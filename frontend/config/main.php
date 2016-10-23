@@ -16,7 +16,8 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [//这里的user组件是指继承组件类的user类
-            'identityClass' => 'common\models\User',
+//            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\MEMBINFO',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
 
