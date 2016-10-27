@@ -30,7 +30,7 @@ class SignupForm extends Model
 
             ['username', 'trim'],
             ['username', 'required'],
-            ['memb___id', 'unique', 'targetClass' => '\common\models\MEMBINFO', 'targetAttribute'=>'memb___id', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\MEMBINFO', 'targetAttribute'=>'memb___id', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
