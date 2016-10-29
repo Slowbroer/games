@@ -150,7 +150,9 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
+//            die("test");
             if ($user = $model->signup()) {//返回一个MEMBINFO
+//                die("test");
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }

@@ -3,14 +3,16 @@
 namespace common\models;
 
 use Yii;
+use yii\base\NotSupportedException;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * This is the model class for table "MEMB_INFO".
+ * This is the model class for table "{{%MEMB_INFO}}".
  *
  * @property integer $memb_guid
  * @property string $memb___id
- * @property string $memb__pwd
  * @property string $memb_name
  * @property string $sno__numb
  * @property string $post_code
@@ -29,44 +31,27 @@ use yii\web\IdentityInterface;
  * @property string $mail_chek
  * @property string $bloc_code
  * @property string $ctl1_code
- * @property integer $vip_free
- * @property integer $member
- * @property integer $ZY
- * @property integer $jf
- * @property integer $rcb
- * @property integer $vip
- * @property string $Expired
- * @property string $sms_t
- * @property string $last_ip
- * @property string $last_s
- * @property string $bloc_date
- * @property string $TOPACC
- * @property string $TOPJP
- * @property string $QXENDTIME
- * @property string $LINZBSJ
- * @property string $LGONGZHISJ
- * @property string $STOPINFO
- * @property string $STOPTIME
  * @property string $QX
- * @property integer $partation
- * @property integer $servercode
- * @property integer $usedtime
- * @property integer $YB
- * @property integer $QZ
- * @property integer $RMB
- * @property integer $TsLevel
- * @property integer $LjRMB
+ * @property integer $jf
+ * @property integer $ServerCode
+ * @property integer $UsedTime
+ * @property integer $MemberType
+ * @property integer $MemberResetChrNum
+ * @property string $GetItemDay
+ * @property string $memb__pwd
+ * @property string $GetInfoDay
+ * @property string $authkey
+ *
+ * @property MEMBDETA[] $mEMBDETAs
  */
 class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
 {
-
-
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'MEMB_INFO';
+        return '{{%MEMB_INFO}}';
     }
 
     /**
@@ -75,10 +60,10 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['memb___id', 'memb__pwd', 'memb_name'], 'required'],
-            [['memb___id', 'memb__pwd', 'memb_name', 'sno__numb', 'post_code', 'addr_info', 'addr_deta', 'tel__numb', 'phon_numb', 'mail_addr', 'fpas_ques', 'fpas_answ', 'job__code', 'mail_chek', 'bloc_code', 'ctl1_code', 'sms_t', 'last_ip', 'last_s', 'TOPACC', 'TOPJP', 'STOPINFO', 'QX'], 'string'],
-            [['appl_days', 'modi_days', 'out__days', 'true_days', 'Expired', 'bloc_date', 'QXENDTIME', 'LINZBSJ', 'LGONGZHISJ', 'STOPTIME'], 'safe'],
-            [['vip_free', 'member', 'ZY', 'jf', 'rcb', 'vip', 'partation', 'servercode', 'usedtime', 'YB', 'QZ', 'RMB', 'TsLevel', 'LjRMB'], 'integer'],
+            [['memb___id', 'memb_name', 'sno__numb', 'bloc_code', 'ctl1_code','memb__pwd'], 'required'],
+            [['memb___id', 'memb_name', 'sno__numb', 'post_code', 'addr_info', 'addr_deta', 'tel__numb', 'phon_numb', 'mail_addr', 'fpas_ques', 'fpas_answ', 'job__code', 'mail_chek', 'bloc_code', 'ctl1_code', 'QX', 'memb__pwd','authkey'], 'string'],
+            [['appl_days', 'modi_days', 'out__days', 'true_days', 'GetItemDay', 'GetInfoDay'], 'safe'],
+            [['jf', 'ServerCode', 'UsedTime', 'MemberType', 'MemberResetChrNum'], 'integer'],
         ];
     }
 
@@ -90,7 +75,6 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             'memb_guid' => 'Memb Guid',
             'memb___id' => 'Memb   ID',
-            'memb__pwd' => 'Memb  Pwd',
             'memb_name' => 'Memb Name',
             'sno__numb' => 'Sno  Numb',
             'post_code' => 'Post Code',
@@ -109,40 +93,30 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
             'mail_chek' => 'Mail Chek',
             'bloc_code' => 'Bloc Code',
             'ctl1_code' => 'Ctl1 Code',
-            'vip_free' => 'Vip Free',
-            'member' => 'Member',
-            'ZY' => 'Zy',
-            'jf' => 'Jf',
-            'rcb' => 'Rcb',
-            'vip' => 'Vip',
-            'Expired' => 'Expired',
-            'sms_t' => 'Sms T',
-            'last_ip' => 'Last Ip',
-            'last_s' => 'Last S',
-            'bloc_date' => 'Bloc Date',
-            'TOPACC' => 'Topacc',
-            'TOPJP' => 'Topjp',
-            'QXENDTIME' => 'Qxendtime',
-            'LINZBSJ' => 'Linzbsj',
-            'LGONGZHISJ' => 'Lgongzhisj',
-            'STOPINFO' => 'Stopinfo',
-            'STOPTIME' => 'Stoptime',
             'QX' => 'Qx',
-            'partation' => 'Partation',
-            'servercode' => 'Servercode',
-            'usedtime' => 'Usedtime',
-            'YB' => 'Yb',
-            'QZ' => 'Qz',
-            'RMB' => 'Rmb',
-            'TsLevel' => 'Ts Level',
-            'LjRMB' => 'Lj Rmb',
+            'jf' => 'Jf',
+            'ServerCode' => 'Server Code',
+            'UsedTime' => 'Used Time',
+            'MemberType' => 'Member Type',
+            'MemberResetChrNum' => 'Member Reset Chr Num',
+            'GetItemDay' => 'Get Item Day',
+            'memb__pwd' => 'Memb  Pwd',
+            'GetInfoDay' => 'Get Info Day',
+
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMEMBDETAs()
+    {
+        return $this->hasMany(MEMBDETA::className(), ['memb_guid' => 'memb_guid']);
+    }
 
     public static function findIdentity($id)
     {
-        return static::findOne(['memb___id' => $id]);
+        return static::findOne(['memb_guid' => $id]);
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
@@ -157,7 +131,12 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function getAuthKey()
     {
-        return $this->auth_key;
+        return $this->authkey;
+    }
+
+    public function generateAuthKey()
+    {
+        $this->authkey = Yii::$app->security->generateRandomString();
     }
 
     public function validateAuthKey($authKey)

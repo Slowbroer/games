@@ -33,6 +33,10 @@ class SignupForm extends Model
             ['username', 'unique', 'targetClass' => '\common\models\MEMBINFO', 'targetAttribute'=>'memb___id', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
+            ['nickname', 'trim'],
+            ['nickname', 'required'],
+            ['nickname', 'string', 'min' => 2, 'max' => 255],
+
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
@@ -59,13 +63,18 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
+//        die($this->username);
         $user = new MEMBINFO();
-        $user->memb_name = $this->username;//$this->username是指在signupform的數據，而$user->username則是表示user表中的一個字段
-        $user-> mail_addr = $this->email;
+        $user->memb___id = $this->username;//$this->username是指在signupform的數據，而$user->username則是表示user表中的一個字段
+        $user->mail_addr = $this->email;
         $user->setPassword($this->password);
-        $user-> memb_name = $this->nickname;
+        $user->memb_name = $this->nickname;
+        $user->sno__numb = "1111111111111";
+        $user->bloc_code = '0';
+        $user->ctl1_code = '0';
 //        $user->generateAuthKey();
+//        var_dump(json_encode($user));
         
         return $user->save() ? $user : null;
     }
