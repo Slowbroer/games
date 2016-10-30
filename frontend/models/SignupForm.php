@@ -18,6 +18,7 @@ class SignupForm extends Model
     public $confirm_password;
     public $question_id;
     public $answer;
+    public $server;
 
 
 
@@ -27,6 +28,9 @@ class SignupForm extends Model
     public function rules()
     {
         return [
+
+            ['server', 'integer'],
+            ['server', 'required'],
 
             ['username', 'trim'],
             ['username', 'required'],
@@ -66,6 +70,7 @@ class SignupForm extends Model
 
 //        die($this->username);
         $user = new MEMBINFO();
+        $user->ServerCode = $this->server;
         $user->memb___id = $this->username;//$this->username是指在signupform的數據，而$user->username則是表示user表中的一個字段
         $user->mail_addr = $this->email;
         $user->setPassword($this->password);

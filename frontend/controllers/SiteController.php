@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\SetServerList;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -158,9 +159,13 @@ class SiteController extends Controller
                 }
             }
         }
+        $server = new SetServerList();
+        $server_list = $server->get_list();
+
 
         return $this->render('signup', [
             'model' => $model,
+            'server_list' => $server_list,
         ]);
     }
 

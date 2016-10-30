@@ -54,4 +54,14 @@ class SetServerList extends \yii\db\ActiveRecord
             'Partation' => 'Partation',
         ];
     }
+
+
+    public function get_list()
+    {
+//        return self::find()->select(['ID','ServerName'])->asArray()->all();//会报对象名没用
+
+        return $this->find()->select(['ID','ServerName'])->asArray()->all();
+    }
+
+
 }

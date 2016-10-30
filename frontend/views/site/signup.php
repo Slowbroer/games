@@ -20,6 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
 
+                <?= $form->field($model, 'server')->dropDownList(\yii\helpers\ArrayHelper::map($server_list,"ID",'ServerName')) ?>
+
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'nickname')->textInput(['autofocus' => true]) ?>
