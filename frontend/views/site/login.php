@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,6 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+
+                <?= $form->field($model, 'server')->dropDownList(ArrayHelper::map($server_list,"ID",'ServerName')) ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 

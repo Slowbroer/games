@@ -61,7 +61,8 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['memb___id', 'memb_name', 'sno__numb', 'bloc_code', 'ctl1_code','memb__pwd'], 'required'],
-            [['memb___id', 'memb_name', 'sno__numb', 'post_code', 'addr_info', 'addr_deta', 'tel__numb', 'phon_numb', 'mail_addr', 'fpas_ques', 'fpas_answ', 'job__code', 'mail_chek', 'bloc_code', 'ctl1_code', 'QX', 'memb__pwd','authkey'], 'string'],
+            [['memb___id','memb_name'],'string','length' => [3, 20]],
+            [['sno__numb', 'post_code', 'addr_info', 'addr_deta', 'tel__numb', 'phon_numb', 'mail_addr', 'fpas_ques', 'fpas_answ', 'job__code', 'mail_chek', 'bloc_code', 'ctl1_code', 'QX', 'memb__pwd','authkey'], 'string'],
             [['appl_days', 'modi_days', 'out__days', 'true_days', 'GetItemDay', 'GetInfoDay'], 'safe'],
             [['jf', 'ServerCode', 'UsedTime', 'MemberType', 'MemberResetChrNum'], 'integer'],
         ];
@@ -161,8 +162,8 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
         }
     }
 
-    public static function findByUsername($user_name)
+    public static function findByUsername($user_name,$server)
     {
-        return static::findOne(['memb___id' => $user_name]);
+        return static::findOne(['memb___id' => $user_name,'ServerCode' => $server]);
     }
 }

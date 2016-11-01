@@ -91,8 +91,11 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
+            $server = new SetServerList();
+            $server_list = $server->get_list();
             return $this->render('login', [
                 'model' => $model,
+                'server_list' => $server_list,
             ]);
         }
     }
