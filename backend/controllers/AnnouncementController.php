@@ -8,13 +8,14 @@
 
 namespace backend\controllers;
 
+use backend\models\TestModel;
 use Yii;
-use backend\models\AnnouncenmentForm;
 use yii\web\Controller;
+use backend\models\AnnForm;
 
 
-class AnnouncementController extends Controller{
-
+class AnnouncementController extends Controller
+{
     public function actions()
     {
         return [
@@ -24,17 +25,13 @@ class AnnouncementController extends Controller{
         ];
     }
 
-    public function actionAnnouncement()
-    {
 
-
-    }
 
     public function actionEdit()
     {
         //TODO:需要判断是否登录了
 
-        $model = new AnnouncenmentForm();
+        $model = new AnnForm();
         if($model->load(Yii::$app->request->post()) && $model->update())
         {
             return $this->goBack();
