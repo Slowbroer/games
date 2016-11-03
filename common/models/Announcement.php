@@ -34,10 +34,9 @@ class Announcement extends \yii\db\ActiveRecord
     {
         return [
             [['type', 'name', 'announcement_content', 'add_time', 'admin_id'], 'required'],
-            [['type', 'admin_id'], 'integer'],
+            [['type', 'admin_id','add_time', 'update_time'], 'integer'],
             [['type_name', 'admin_name', 'announcement_content'], 'string'],
             [['name',], 'string', 'length' => [3, 20]],
-            [['add_time', 'update_time'], 'safe'],
         ];
     }
 

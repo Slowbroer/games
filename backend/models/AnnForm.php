@@ -37,19 +37,21 @@ class AnnForm extends Model{
             return null;
         }
 
-        if($this->id)
+        if(!empty($this->id))
         {
             $ann = Announcement::findOne($this->id);
         }
         else
         {
             $ann = new Announcement();
-            $ann->announcement_id = $this->id;
+//            $ann->announcement_id = $this->id;
         }
 
         $ann->name = $this->title;
         $ann->announcement_content = $this->content;
         $ann->type = $this->type_id;
+        $ann->add_time = time();
+        $ann->admin_id = 1;//TODO:需要添加管理员id
 
 
         return $ann->save()? $ann : null;
