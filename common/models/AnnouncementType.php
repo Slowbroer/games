@@ -48,7 +48,7 @@ class AnnouncementType extends \yii\db\ActiveRecord
     }
 
 
-    public function getLIst()//返回列表
+    public function getList()//返回列表
     {
         return self::find()->select(['id','name'])->asArray()->all();
     }

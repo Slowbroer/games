@@ -9,21 +9,33 @@
 
 use yii\ueditor\Ueditor;
 use yii\ueditor\UeditorAsset;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
+use \yii\helpers\ArrayHelper;
 
-UeditorAsset::register($this);
+//UeditorAsset::register($this);//不能再这里调用这个是因为没有进行别名设置，@yii\ueditor\assets，，，而在Ueditor中会进行别名的设置并进行   UeditorAsset::register($this);
 
 ?>
 
 <div>
 
-    <?php $form = ActiveForm::begin(['id' => 'announcement-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'ann-form']); ?>
 
-    <?= $form->field($model, 'server')->dropDownList(ArrayHelper::map($server_list,"ID",'ServerName')) ?>
 
-    <?php echo $form->field($model, 'newstext')->widget
-    (Ueditor::className(),
-    ['id'=> 'LoginForm[newstext]', 'ucontent'=>'初始化文本']
-    ); ?>
+    <?php echo $form->field($model,"title")->label(false)->textInput(['placeholder'=>"请填写标题"]);?>
+
+    <?php if(!empty($model['id'])){
+        echo $form->field($model,"id")->label(false)->hiddenInput();
+    }?>
+
+    <?php echo $form->field($model,"type_id")->label(false)->dropDownList(ArrayHelper::map($type_list,"id",'name'));?><!--这里要添加数组-->
+
+    <?php echo $form->field($model,'content')->widget(Ueditor::className(), [
+        'id'=>'AnnForm[content]',//id 必须是那个content的东西
+        //'name'=>'AnnForm[content]',
+    ]); ?>
+
+
 
 
     <div class="form-group">

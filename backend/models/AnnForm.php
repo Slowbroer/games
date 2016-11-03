@@ -27,7 +27,7 @@ class AnnForm extends Model{
                 [['type_id','content','title'],'required'],
                 [['type_id'],'integer'],
                 [['title'],'string'],
-                ['content', 'string', 'min' => 2, 'max' => 255],
+                ['content', 'string'],
             ];
     }
 
