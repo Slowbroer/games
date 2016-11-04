@@ -30,9 +30,10 @@ use \yii\helpers\ArrayHelper;
 
     <?php echo $form->field($model,"type_id")->label(false)->dropDownList(ArrayHelper::map($type_list,"id",'name'));?><!--这里要添加数组-->
 
-    <?php echo $form->field($model,'content')->widget(Ueditor::className(), [
-        'id'=>'AnnForm[content]',//id 必须是那个content的东西
-        //'name'=>'AnnForm[content]',
+    <?php echo $form->field($model,'content')->widget('common\widgets\ueditor\Ueditor',[
+        'options'=>[
+            'initialFrameHeight' => 850,
+        ]
     ]); ?>
 
 
