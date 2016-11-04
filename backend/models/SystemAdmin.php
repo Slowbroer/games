@@ -16,6 +16,7 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $salt
  * @property string $authkey
+ * @property string $password
  */
 class SystemAdmin extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -33,9 +34,9 @@ class SystemAdmin extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['admin_name', 'admin_power', 'mobile_phone', 'email','salt','authkey'], 'string'],
+            [['admin_name', 'admin_power', 'mobile_phone', 'email','salt','authkey','password'], 'string'],
             [['admin_level'], 'integer'],
-            [['admin_name', 'mobile_phone', 'email','salt','admin_level'], 'required'],
+            [['admin_name', 'mobile_phone', 'email','salt','admin_level','password'], 'required'],
         ];
     }
 
@@ -87,12 +88,12 @@ class SystemAdmin extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function setPassword($password)
     {
-        $this->memb__pwd = md5($password);
+        $this->password = md5($password);
     }
 
     public function validatePassword($password)
     {
-        if(trim(md5($password))==trim($this->memb__pwd))
+        if(trim(md5($password))==trim($this->password))
         {
             return true;
         }
