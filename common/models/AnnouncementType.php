@@ -52,4 +52,6 @@ class AnnouncementType extends \yii\db\ActiveRecord
     {
         return self::find()->select(['id','name'])->asArray()->all();
     }
+
+
 }

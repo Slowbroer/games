@@ -33,7 +33,9 @@ use \yii\helpers\ArrayHelper;
     <?php echo $form->field($model,'content')->widget('common\widgets\ueditor\Ueditor',[
         'options'=>[
             'initialFrameHeight' => 850,
-        ]
+            'content' => $model->content,//通过Ueditor的js部分代码和官方文档的前端配置项，就知道要怎么设置
+        ],
+
     ]); ?>
 
 

@@ -8,6 +8,7 @@
 
 namespace backend\models;
 
+use common\models\AnnouncementType;
 use Yii;
 use common\models\Announcement;
 use yii\base\Model;
@@ -44,14 +45,21 @@ class AnnForm extends Model{
         else
         {
             $ann = new Announcement();
+            $ann->add_time = time();
 //            $ann->announcement_id = $this->id;
         }
 
-        $ann->name = $this->title;
-        $ann->announcement_content = $this->content;
-        $ann->type = $this->type_id;
-        $ann->add_time = time();
-        $ann->admin_id = 1;//TODO:需要添加管理员id
+        if($ann)
+        {
+            $ann->type_name = AnnouncementType::findOne($this->type_id)->name;
+
+            $ann->name = $this->title;
+            $ann->announcement_content = $this->content;
+            $ann->type = $this->type_id;
+            $ann->admin_id = Yii::$app->user->id;//需要添加管理员id
+            $ann->update_time = time();
+        }
+
 
 
         return $ann->save()? $ann : null;
