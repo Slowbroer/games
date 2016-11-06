@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use frontend\models\Character;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -165,5 +166,11 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
     public static function findByUsername($user_name,$server)
     {
         return static::findOne(['memb___id' => $user_name,'ServerCode' => $server]);
+    }
+
+
+    public function getCharacter()
+    {
+        return $this->hasMany(Character::className(),['AccountID'=>'memb___id']);
     }
 }

@@ -15,7 +15,7 @@ use Yii;
  * @property string $update_time
  * @property string $type_name
  * @property integer $admin_id
- * @property string $admin_name
+ *
  * @property integer $enable
  */
 class Announcement extends \yii\db\ActiveRecord
@@ -36,7 +36,7 @@ class Announcement extends \yii\db\ActiveRecord
         return [
             [['type', 'name', 'announcement_content', 'add_time', 'admin_id'], 'required'],
             [['type', 'admin_id','add_time', 'update_time','enable'], 'integer'],
-            [['type_name', 'admin_name', 'announcement_content'], 'string'],
+            [['type_name', 'announcement_content'], 'string'],
             [['name',], 'string', 'length' => [3, 20]],
 
         ];
@@ -56,7 +56,7 @@ class Announcement extends \yii\db\ActiveRecord
             'update_time' => 'Update Time',
             'type_name' => 'Type Name',
             'admin_id' => 'Admin ID',
-            'admin_name' => 'Admin Name',
+
         ];
     }
 
