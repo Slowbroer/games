@@ -11,6 +11,7 @@ namespace frontend\models;
 
 use common\models\MEMBINFO;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 class RankForm extends Model {
 
@@ -31,12 +32,17 @@ class RankForm extends Model {
     }
 
 
-    public function c_rank()//英雄排行
+    public function
+
+
+    public function c_rank_query()//英雄排行
     {
 
         if (!$this->validate()) {
             return null;
         }
+
+        $model = new
 
         $where = array();
         $where['Character.ZY'] = isset($this->career)? $this->career:'';//职业表
@@ -52,15 +58,13 @@ class RankForm extends Model {
             ->onCondition("MEMBINFO.memb___id=Character.AccountID")
             ->where($where)->orderBy($order)->limit($limit)->asArray()->all();
 
-
-        $list = array();
+        //TODO:这里需要处理职业
 
         foreach($characters as $key=>$character)
         {
-            $characters[$key]['ZY_name'] = $character['']
+            $characters[$key]['ZY_name'] = $character[''];
         }
 
-//        var_dump($users);
 
     }
 
