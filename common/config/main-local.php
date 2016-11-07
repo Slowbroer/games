@@ -4,9 +4,9 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
 //            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'dsn' => 'sqlsrv:Server=localhost;Database=games',
+            'dsn' => 'sqlsrv:Server=localhost;Database=games2',
             'username' => 'sa',
-            'password' => 'mj4436549213',
+            'password' => 'mj19930115',
             'charset' => 'utf8',
         ],
         'mailer' => [
