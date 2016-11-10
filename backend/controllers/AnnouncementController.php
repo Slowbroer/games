@@ -9,6 +9,7 @@
 
 namespace backend\controllers;
 
+use backend\models\AnntypeForm;
 use backend\models\TestModel;
 use common\models\Announcement;
 use common\models\AnnouncementType;
@@ -17,7 +18,7 @@ use yii\web\Controller;
 use backend\models\AnnForm;
 
 
-class AnnouncementController extends Controller
+class AnnouncementController extends Controller//公告控制器
 {
     public function actions()
     {
@@ -91,5 +92,23 @@ class AnnouncementController extends Controller
         $id = isset($_GET['id'])? $_GET['id']:'';
 
     }
+
+    public function actionUpdatetype(){
+        $model = new AnntypeForm();
+        if($model->load(Yii::$app->request->post()) && $model->update())
+        {
+            return true;
+        }
+        else
+        {
+            if(!empty($_GET['id'] && is_numeric(intval($_GET['id']))))
+            {
+                return AnnouncementType::findOne(['id'=>$_GET['id']]);
+            }
+
+            return false;
+        }
+    }
+
 
 }

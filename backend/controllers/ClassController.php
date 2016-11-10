@@ -23,7 +23,7 @@ class ClassController extends Controller
         return json_encode($class->getList());
     }
 
-    public function actionAdd()//add or update a class
+    public function actionUpdate()//add or update a class
     {
 
         $model = new ClassForm();
@@ -33,7 +33,11 @@ class ClassController extends Controller
         }
         else
         {
-            return "faild";
+            if(!empty($_GET['id'] && is_numeric(intval($_GET['id']))))
+            {
+                return ClassSet::findOne(['id'=>$_GET['id']]);
+            }
+            return "failed";
         }
     }
 

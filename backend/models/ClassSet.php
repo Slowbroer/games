@@ -8,6 +8,7 @@ use Yii;
 /**
  * This is the model class for table "ClassSet".
  *
+ * @property integer $id
  * @property integer $class_id
  * @property string $class_name
  * @property integer $last_time

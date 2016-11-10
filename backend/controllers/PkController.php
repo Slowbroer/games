@@ -31,6 +31,11 @@ class PkController extends Controller
         }
         else
         {
+            if(!empty($_GET['id'] && is_numeric(intval($_GET['id']))))
+            {
+                return PKstatus::findOne(['id'=>$_GET['id']]);
+            }
+
             return "failed";
         }
     }

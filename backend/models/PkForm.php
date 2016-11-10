@@ -16,13 +16,15 @@ class PkForm extends Model
 
     public $id;
     public $name;
+    public $key;
 
 
     public function rules(){
         return [
-            [['id','name'],'require'],
-            ['id','integer'],
+            [['key','name'],'require'],
+            [['id','key'],'integer'],
             ['name','string'],
+            ['key','unique','targetClass'=>'\backend\models\PKstatus','targetAttribute'=>'key_value','message'=>'这个pk状态的键值已经存在']
         ];
     }
 
@@ -32,8 +34,15 @@ class PkForm extends Model
             return false;
         }
 
-        $pk = new PKstatus();
-        $pk->key_value = $this->id;
+        if(empty($this->id))
+        {
+            $pk = new PKstatus();
+        }
+        else
+        {
+            $pk = PKstatus::findOne(['id'=>$this->id]);
+        }
+        $pk->key_value = $this->key;
         $pk->pk_status = $this->name;
         $pk->last_time = time();
 

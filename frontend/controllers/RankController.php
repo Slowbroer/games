@@ -13,7 +13,7 @@ use frontend\models\RankForm;
 use Yii;
 use yii\web\Controller;
 
-class RankController extends Controller{
+class RankController extends Controller{//排行控制器
 
     public function actionCharacterlist(){//英雄排行
 

@@ -10,20 +10,23 @@ namespace backend\models;
 
 
 use yii\base\Model;
+use backend\models\ClassSet;
 
 class ClassForm extends Model
 {
 
     public $id;
     public $name;
+    public $key;
 
 
     public function rules()
     {
         return [
-            [['id','name'],'required'],
-            ['id','integer'],
-            ['name','string']
+            [['key','name'],'required'],
+            [['id','key'],'integer'],
+            ['name','string'],
+            ['key','unique','targetClass'=>'\backend\models\ClassSet','targetAttribute'=>'class_id','message'=>'这个角色的键值已经存在！']
         ];
     }
 
@@ -33,8 +36,15 @@ class ClassForm extends Model
         {
             return false;
         }
-        $class = new ClassSet();
-        $class->class_id = $this->id;
+        if(empty($this->id))
+        {
+            $class = new ClassSet();
+        }
+        else
+        {
+            $class = ClassSet::findOne(['id'=>$this->id]);
+        }
+        $class->class_id = $this->key;
         $class->class_name = $this->name;
         $class->last_time = time();
 
