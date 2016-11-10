@@ -15,27 +15,38 @@ use yii\web\Controller;
 
 class RankController extends Controller{
 
-    public function actionCharacter_list(){//英雄排行
+    public function actionCharacterlist(){//英雄排行
+
+//        $mem= MEMBINFO::find()->select("*")->join("LEFT OUTER JOIN",'CharacterCharacter as c',)->where(['ServerCode'=>2])->limit(10)->with('character')->all();
+//        $users = $mem->character;
 
 
 
         $model = new RankForm();
-        if($model->load(Yii::$app->request->post()) &&  $model->validate())
+        if($model->load(Yii::$app->request->post()))
         {
-            $model->c_rank();
+            $list = $model->c_rank();
+            return json_encode($list);
         }
         else
         {
-            //TODO:这里还要获取到游戏区数据、职业数据和pk数据
+            return null;
+        }
 
-            $server = new SetServerList();//游戏区数据
-            $server_list = $server->get_list();
+    }
 
-            return $this->render("",[
-                'model'=>$model,
-                'server'=>$server_list,
 
-            ]);
+    public function actionGuildlist()
+    {
+        $model = new RankForm();
+        if($model->load(Yii::$app->request->post()))
+        {
+            $list = $model->g_rank();
+            return json_encode($list);
+        }
+        else
+        {
+            return null;
         }
     }
 

@@ -9,8 +9,10 @@
 namespace frontend\models;
 
 
+use backend\models\PKstatus;
 use common\models\MEMBINFO;
 use yii\base\Model;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
 class RankForm extends Model {
@@ -39,8 +41,6 @@ class RankForm extends Model {
             return null;
         }
 
-        $model = new
-
         $where = array();
         $where['Character.ZY'] = isset($this->career)? $this->career:'';//职业表
         $where['MEMBINFO.ServerCode'] = isset($this->server)? $this->server:'';//服务区
@@ -51,34 +51,66 @@ class RankForm extends Model {
 
         $mem= new Character();
 
-        $characters = $mem->find()->select("Character.Name,Character.Name,Character.cLevel,Character.ZY,Character.PkLevel")->joinWith(MEMBINFO::className())
+        $characters = $mem->find()->select("Character.Name,Character.Name,Character.cLevel,Character.Class,Character.ZY,Character.PkLevel")->joinWith(MEMBINFO::className())
             ->onCondition("MEMBINFO.memb___id=Character.AccountID")
             ->where($where)->orderBy($order)->limit($limit)->asArray()->all();
 
-        //TODO:这里需要处理职业
 
         $list = array();
+        $class = new ClassSet();//职业名称表
+        $class_list = $class->getList();
+        $class_array = ArrayHelper::map($class_list,"class_id","class_name");
 
-        $class_list = [
-            '0'=>'法师',
-            '1'=>'魔导士',
-            '32'=>'',
-            '33'=>'',
-            '16'=>'',
-            '17'=>'',
-            '48'=>'',
-            '64'=>'',
+        $pk = new PKstatus();
+        $pk_status = $pk->getList();
+        $pk_array = ArrayHelper::map($pk_status,"key_value","pk_status");
 
-        ];//TODO:这里的职业是不是有要后台进行相应的设置呢，还是说有一个表记录
-        "0法 1魔导 32精 33圣 16战 17骑 48魔 64圣导";
+
 
         foreach($characters as $key=>$character)
         {
-            $characters[$key]['class_name'] = $character[''];
+            $characters[$key]['ZY_name'] = $class_array[$characters['Class']];
+            $characters[$key]["PK_name"] = $pk_array[$characters['PkLevel']];
         }
+
+        return $characters;
 
 //        var_dump($users);
 
     }
+
+    public function g_rank(){//战盟排行
+
+        if(!$this->validate()){
+            return null;
+        }
+
+        $where=array();
+        $order='';
+        if(!empty($this->server)){
+            $where['gm.server']=$this->server;
+        }
+
+        if(!empty($this->condition)){
+            $order=$this->condition;
+        }
+
+        $limit = empty($this->number)? 30:$this->number;
+//        $where['']
+
+        $query = new Query();
+        //TODO : confirm the relationship with Guild and GuildMasterApply
+        return $query->select("g.G_Name,g.G_Master,g.G_Notice")->from("Guild g")
+            ->leftJoin("GuildMasterApply gm",'gm.character_name=g.G_master and gm.guild_name=g.G_Name')
+            ->where($where)->orderBy($order)->all();//这里默认已经是返回数组了，和ar类不同
+
+//            $query->select(['user.name AS author', 'post.title as title'])
+//                ->from('user')
+//                ->leftJoin('post', 'post.user_id = user.id');
+//        $query->leftJoin(['u' => $subQuery], 'u.id=author_id');
+    }
+
+
+
 
 }
