@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use \yii\bootstrap\ButtonDropdown;
 
 AppAsset::register($this);
 ?>
@@ -40,6 +41,15 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = '<li>'
+            . ButtonDropdown::widget([
+                'label' => '公告',
+                'items' => [
+                    ['label' => '公告列表', 'url' => 'index.php?r=announcement/list'],
+                    ['label' => '公告类型', 'url' => 'index.php?r=announcement/list'],
+                ]
+            ])
+            .'</li>';
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

@@ -93,7 +93,25 @@ class AnnouncementController extends Controller//公告控制器
 
     }
 
+    public function actionTypelist()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $type = new AnnouncementType();
+        $type_list = $type->getList();
+
+        //echo the view
+        echo $this->render('typelist',['lists'=>$type_list]);
+    }
+
     public function actionUpdatetype(){
+
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $model = new AnntypeForm();
         if($model->load(Yii::$app->request->post()) && $model->update())
         {
@@ -108,6 +126,11 @@ class AnnouncementController extends Controller//公告控制器
 
             return false;
         }
+    }
+
+    public function actionDeltype()
+    {
+
     }
 
 
