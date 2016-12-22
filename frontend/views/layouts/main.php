@@ -28,21 +28,58 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => '奇迹MU',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => '首页', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = [
+            'label'=>'排行查询',
+            'items'=>[
+                ['label' => '角色排行', 'url' => 'index.php?r=rank/default',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+//                   '<li class="divider"></li>',
+//                   '<li class="dropdown-header">Dropdown Header</li>',
+                ['label' => '战盟排行', 'url' => 'index.php?r=rank/guilddefault',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+            ],
+        ];
+        $menuItems[] = [
+            'label'=>'商城',
+            'items'=>[
+                ['label' => '购买装备', 'url' => 'index.php?r=item/buyitem',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+//                   '<li class="divider"></li>',
+//                   '<li class="dropdown-header">Dropdown Header</li>',
+                ['label' => '购买套装', 'url' => 'index.php?r=item/buypackage',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+                ['label' => '充值', 'url' => 'http://www.libaopay.com/',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+            ],
+        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

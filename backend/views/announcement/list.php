@@ -19,11 +19,21 @@ use \yii\bootstrap\Html;
     <?php } ?>
 </div>
 
+<div style="text-align: center">
+    <?php
+    echo \yii\widgets\LinkPager::widget([
+        'pagination' => $pagination,
+    ]);
+    ?>
+</div>
+
 <div style="margin: 10px auto">
     <a href="index.php?r=announcement/edit">
         <button type="button" class="btn btn-info">新建公告</button>
     </a>
 </div>
+
+
 
 <script type="text/javascript">
     function del_blog(id)

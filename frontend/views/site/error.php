@@ -7,7 +7,8 @@
 
 use yii\helpers\Html;
 
-$this->title = $name;
+//$this->title = $name;
+$this->title = "出错了－_－";
 ?>
 <div class="site-error">
 
@@ -17,11 +18,16 @@ $this->title = $name;
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
+    <div style="text-align: center">
+        <a href="javascript:history.go(-1);">返回上一页</a>
+    </div>
+
+
     <p>
-        The above error occurred while the Web server was processing your request.
+        如有疑问，请联系客服；
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        客服QQ：312312312
     </p>
 
 </div>

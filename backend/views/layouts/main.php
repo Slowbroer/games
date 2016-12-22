@@ -9,7 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-use \yii\bootstrap\ButtonDropdown;
+use \yii\bootstrap\Dropdown;
 
 AppAsset::register($this);
 ?>
@@ -40,16 +40,79 @@ AppAsset::register($this);
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+
+
     } else {
-        $menuItems[] = '<li>'
-            . ButtonDropdown::widget([
-                'label' => '公告',
-                'items' => [
-                    ['label' => '公告列表', 'url' => 'index.php?r=announcement/list'],
-                    ['label' => '公告类型', 'url' => 'index.php?r=announcement/list'],
-                ]
-            ])
-            .'</li>';
+
+        $menuItems[] = [
+            'label'=>'公告管理',
+            'items'=>[
+                ['label' => '公告列表', 'url' => 'index.php?r=announcement/list',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+//                   '<li class="divider"></li>',
+//                   '<li class="dropdown-header">Dropdown Header</li>',
+                ['label' => '公告类型', 'url' => 'index.php?r=announcement/typelist',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+            ],
+        ];
+
+        $menuItems[] = [
+            'label'=>'商城管理',
+            'items'=>[
+                ['label' => '装备管理', 'url' => 'index.php?r=item/list',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+//                   '<li class="divider"></li>',
+//                   '<li class="dropdown-header">Dropdown Header</li>',
+                ['label' => '套装管理', 'url' => 'index.php?r=package/list',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+                ['label' => '订单管理', 'url' => '#',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+            ],
+        ];
+
+        $menuItems[] = [
+            'label'=>'系统管理',
+            'items'=>[
+                ['label' => '系统设置', 'url' => '#',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+                ['label' => '管理员账户管理', 'url' => '#',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+//                   '<li class="divider"></li>',
+//                   '<li class="dropdown-header">Dropdown Header</li>',
+                ['label' => '管理员操作日志', 'url' => '#',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+                ['label' => '管理员', 'url' => '#',
+                    'options'=>[
+                        'target'=>'.container'
+                    ]
+                ],
+            ],
+        ];
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

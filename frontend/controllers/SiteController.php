@@ -66,6 +66,7 @@ class SiteController extends Controller
         ];
     }
 
+
     /**
      * Displays homepage.
      *
@@ -169,6 +170,7 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
             'server_list' => $server_list,
+            'title'=>'注册'
         ]);
     }
 

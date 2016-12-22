@@ -2,12 +2,13 @@
 
 namespace common\models;
 
-use frontend\models\Character;
+use common\models\Character;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+
 
 /**
  * This is the model class for table "{{%MEMB_INFO}}".
@@ -41,7 +42,7 @@ use yii\web\IdentityInterface;
  * @property string $GetItemDay
  * @property string $memb__pwd
  * @property string $GetInfoDay
- * @property string $authkey
+ * @property string $money
  *
  * @property MEMBDETA[] $mEMBDETAs
  */
@@ -65,7 +66,7 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
             [['memb___id','memb_name'],'string','length' => [3, 20]],
             [['sno__numb', 'post_code', 'addr_info', 'addr_deta', 'tel__numb', 'phon_numb', 'mail_addr', 'fpas_ques', 'fpas_answ', 'job__code', 'mail_chek', 'bloc_code', 'ctl1_code', 'QX', 'memb__pwd','authkey'], 'string'],
             [['appl_days', 'modi_days', 'out__days', 'true_days', 'GetItemDay', 'GetInfoDay'], 'safe'],
-            [['jf', 'ServerCode', 'UsedTime', 'MemberType', 'MemberResetChrNum'], 'integer'],
+            [['jf', 'ServerCode', 'UsedTime', 'MemberType', 'MemberResetChrNum','money'], 'integer'],
         ];
     }
 
@@ -104,6 +105,7 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
             'GetItemDay' => 'Get Item Day',
             'memb__pwd' => 'Memb  Pwd',
             'GetInfoDay' => 'Get Info Day',
+            'money' => '元宝',
 
         ];
     }
@@ -115,6 +117,7 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(MEMBDETA::className(), ['memb_guid' => 'memb_guid']);
     }
+
 
     public static function findIdentity($id)
     {
@@ -129,6 +132,11 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
     public function getId()
     {
         return $this->getPrimaryKey();
+    }
+
+    public function getMenb()
+    {
+        return $this->memb___id;
     }
 
     public function getAuthKey()
@@ -148,12 +156,12 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function setPassword($password)
     {
-        $this->memb__pwd = md5($password);
+        $this->memb__pwd = $password;
     }
 
     public function validatePassword($password)
     {
-        if(trim(md5($password))==trim($this->memb__pwd))
+        if(trim($password)==trim($this->memb__pwd))
         {
             return true;
         }
@@ -163,14 +171,54 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
         }
     }
 
-    public static function findByUsername($user_name,$server)
+    public static function findByUsername($user_name,$server)//����memb___id��ȡ��Ϣ
     {
         return static::findOne(['memb___id' => $user_name,'ServerCode' => $server]);
     }
 
 
-    public function getCharacter()
+    public function getCharacters()
     {
         return $this->hasMany(Character::className(),['AccountID'=>'memb___id']);
+    }
+
+    public function getmoney($id){//get the user's money
+        $money = $this->find()->select("money")->where(['memb___id'=>$id])->one();
+        return $money->money;
+    }
+
+    public function getinfo($id){//get the user's info
+        $info = $this->find()->where(['memb___id'=>$id])->one();
+        return $info;
+    }
+
+    public function updateMoney($money,$is_add=1)//update the money
+    {
+        if($is_add == 1)
+        {
+            $this->money += $money;
+        }
+        elseif ($is_add == 0)
+        {
+            $this->money -= $money;
+        }
+
+        if($this->money<0)
+        {
+            return "您的余额不足";
+        }
+        else
+        {
+            if($this->save())
+            {
+                return true;
+            }
+            else
+            {
+                return "扣费过程出现错误，如果元宝已经被扣除，请联系客服";
+            }
+
+        }
+
     }
 }

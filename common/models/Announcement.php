@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "announcement".
@@ -37,7 +38,7 @@ class Announcement extends \yii\db\ActiveRecord
             [['type', 'name', 'announcement_content', 'add_time', 'admin_id'], 'required'],
             [['type', 'admin_id','add_time', 'update_time','enable'], 'integer'],
             [['type_name', 'announcement_content'], 'string'],
-            [['name',], 'string', 'length' => [3, 20]],
+            [['name',], 'string', 'length' => [0, 20]],
 
         ];
     }
@@ -67,7 +68,19 @@ class Announcement extends \yii\db\ActiveRecord
         {
             $where['type'] = $filter['type'];
         }
-        return $this->find()->select(['announcement_id','type','name','add_time','type_name'])->where($where)->asArray()->all();
+        $query = $this->find()->select(['announcement_id','type','name','add_time','type_name'])->where($where)->asArray();
+
+        $count = $query->count();
+
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1,'params'=>array_merge($_GET, ['keywords' => 'test'])]);
+
+        $result['list'] = $articles = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+        $result['page'] = $pagination;
+
+        return $result;
+//        return $this->find()->select(['announcement_id','type','name','add_time','type_name'])->where($where)->asArray()->all();
     }
 
     public function info($id)//返回详情

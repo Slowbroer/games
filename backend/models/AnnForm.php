@@ -26,9 +26,10 @@ class AnnForm extends Model{
         return
             [
                 [['type_id','content','title'],'required'],
-                [['type_id'],'integer'],
+                [['type_id',],'integer'],
                 [['title'],'string'],
                 ['content', 'string'],
+                ['id','safe'],
             ];
     }
 
@@ -41,6 +42,7 @@ class AnnForm extends Model{
         if(!empty($this->id))
         {
             $ann = Announcement::findOne($this->id);
+//            var_dump("111");
         }
         else
         {
@@ -58,7 +60,9 @@ class AnnForm extends Model{
             $ann->type = $this->type_id;
             $ann->admin_id = Yii::$app->user->id;//需要添加管理员id
             $ann->update_time = time();
+            $ann->enable = 1;
         }
+
 
 
 

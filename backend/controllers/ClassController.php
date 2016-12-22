@@ -20,7 +20,7 @@ class ClassController extends Controller
     public function actionList()//load the list
     {
         $class = new ClassSet();
-        return json_encode($class->getList());
+        return json_encode($class->get_list());
     }
 
     public function actionUpdate()//add or update a class

@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\ConfigureForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -94,6 +95,16 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+
+
+    public function actionConfigure(){
+        $model = new ConfigureForm();
+        if($model->load(Yii::$app->request->post()))
+        {
+
+        }
     }
 
 

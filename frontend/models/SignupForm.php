@@ -56,6 +56,18 @@ class SignupForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'username' => '用户名',
+            'email' => '邮箱地址',
+            'password' => '密码',
+            'nickname' => '昵称',
+            'confirm_password' => '确认密码',
+            'server'=>'游戏区'
+        ];
+    }
+
     /**
      * Signs user up.
      *
