@@ -124,16 +124,12 @@ class ItemController extends Controller
             {
                 return $this->render('/site/error',['message'=>'你现在处于在线状态，请离线后进行购买！']);
             }
-//            $id = isset($_GET['id'])? $_GET['id']:0;
-//            $package = TzItem::findOne(['Id'=>$id]);
-
             if(!isset($package))
             {
                 return $this->render('/site/error',['message'=>'未找到相应的套装，请重新刷新页面或者联系客服']);
             }
 
             $warehouse = Warehouse::getinfo(Yii::$app->user->identity->getMenb());
-
             if(empty($warehouse['Items']))
             {
                 return $this->render('/site/error',['message'=>'购买失败！购买装备之前必须建立角色并且打开仓库一次！否则无法购买哦！']);
@@ -153,25 +149,25 @@ class ItemController extends Controller
             {
                 return $this->render('/site/error',['message'=>'您的余额不足，请先充值之后进行购买']);
             }
+
+            $item = $warehouse->ItemsCode();
+            $used_space = $warehouse->UsedSpace($item);
+            $space_enough = $package->space_enough($used_space);
+            if($space_enough['code']==0)
+            {
+                return $this->render('/site/error',['message'=>"仓库的空间不足，请整理仓库之后再进行购买"]);
+            }
+
+
             $result = $memb_info->updateMoney($package->Prise,0);//扣除金额
             if($result!==true)
             {
                 return $this->render('/site/error',['message'=>$result]);
             }
 
-            $result = $package->savePackage($mem_id);//记录购买记录和返回记录到仓库的装备代码
+            $result = $package->savePackage($mem_id,$space_enough,$item);//记录购买记录和返回记录到仓库的装备代码
             if($result>=0)
             {
-//                $connect = Yii::$app->db;
-//                $sql = "select DBO.varbin2hexstr(DBO.ItemCode(".$array['zuoshou'].",".$array['youshou'].","
-//                    .$array['tou'].",".$array['kai'].","
-//                    .$array['shou'].",".$array['tui'].","
-//                    .$array['xie'].",".$array['fei'].",".$array['xianglian'].","
-//                    .$array['zuojiezhi'].",".$array['youjiezhi']
-//                    .")) as code";
-//                $command = $connect->createCommand($sql);
-//                $code = $command->queryScalar();
-//                $item_result = $warehouse->updateItem(bin2hex($result));//更新仓库的内容
                 return $this->render('/site/success',['message'=>'购买成功，请到游戏里查看','name'=>"购买套装"]);
             }
             else
@@ -303,8 +299,12 @@ class ItemController extends Controller
 //        $tz = TzItem::findOne(['Id'=>2]);
 //        $tz->savePackage();
         $wearhouse = Warehouse::findOne(['AccountID'=>'zhang004']);
-
-        var_dump($wearhouse);
+//
+        $item = $wearhouse->ItemsCode();
+        var_dump($item);
+//        $items_code = array();
+//        preg_match_all("/[0-9a-fA-F]{32}/",$item,$items_code);
+//        var_dump($items_code);
 //        $item = new MuItem();
 //        $item_info = $item->findbyindex(2,3);
 //        var_dump($item_info);

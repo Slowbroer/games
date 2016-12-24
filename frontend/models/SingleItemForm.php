@@ -57,39 +57,36 @@ class SingleItemForm extends Model
 
     public function buy_item($memb_id){//购买单件装备
 
-//        var_dump($warehouse->AccountID);
-        $item = MuItem::findOne(['Id'=>$this->id]);
+        $item = MuItem::findOne(['Id'=>$this->id]);//装备信息
         if(isset($item))
         {
             $menb = MEMBINFO::findOne(['memb___id'=>$memb_id]);
             if($item->Prise>$menb->money){
-                return array(['code'=>0,'message'=>"您的余额不够，请充值后再进行购买！"]);
+                return array('code'=>0,'message'=>"您的余额不够，请充值后再进行购买！");
             }
-            else
-            {
-                $money_result = $menb->updateMoney($item->Prise,0);//update the money
-                if($money_result!==true)
-                {
-                    return array(['code'=>0,'message'=>$money_result]);
-                }
-            }
-            $code = $item->createCode();//return the string without the "0x"
+
+            $code = $item->createCode();//return the string without the "0x"  装备代码，字符串形式返回
             $item_log = new ItemLog();
             $last_sn = $item_log->getLastsn();
             $item_number = str_pad(base_convert($last_sn-1,10,16),8,0,STR_PAD_LEFT);
-            $code = substr_replace($code,$item_number,8,8);
+            $code = substr_replace($code,$item_number,8,8);//最终的装备代码
 
-            $change = 0;
             $final_str = '';
             $warehouse = new Warehouse();
-            $warehouse_code = $warehouse->ItemsCode($memb_id);
-//            var_dump($warehouse_code);
+            $warehouse_code = $warehouse->ItemsCode($memb_id);//返回一个仓库的装备代码块
+
             if($warehouse_code !== null && (!empty($warehouse_code)))
             {
-                $will_space = $warehouse->checkSpace($code);
-//                var_dump($will_space);
-                if($will_space['code']===1)
+                $will_space = $warehouse->checkSpace($code,$warehouse_code);//检查这个商品是否能够放进仓库中
+
+                if($will_space['code']===1)//可以放进去仓库中
                 {
+                    $money_result = $menb->updateMoney($item->Prise,0);//扣钱
+                    if($money_result!==true)
+                    {
+                        return array('code'=>0,'message'=>$money_result);
+                    }
+
                     $final_str = substr_replace($warehouse_code,$code,(($will_space['y']*8 +$will_space['x'])*32),32);
                     $connect = Yii::$app->db;
                     $final_str = "0x".$final_str;
@@ -98,36 +95,20 @@ class SingleItemForm extends Model
                     $row = $command->execute();
                     if($row < 1)
                     {
-                        return array(['code'=>0,'message'=>"购买失败"]);
+                        return array('code'=>0,'message'=>"购买失败");
                     }
                 }
-//                $str_array = $this->StrSplit($warehouse_code);
-//                foreach ($str_array as $key => $value)
-//                {
-//                    if($value == "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
-//                    {
-//                        $str_array[$key] = $code;
-//                        $change += 1;
-//                        break;
-//                    }
-//                }
-            }
-//            foreach ($str_array as $value)
-//            {
-//                $final_str .= $value;
-//            }
-            if($change != 0)
-            {
-                $connect = Yii::$app->db;
-                $final_str = "0x".$final_str;
-                $sql = "update warehouse set Items = $final_str where AccountID = '".$memb_id."'";
-                $command = $connect->createCommand($sql);
-                $row = $command->execute();
-                if($row < 1)
+                else
                 {
-                    return array(['code'=>0,'message'=>"购买失败"]);
+                    return array('code'=>0,'message'=>"仓库空间不足");
                 }
             }
+            else
+            {
+                return array('code'=>0,'message'=>"你必须先创建一个角色");
+            }
+
+
 
             $item_log->acc = $memb_id;
             $item_log->name = $item->Name;

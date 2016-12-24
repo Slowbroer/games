@@ -93,7 +93,7 @@ class TzItem extends \yii\db\ActiveRecord
     }
 
 
-    public function savePackage($memb_id){
+    public function savePackage($memb_id,$space_enough,$warehouse_items=''){
 
         $array = array(
             'zuoshou'=>'0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
@@ -112,15 +112,17 @@ class TzItem extends \yii\db\ActiveRecord
         {
             if($key!='Id'&&$key!='Name'&&$key!='BW'&&$key!='Prise'&&$key!='ItemNums')
             {
-                if($value!=null){
+                if(($value!=null) && (!preg_match("/^[f|F]+$/",$value))){
                     $item_log = new ItemLog();
                     $sn = $item_log->getLastsn();
                     $item_number = str_pad(base_convert($sn-1,10,16),8,0,STR_PAD_LEFT);
-                    $array[$key] = "0x".substr_replace($value,$item_number,8,8);
+                    $item_code = substr_replace($value,$item_number,8,8);
+
+                    $warehouse_items = substr_replace($warehouse_items,$item_code,(($space_enough[$key]['y']*8 +$space_enough[$key]['x'])*32),32);
 
                     $item_log->acc = $memb_id;
                     $item_log->name = $this->Name;
-                    $item_log->itemcode = $array[$key];
+                    $item_log->itemcode = $item_code;
                     $item_log->Iname = "套装";
                     $item_log->sn = $sn-1;
                     $item_log->sentdate = date("Y-m-d H:i:s");
@@ -129,62 +131,24 @@ class TzItem extends \yii\db\ActiveRecord
                     {
                         return false;
                     }
-
-//                    $this->attributes[$key] = substr_replace($value,$item_number,6,8);
-//                    $item_log->setAttribute($key,substr_replace($value,$item_number,6,8));
                 }
-
             }
-
         }
 
         $connect = Yii::$app->db;
-        $sql = "update warehouse set Items= DBO.ItemCode(".$array['zuoshou'].",".$array['youshou'].","
-            .$array['tou'].",".$array['kai'].","
-            .$array['shou'].",".$array['tui'].","
-            .$array['xie'].",".$array['fei'].",".$array['xianglian'].","
-            .$array['zuojiezhi'].",".$array['youjiezhi']
-            .") where AccountID = '".$memb_id."'";
-//        die($sql);
+        $warehouse_items = "0x".$warehouse_items;
+        $sql = "update warehouse set Items = $warehouse_items where AccountID = '".$memb_id."'";
+//        $sql = "update warehouse set Items= DBO.ItemCode(".$array['zuoshou'].",".$array['youshou'].","
+//            .$array['tou'].",".$array['kai'].","
+//            .$array['shou'].",".$array['tui'].","
+//            .$array['xie'].",".$array['fei'].",".$array['xianglian'].","
+//            .$array['zuojiezhi'].",".$array['youjiezhi']
+//            .") where AccountID = '".$memb_id."'";
 
         $command = $connect->createCommand($sql);
         $code = $command->execute();
-//        $result = '';
-//        foreach ($array as $value)
-//        {
-//            $result .= $value;
-//        }
-//        $result = str_pad($result,120*32,"F",STR_PAD_RIGHT);
-
-//        $connect = Yii::$app->db;
-//
-//                $sql = "select DBO.varbin2hexstr(DBO.ItemCode(".$array['zuoshou'].",".$array['youshou'].","
-//                    .$array['tou'].",".$array['kai'].","
-//                    .$array['shou'].",".$array['tui'].","
-//                    .$array['xie'].",".$array['fei'].",".$array['xianglian'].","
-//                    .$array['zuojiezhi'].",".$array['youjiezhi']
-//                    .")) as code";
-//
-//                $command = $connect->createCommand($sql);
-//                $code = $command->queryScalar();
 
         return $code;
-
-//        var_dump($this->attributes['zuoshou']);
-//        array (size=13)
-//      'Id' => int 2
-//      'Name' => string '战士王者大天套' (length=21)
-//      'BW' => string '（大天使之剑+火之项链）' (length=34)
-//      'Prise' => int 200
-//      'ItemNums' => string '5' (length=1)
-//      'zuoshou' => string '13EFC8FFFFFFC97F0900ADFFFFFFFFFF' (length=32)
-//      'tou' => null
-//      'kai' => null
-//      'shou' => null
-//      'tui' => null
-//      'xie' => null
-//      'xianglian' => string '0D6B66FFFFFFC87F0AD0ADFFFFFFFFFF' (length=32)
-//      'zuojiezhi' => null
     }
 
     public function package_update(){
@@ -263,6 +227,71 @@ class TzItem extends \yii\db\ActiveRecord
             }
         }
         return $items;
+    }
+
+
+    public function space_enough($used_space)
+    {
+        $space_enough = array('code'=>1);
+        foreach ($this->attributes as $key => $value)//遍历每一件装备
+        {
+            if($key!='Id'&&$key!='Name'&&$key!='BW'&&$key!='Prise'&&$key!='ItemNums')
+            {
+                if(!preg_match("/^[f|F]+$/",$value))
+                {
+                    $Index_code = hexdec(substr($value,0,2));
+                    $cate		= hexdec(substr($value,18,1));
+
+                    $item = new MuItem();
+                    $item_info = $item->findbyindex($Index_code,$cate);
+
+                    $item_enough = true;
+                    $space_enough[$key]=array();
+                    for ($y = 0;$y < 15;$y++)//遍历每一个格子，检测是否能够放置这件装备
+                    {
+                        for ($x = 0;$x < 8;$x++)
+                        {
+                            $space = $x."-".$y;
+                            if(!in_array($space,$used_space))
+                            {
+                                $item_space = $item_info->itemXY($x,$y,"array");
+                                $is_used = false;
+                                foreach ($item_space as $k=>$v)
+                                {
+                                    $xy = explode("-",$v);
+                                    if($xy[0] >=8 || $xy[1] >= 15 || in_array($v,$used_space))
+                                    {
+                                        $is_used = true;
+                                        break;
+                                    }
+                                }
+                                if($is_used == false)//如果这件装备能放进去
+                                {
+                                    $space_enough[$key]['x'] = $x;
+                                    $space_enough[$key]['y'] = $y;
+                                    $used_space = array_merge($used_space,$item_space);
+                                    break 2;
+                                }
+                                else
+                                {
+                                    continue;//如果放不进去，继续遍历格子
+                                }
+                            }
+                        }
+                    }
+                    if(empty($space_enough[$key]))
+                    {
+                        $space_enough['code'] = 0;//有一件装备不能放进去就退出，说明套装放不进去
+                        break;
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        return $space_enough;
     }
 
 

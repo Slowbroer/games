@@ -69,55 +69,32 @@ class Warehouse extends \yii\db\ActiveRecord
         return $this->save()? true:false;
     }
 
-    public function UsedSpace()//获取到仓库的已经使用的格子，以数组的形式返回
+    public function UsedSpace($item)//获取到仓库的已经使用的格子，以数组的形式返回,参数为仓库中的装备代码
     {
-        $item = $this->ItemsCode();
-
         preg_match_all("/[0-9a-fA-F]{32}/",$item,$items_code);
         $used_space = array();
-
-//        for ($y = 0;$y < 15;$y++)
-//        {
-//            for ($x = 0;$x < 8;$x++)
-//            {
-//                $value = $items_code[0][$y*8+$x];
-//                if(!preg_match("/^[F|f]+$/",$value))
-//                {
-//                    $Index_code = hexdec(substr($value,0,2));
-//
-//                    $cate		= hexdec(substr($value,18,1));
-//
-//                    $item = new MuItem();
-//                    $item_info = $item->findbyindex($Index_code,$cate);
-//                    $used_space[] = $item->itemXY($x,$y,"string");
-//                }
-//            }
-//        }
 
         foreach ($items_code[0] as $key => $value)
         {
             if(!preg_match("/^[F|f]+$/",$value))
             {
-                $Index_code = hexdec(substr($value,0,2));
 
+                $Index_code = hexdec(substr($value,0,2));
                 $cate		= hexdec(substr($value,18,1));
 
                 $item = new MuItem();
                 $item_info = $item->findbyindex($Index_code,$cate);
-                $used_space[] = $item_info->itemXY($key%8,$key/8,"string");
+                $used_space[] = $item_info->itemXY($key%8,intval($key/8),"string");
             }
-
         }
-
         if(!empty($used_space))
         {
             $used_space = explode(",",implode(",",$used_space));
         }
-
         return $used_space;
     }
 
-    public function checkSpace($item_code='')//检查仓库是否有空位置给一个装备放置，如果有，返回这个位置的坐标信息
+    public function checkSpace($item_code='',$warehouse_item)//检查仓库是否有空位置给一个装备放置，如果有，返回这个位置的坐标信息
     {
         if(empty($item_code)||preg_match("/^[F|f]+$/",$item_code))
         {
@@ -131,8 +108,7 @@ class Warehouse extends \yii\db\ActiveRecord
             $item_info = $item->findbyindex($Index_code,$cate);
 
             $will_space =array();
-
-            $used_space = empty($this->used_space)? $this->UsedSpace():$this->used_space;//get the used space of warehouse
+            $used_space = empty($this->used_space)? $this->UsedSpace($warehouse_item):$this->used_space;//get the used space of warehouse
 
             for ($y = 0;$y < 15;$y++)//遍历每一个格子，检测是否能够放置这件装备
             {
@@ -166,10 +142,18 @@ class Warehouse extends \yii\db\ActiveRecord
         }
     }
 
-
     public function ItemsCode($memb_id='')//获取仓库的装备代码，已经转换为字符串的
     {
-        $item = $this->find()->select(" DBO.varbin2hexstr(Items) as item ")->where(['AccountID'=>$this->AccountID])->asArray()->one();
+        if(empty($memb_id))
+        {
+            $memb_id = $this->AccountID;
+        }
+        if(empty($memb_id))
+        {
+            return null;
+        }
+
+        $item = $this->find()->select(" DBO.varbin2hexstr(Items) as item ")->where(['AccountID'=>$memb_id])->asArray()->one();
         return $item['item'];
     }
 
