@@ -61,7 +61,7 @@ AppAsset::register($this);
         $menuItems[] = [
             'label'=>'商城',
             'items'=>[
-                ['label' => '购买装备', 'url' => 'index.php?r=item/buyitem',
+                ['label' => '购买装备', 'url' => 'index.php?r=item/buy_single_item',
                     'options'=>[
                         'target'=>'.container'
                     ]
