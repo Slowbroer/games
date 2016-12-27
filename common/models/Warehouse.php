@@ -107,7 +107,7 @@ class Warehouse extends \yii\db\ActiveRecord
             $item = new MuItem();
             $item_info = $item->findbyindex($Index_code,$cate);
 
-            $will_space =array();
+            $will_space =array('code'=>0);
             $used_space = empty($this->used_space)? $this->UsedSpace($warehouse_item):$this->used_space;//get the used space of warehouse
 
             for ($y = 0;$y < 15;$y++)//遍历每一个格子，检测是否能够放置这件装备
