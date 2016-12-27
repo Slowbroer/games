@@ -32,6 +32,7 @@ class ItemController extends Controller
 
         $list = $item->getList($filter);
 
+
         echo $this->render("list",['lists'=>$list['lists'],'pagination'=>$list['page']]);
     }
 

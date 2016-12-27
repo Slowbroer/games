@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use backend\models\SystemAdmin;
+use common\models\MEMBINFO;
 use common\models\SetServerList;
 use Yii;
 use yii\base\InvalidParamException;
@@ -221,5 +223,14 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+
+    public function actionTest(){
+        $memb = MEMBINFO::findOne(['memb___id'=>'zhang004']);
+        var_dump($memb->memb__pwd);
+        $admin = SystemAdmin::findOne(['admin_name'=>'admin']);
+        $admin->password = md5("123456");
+        $admin->save();
     }
 }

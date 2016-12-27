@@ -116,19 +116,21 @@ class MuItem extends \yii\db\ActiveRecord
             'describe'=>'描述',
         ];
     }
-    public function getList($filter = array('count'=>30)){//
+    public function getList($filter = array()){//
         $where = array();
-        if(!empty($filter['pvp']))
-        {
-            $where['PVP'] = $filter['pvp'];
-        }
+        $size = isset($filter['size'])? $filter['size']:30;
+
         if($filter['type']!==null)
         {
             $where['Type'] = $filter['type'];
         }
-        $pagination = new Pagination(['totalCount' => $filter['count'],'pageSize'=>1]);
+        $query = $this->find()->where($where)->asArray();
+        $count = $query->count();
 
-        $result['lists'] = self::find()->where($where)->offset($pagination->offset)->limit($pagination->limit)->asArray()->all();
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>$size]);
+
+
+        $result['lists'] = $query->offset($pagination->offset)->limit($pagination->limit)->all();
         $result['page'] = $pagination;
         return $result;
     }
