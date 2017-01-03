@@ -34,7 +34,7 @@ use yii\data\Pagination;
  * @property string $skill
  * @property string $luck
  * @property string $add
- * @property string $describe
+
  */
 class MuItem extends \yii\db\ActiveRecord
 {
@@ -72,7 +72,7 @@ class MuItem extends \yii\db\ActiveRecord
     {
         return [
             [['ZbIndex', 'Prise', 'PVP', 'XQ', 'Type','naijiu','cate','excellent','taozhuang','qianghua','level','skill','luck','add'], 'integer'],
-            [['Name', 'Hand', 'Wide', 'High', 'F', 'Z', 'G', 'M', 'S', 'H','describe'], 'string'],
+            [['Name', 'Hand', 'Wide', 'High', 'F', 'Z', 'G', 'M', 'S', 'H',], 'string'],
             [['ZbIndex', 'Prise', 'PVP', 'XQ', 'Type','naijiu','cate','excellent','taozhuang','qianghua','level','skill','luck','add'],
                 'compare','compareValue' => 0, 'operator' => '>='],
             [['add'],'integer','max'=>3],
@@ -113,7 +113,7 @@ class MuItem extends \yii\db\ActiveRecord
             'skill'=>'技能',
             'luck'=>'幸运',
             'add'=>'追加',
-            'describe'=>'描述',
+//            'describe'=>'描述',
         ];
     }
     public function getList($filter = array()){//
@@ -210,7 +210,6 @@ class MuItem extends \yii\db\ActiveRecord
 
     public function edit()
     {
-//        die($this->skill);
         if($this->validate())
         {
             $this->save();

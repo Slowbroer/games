@@ -68,11 +68,12 @@ class Announcement extends \yii\db\ActiveRecord
         {
             $where['type'] = $filter['type'];
         }
+        $page_size = isset($filter['page_size'])? $filter['page_size']:20;
         $query = $this->find()->select(['announcement_id','type','name','add_time','type_name'])->where($where)->asArray();
 
         $count = $query->count();
 
-        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>1,'params'=>array_merge($_GET, ['keywords' => 'test'])]);
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>$page_size,'params'=>array_merge($_GET, ['keywords' => 'test'])]);
 
         $result['list'] = $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
@@ -101,4 +102,7 @@ class Announcement extends \yii\db\ActiveRecord
             return ($this->save())? true:false;
         }
     }
+
+
+
 }

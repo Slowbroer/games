@@ -158,6 +158,13 @@ class Warehouse extends \yii\db\ActiveRecord
     }
 
 
+    public function register_add(MEMBINFO $user)
+    {
+        $this->AccountID = $user->memb___id;
+        $this->save();
+    }
+
+
 
 
 

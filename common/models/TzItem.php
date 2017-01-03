@@ -156,6 +156,10 @@ class TzItem extends \yii\db\ActiveRecord
         {
             return false;
         }
+        else
+        {
+            return $this->save();
+        }
     }
 
     //获取套装中的装备，解析套装中的装备代码，然后以数组的形式返回

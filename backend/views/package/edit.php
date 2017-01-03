@@ -77,7 +77,7 @@ use yii\helpers\Html;
 <!--            --><?php ////ActiveForm::end(); ?>
 <!--            </form>-->
 
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'login-form','action'=>"index.php?r=package/saveitem",'options'=>['class' => 'item-edit',]]); ?>
             <tr>
                 <td><?= Html::encode($item['type_name']);?></td>
                 <td><?= $form->field($item['item'], 'Id')->dropDownList($item['type_list'],['prompt'=>'请选择'])->label(false); ?></td>
@@ -90,6 +90,8 @@ use yii\helpers\Html;
                 <td><?= $form->field($item['item'], 'skill')->dropDownList(['0'=>"加",'1'=>'不加'])->label(false); ?></td>
                 <td><?= $form->field($item['item'], 'luck')->dropDownList(['0'=>"加",'1'=>'不加'])->label(false); ?></td>
 
+                <?php echo Html::hiddenInput('type',$key);?>
+                <?php echo Html::hiddenInput('id',$model->Id);?>
 
                 <td><div style="display: inline-block"><?= Html::submitButton("保存",['style'=>'width:100px;','class'=>'btn btn-success']); ?></div></td>
             </tr>

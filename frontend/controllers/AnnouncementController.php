@@ -9,24 +9,44 @@
 namespace frontend\controllers;
 
 
+use common\models\AnnComment;
 use common\models\Announcement;
+use common\models\AnnouncementType;
 use yii\web\Controller;
 use Yii;
 
 class AnnouncementController extends Controller//公共前台功能代码，包括评论和回复的代码
 {
 
+    public function actionAll()
+    {
+        $ann = new Announcement();
+        $all = $ann->getList();//announcements list
+
+        $ann_type = new AnnouncementType();
+        $type_lists = $ann_type->getList();//announcements type list
+
+        return $this->render("all",['ann'=>$all['list'],'pagination'=>$all['page'],'types'=>$type_lists]);
+    }
+
     public function actionInfo()
     {
         $id = isset($_REQUEST['id'])? $_REQUEST['id']:0;
         $announcement = Announcement::findOne(['announcement_id'=>$id]);
+
+
+
+        $comment = new AnnComment();
+        $comment->ann_id = $id;
+
+        $comment_lists = $comment->comment_list();
         if(!$announcement)
         {
             header("index.php");
         }
         else
         {
-            return $this->render("info",['model'=>$announcement]);
+            return $this->render("info",['model'=>$announcement,'comment'=>$comment,'comment_lists'=>$comment_lists]);
         }
     }
 
@@ -53,4 +73,7 @@ class AnnouncementController extends Controller//公共前台功能代码，包�
             }
         }
     }
+
+
+
 }

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 use backend\models\SystemAdmin;
 use common\models\MEMBINFO;
 use common\models\SetServerList;
+use common\models\Warehouse;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -159,7 +160,10 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 //            die("test");
             if ($user = $model->signup()) {//返回一个MEMBINFO
-//                die("test");
+
+                $warehouse = new Warehouse();
+                $warehouse->register_add($user);
+
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }

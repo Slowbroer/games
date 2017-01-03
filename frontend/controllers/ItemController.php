@@ -225,8 +225,7 @@ class ItemController extends Controller
             {
                 return $this->render('/site/error',['message'=>'购买失败！购买装备之前必须建立角色并且打开仓库一次！否则无法购买哦！']);
             }
-
-//            $mem_id = Yii::$app->user->identity->getMenb();
+            
             $connect = Yii::$app->db;
             $sql = "select DBO.JC_CKZB_NUM('".$memb_id."') as id";
             $command = $connect->createCommand($sql);
@@ -236,7 +235,6 @@ class ItemController extends Controller
                 return $this->render('/site/error',['message'=>'检测到您的仓库有'.$code.'件物品，请取出再进行购买']);
             }
 
-//            $warehouse_item = $warehouse->ItemsCode();
             $result = $model->buy_item($memb_id);
             if($result['code']==0)
             {

@@ -84,7 +84,7 @@ class PackageController extends Controller
         $package = TzItem::findOne(["Id"=>$id]);
         if(!isset($package))
         {
-            return false;
+            return "1";
         }
         $item_array = isset($_POST['MuItem'])? $_POST['MuItem']:array();
         if($item_array['Id']>0) {
@@ -109,7 +109,7 @@ class PackageController extends Controller
                 return "success";
             }
         }
-        return false;
+        return "2";
     }
 
 

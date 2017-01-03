@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use common\models\Warehouse;
 use yii\base\Model;
 use common\models\User;
 use common\models\MEMBINFO;
@@ -94,5 +95,8 @@ class SignupForm extends Model
 //        var_dump(json_encode($user));
         
         return $user->save() ? $user : null;
+
+
+
     }
 }

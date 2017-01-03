@@ -38,22 +38,20 @@ AppAsset::register($this);
         ['label' => '首页', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => '注册', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => '登陆', 'url' => ['/site/login']];
     } else {
         $menuItems[] = [
             'label'=>'排行查询',
             'items'=>[
                 ['label' => '角色排行', 'url' => 'index.php?r=rank/default',
                     'options'=>[
-                        'target'=>'.container'
+//                        'target'=>'.container'
                     ]
                 ],
-//                   '<li class="divider"></li>',
-//                   '<li class="dropdown-header">Dropdown Header</li>',
                 ['label' => '战盟排行', 'url' => 'index.php?r=rank/guilddefault',
                     'options'=>[
-                        'target'=>'.container'
+//                        'target'=>'.container'
                     ]
                 ],
             ],
@@ -63,19 +61,33 @@ AppAsset::register($this);
             'items'=>[
                 ['label' => '购买装备', 'url' => 'index.php?r=item/buy_single_item',
                     'options'=>[
-                        'target'=>'.container'
+//                        'target'=>'.container'
                     ]
                 ],
-//                   '<li class="divider"></li>',
-//                   '<li class="dropdown-header">Dropdown Header</li>',
                 ['label' => '购买套装', 'url' => 'index.php?r=item/buypackage',
                     'options'=>[
-                        'target'=>'.container'
+//                        'target'=>'.container'
                     ]
                 ],
                 ['label' => '充值', 'url' => 'http://www.libaopay.com/',
                     'options'=>[
-                        'target'=>'.container'
+//                        'target'=>'.container'
+                    ]
+                ],
+            ],
+        ];
+
+        $menuItems[] = [
+            'label'=>'论坛公告',
+            'items'=>[
+                ['label' => '最新公告', 'url' => 'index.php?r=item/buy_single_item',
+                    'options'=>[
+//                        'target'=>'.container'/
+                    ]
+                ],
+                ['label' => '全部公告', 'url' => 'index.php?r=announcement/all',
+                    'options'=>[
+                        'target'=>'content'
                     ]
                 ],
             ],
@@ -83,7 +95,7 @@ AppAsset::register($this);
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->memb___id . ')',
+                '退出登陆 (' . Yii::$app->user->identity->memb___id . ')',
                 ['class' => 'btn btn-link']
             )
             . Html::endForm()
