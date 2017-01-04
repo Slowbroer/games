@@ -54,50 +54,25 @@ use yii\helpers\Html;
         </thead>
         <tbody>
         <?php foreach ($items as $key => $item){?>
-<!--            <form class="item-edit" action="index.php?r=package/saveitem" method="post">-->
-<!--            --><?php ////$form = ActiveForm::begin(['options'=>['class' => 'item-edit',],'action'=>\yii\helpers\Url::toRoute('package/saveitem'),'method'=>"POST"]); ?>
-<!--            <tr style="width: 100%">-->
-<!--                <td><label style="width: 60px;">--><?php //echo Html::encode($item['type_name']);?><!--</label></td>-->
-<!--                <td>--><?php //echo Html::dropDownList('MuItem[Id]',$item['Id'],$item['type_list'],['style'=>'width:200px;','prompt'=>"请选择",'class'=>'id_list']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[naijiu]',$item['naijiu'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[PVP]',$item['PVP'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[taozhuang]',$item['taozhuang'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[qianghua]',$item['qianghua'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[level]',$item['level'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[skill]',$item['skill'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[luck]',$item['luck'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                <td>--><?php //echo Html::input('text','MuItem[add]',$item['add'],['style'=>'width:40px;']);?><!--</td>-->
-<!--                --><?php ////echo Html::hiddenInput('MuItem[ZbIndex]',$item['ZbIndex'],['style'=>'width:40px;']);?>
-<!---->
-<!--                --><?php //echo Html::hiddenInput('type',$key);?>
-<!--                --><?php //echo Html::hiddenInput('id',$model->Id);?>
-<!--                <td>--><?php //echo Html::submitButton("保存",['style'=>'width:100px;']);?><!--</td>-->
-<!---->
-<!--            </tr>-->
-<!--            --><?php ////ActiveForm::end(); ?>
-<!--            </form>-->
-
-            <?php $form = ActiveForm::begin(['id' => 'login-form','action'=>"index.php?r=package/saveitem",'options'=>['class' => 'item-edit',]]); ?>
-            <tr>
-                <td><?= Html::encode($item['type_name']);?></td>
-                <td><?= $form->field($item['item'], 'Id')->dropDownList($item['type_list'],['prompt'=>'请选择'])->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'naijiu')->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'PVP')->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'taozhuang')->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'qianghua')->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'level')->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'add')->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'skill')->dropDownList(['0'=>"加",'1'=>'不加'])->label(false); ?></td>
-                <td><?= $form->field($item['item'], 'luck')->dropDownList(['0'=>"加",'1'=>'不加'])->label(false); ?></td>
+            <form class="item-edit" action="index.php?r=package/saveitem" method="post">
+            <tr style="width: 100%;height: 30px;">
+                <td><label style="width: 60px;"><?php echo Html::encode($item['type_name']);?></label></td>
+                <td><?php echo Html::dropDownList('MuItem[Id]',$item['Id'],$item['type_list'],['style'=>'width:200px;','prompt'=>"请选择",'class'=>'id_list']);?></td>
+                <td><?php echo Html::input('text','MuItem[naijiu]',$item['naijiu'],['style'=>'width:40px;','class'=>'naijiu']);?></td>
+                <td><?php echo Html::input('text','MuItem[PVP]',$item['PVP'],['style'=>'width:40px;','class'=>'pvp']);?></td>
+                <td><?php echo Html::input('text','MuItem[taozhuang]',$item['taozhuang'],['style'=>'width:40px;','class'=>'taozhuang']);?></td>
+                <td><?php echo Html::input('text','MuItem[qianghua]',$item['qianghua'],['style'=>'width:40px;','class'=>'qianghua']);?></td>
+                <td><?php echo Html::input('text','MuItem[level]',$item['level'],['style'=>'width:40px;','class'=>'level']);?></td>
+                <td><?php echo Html::input('text','MuItem[skill]',$item['skill'],['style'=>'width:40px;','class'=>'skill']);?></td>
+                <td><?php echo Html::input('text','MuItem[luck]',$item['luck'],['style'=>'width:40px;','class'=>'luck']);?></td>
+                <td><?php echo Html::input('text','MuItem[add]',$item['add'],['style'=>'width:40px;','class'=>'add']);?></td>
+                <?php echo Html::hiddenInput('MuItem[ZbIndex]',$item['ZbIndex'],['style'=>'width:40px;','class'=>'index']);?>
 
                 <?php echo Html::hiddenInput('type',$key);?>
                 <?php echo Html::hiddenInput('id',$model->Id);?>
-
-                <td><div style="display: inline-block"><?= Html::submitButton("保存",['style'=>'width:100px;','class'=>'btn btn-success']); ?></div></td>
+                <td><?php echo Html::submitButton("保存",['style'=>'width:100px;']);?></td>
             </tr>
-
-            <?php ActiveForm::end(); ?>
-
+            </form>
         <?php }?>
         </tbody>
     </table>
@@ -105,6 +80,38 @@ use yii\helpers\Html;
 
 
 <script type="text/javascript">
+
+    $(".id_list").change(function (e) {
+//        console.log($(this).parent().parent().html());
+
+        var item = $(this).parent().parent();
+        $.ajax({
+            url:"index.php?r=item/info",
+            data:"id="+$(this).val(),
+            type:"GET",
+            success:function (data) {
+                data = eval("("+data+")");
+                console.log(data);
+                item.find(".naijiu").val(data.naijiu);
+                item.find(".pvp").val(data.PVP);
+                item.find(".taozhuang").val(data.taozhuang);
+                item.find(".qianghua").val(data.qianghua);
+                item.find(".level").val(data.level);
+                item.find(".skill").val(data.skill);
+                item.find(".luck").val(data.luck);
+                item.find(".add").val(data.add);
+                item.find(".index").val(data.ZbIndex);
+//                console.log(item);
+//                alert(item.find(".naijiu"));
+
+            },
+            error:function () {
+
+            }
+        });
+
+
+    });
 
     $(".item-edit").submit(function (e) {
         alert("test");
@@ -139,10 +146,7 @@ use yii\helpers\Html;
     }
 
 
-    $(".id_list").change(function (e) {
-//        loadInfo($(this));
-        console.log($(this).parent().parent());
-    });
+
 
     function loadInfo(form) {
         $.ajax({

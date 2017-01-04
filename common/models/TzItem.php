@@ -172,61 +172,61 @@ class TzItem extends \yii\db\ActiveRecord
             {
                 if($value!=null&&$value!='FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
                 {
-//                    $index = base_convert(substr($value,0,2),16,10);//排序
-//
-//                    $items[$key]['ZbIndex'] = $index;
-//                    $items[$key]['shuxing'] = substr($value,2,2);//属性，需要进一步细化
-//                    $shuxing = str_pad(base_convert($items[$key]['shuxing'],16,2),8,0,STR_PAD_LEFT);
-//                    $items[$key]['skill'] = substr($shuxing,0,1);
-//                    $items[$key]['level'] = bindec(substr($shuxing,1,4));//bin to 10
-//                    $items[$key]['luck'] = substr($shuxing,5,1);
-//                    $items[$key]['add'] = bindec(substr($shuxing,6,2));
-//
-//                    $items[$key]['naijiu'] = base_convert(substr($value,4,2),16,10);//耐久
-//                    $items[$key]['excellent'] = base_convert(substr($value,14,2),16,10);//卓越
-//                    $items[$key]['taozhuang'] = base_convert(substr($value,16,2),16,10);//套装
-//                    $items[$key]['cate'] = base_convert(substr($value,18,1),16,10);//装备大类
-//                    $items[$key]['PVP'] = base_convert(substr($value,19,1),16,10);//pvp
-//                    $items[$key]['qianghua'] = base_convert(substr($value,20,2),16,10);//强化
-//                    $items[$key]['type_name'] = $this->item_types[$key]['name'];
-//
-//                    $item = new MuItem();
-//                    $item_info = $item->findbyindex($index,$items[$key]['cate']);
-//                    $items[$key]['Name'] = $item_info['Name'];
-//                    $items[$key]['Id'] = $item_info['Id'];
-//
-//                    $items[$key]['type_list'] = MuItem::typeList($this->item_types[$key]['id']);
+                    $index = base_convert(substr($value,0,2),16,10);//排序
+
+                    $items[$key]['ZbIndex'] = $index;
+                    $items[$key]['shuxing'] = substr($value,2,2);//属性，需要进一步细化
+                    $shuxing = str_pad(base_convert($items[$key]['shuxing'],16,2),8,0,STR_PAD_LEFT);
+                    $items[$key]['skill'] = substr($shuxing,0,1);
+                    $items[$key]['level'] = bindec(substr($shuxing,1,4));//bin to 10
+                    $items[$key]['luck'] = substr($shuxing,5,1);
+                    $items[$key]['add'] = bindec(substr($shuxing,6,2));
+
+                    $items[$key]['naijiu'] = base_convert(substr($value,4,2),16,10);//耐久
+                    $items[$key]['excellent'] = base_convert(substr($value,14,2),16,10);//卓越
+                    $items[$key]['taozhuang'] = base_convert(substr($value,16,2),16,10);//套装
+                    $items[$key]['cate'] = base_convert(substr($value,18,1),16,10);//装备大类
+                    $items[$key]['PVP'] = base_convert(substr($value,19,1),16,10);//pvp
+                    $items[$key]['qianghua'] = base_convert(substr($value,20,2),16,10);//强化
+                    $items[$key]['type_name'] = $this->item_types[$key]['name'];
 
                     $item = new MuItem();
-                    $item_info = $item->findbyindex(base_convert(substr($value,0,2),16,10),base_convert(substr($value,18,1),16,10));
+                    $item_info = $item->findbyindex($index,$items[$key]['cate']);
+                    $items[$key]['Name'] = $item_info['Name'];
+                    $items[$key]['Id'] = $item_info['Id'];
 
-                    $items[$key]['item'] = $item_info;
                     $items[$key]['type_list'] = MuItem::typeList($this->item_types[$key]['id']);
-                    $items[$key]['type_name'] = $this->item_types[$key]['name'];
+
+//                    $item = new MuItem();
+//                    $item_info = $item->findbyindex(base_convert(substr($value,0,2),16,10),base_convert(substr($value,18,1),16,10));
+//
+//                    $items[$key]['item'] = $item_info;
+//                    $items[$key]['type_list'] = MuItem::typeList($this->item_types[$key]['id']);
+//                    $items[$key]['type_name'] = $this->item_types[$key]['name'];
                 }
                 else
                 {
-//                    $items[$key]['ZbIndex'] = -1;
-//                    $items[$key]['shuxing'] = 0;
-//                    $items[$key]['skill'] = 0;
-//                    $items[$key]['level'] = 0;
-//                    $items[$key]['luck'] = 0;
-//                    $items[$key]['add'] = 0;
-//                    $items[$key]['naijiu'] = 0;
-//                    $items[$key]['excellent'] = 0;
-//                    $items[$key]['taozhuang'] = 0;
-//                    $items[$key]['cate'] = 0;
-//                    $items[$key]['PVP'] = 0;
-//                    $items[$key]['qianghua'] = 0;
-//                    $items[$key]['Name'] = '';
-//                    $items[$key]['type_name'] = $this->item_types[$key]['name'];
-//                    $items[$key]['Id'] = 0;
-////                    $items[$key]['type_id'] = $this->item_types[$key]['id'];
-//                    $items[$key]['type_list'] = MuItem::typeList($this->item_types[$key]['id']);
-
-                    $items[$key]['item'] = new MuItem();
-                    $items[$key]['type_list'] = MuItem::typeList($this->item_types[$key]['id']);
+                    $items[$key]['ZbIndex'] = -1;
+                    $items[$key]['shuxing'] = 0;
+                    $items[$key]['skill'] = 0;
+                    $items[$key]['level'] = 0;
+                    $items[$key]['luck'] = 0;
+                    $items[$key]['add'] = 0;
+                    $items[$key]['naijiu'] = 0;
+                    $items[$key]['excellent'] = 0;
+                    $items[$key]['taozhuang'] = 0;
+                    $items[$key]['cate'] = 0;
+                    $items[$key]['PVP'] = 0;
+                    $items[$key]['qianghua'] = 0;
+                    $items[$key]['Name'] = '';
                     $items[$key]['type_name'] = $this->item_types[$key]['name'];
+                    $items[$key]['Id'] = 0;
+//                    $items[$key]['type_id'] = $this->item_types[$key]['id'];
+                    $items[$key]['type_list'] = MuItem::typeList($this->item_types[$key]['id']);
+
+//                    $items[$key]['item'] = new MuItem();
+//                    $items[$key]['type_list'] = MuItem::typeList($this->item_types[$key]['id']);
+//                    $items[$key]['type_name'] = $this->item_types[$key]['name'];
                 }
             }
         }

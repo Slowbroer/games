@@ -91,8 +91,9 @@ class PackageController extends Controller
             $item = MuItem::findOne(['Id' => $item_array['Id']]);
             if (isset($item) && $item->load(Yii::$app->request->post()) && isset($_POST['type'])) {
                 $code = $item->createCode();
-//                var_dump($item);
+//                var_dump($item);1d00030000000000008100FFFFFFFFFF
                 $package->setAttribute($_POST['type'], $code);
+                var_dump($package->$_POST['type']);
                 $result = $package->save();
                 if($result)
                 {
