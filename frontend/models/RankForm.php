@@ -55,9 +55,9 @@ class RankForm extends Model {
     public function c_rank()//英雄排行
     {
 
-        if (!$this->validate()) {
-            return null;
-        }
+//        if (!$this->validate()) {
+//            return null;
+//        }
 
         $where = " where m.ServerCode = ".$this->server;
         if($this->career!==''&&intval($this->career)>=0)
