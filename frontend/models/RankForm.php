@@ -104,9 +104,9 @@ class RankForm extends Model {
 
     public function g_rank(){//战盟排行
 
-        if(!$this->validate()){
-            return null;
-        }
+//        if(!$this->validate()){
+//            return null;
+//        }
 
         $where=array();
         $order='';

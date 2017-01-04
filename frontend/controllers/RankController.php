@@ -17,6 +17,8 @@ use common\models\SetServerList;
 
 class RankController extends Controller{//排行控制器
 
+    public $enableCsrfValidation =false;
+
     public function actionCharacterlist(){//英雄排行
 
         $model = new RankForm();
@@ -94,6 +96,23 @@ class RankController extends Controller{//排行控制器
             $class->class_id = $key;
             $class->class_name = $value;
             $class->save();
+        }
+
+    }
+
+
+    public function actionLevelrank()
+    {
+        $model = new RankForm();
+        $list = $model->g_rank();
+        if(empty($list))
+        {
+            return json_encode(array('code'=>0,'message'=>'没有相应排行'));
+        }
+        else
+        {
+//                $content = $this->renderPartial("list",['lists'=>$list]);
+            return json_encode($list);
         }
 
     }
