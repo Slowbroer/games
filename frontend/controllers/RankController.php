@@ -104,7 +104,7 @@ class RankController extends Controller{//排行控制器
     public function actionLevelrank()
     {
         $model = new RankForm();
-        $list = $model->g_rank();
+        $list = $model->c_rank();
         if(empty($list))
         {
             return json_encode(array('code'=>0,'message'=>'没有相应排行'));
