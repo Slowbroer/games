@@ -59,11 +59,11 @@ class RankForm extends Model {
 //            return null;
 //        }
 
-        $where = " where m.ServerCode = ".$this->server;
-        if($this->career!==''&&intval($this->career)>=0)
-        {
-            $where .= " and c.Class = $this->career ";
-        }
+//        $where = " where m.ServerCode = ".$this->server;
+//        if($this->career!==''&&intval($this->career)>=0)
+//        {
+//            $where .= " and c.Class = $this->career ";
+//        }
 //        $where = array();
 //        $where['Character.ZY'] = isset($this->career)? $this->career:'';//职业表
 //        $where['MEMBINFO.ServerCode'] = isset($this->server)? $this->server:'';//服务区
