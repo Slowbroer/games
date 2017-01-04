@@ -78,7 +78,10 @@ class RankForm extends Model {
 //            ->onCondition("MEMBINFO.memb___id=Character.AccountID")
 //            ->where($where)->orderBy($order)->limit($limit)->asArray()->all();
         $connect = Yii::$app->db;
-        $sql = "select top $limit c.Name,c.cLevel,c.Class,c.ZY,c.PkLevel from Character as c left join MEMB_INFO as m on c.AccountID = m.memb___id ".$where." order by $order desc";
+//        $sql = "select top $limit c.Name,c.cLevel,c.Class,c.ZY,c.PkLevel from Character as c left join MEMB_INFO as m on c.AccountID = m.memb___id ".$where." order by $order desc";
+
+        $sql = "select top $limit c.Name,c.cLevel,c.Class,c.ZY,c.PkLevel from Character as c left join MEMB_INFO as m on c.AccountID = m.memb___id  order by $order desc";
+
 
 //        var_dump($sql);
         $command = $connect->createCommand($sql);
