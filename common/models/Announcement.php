@@ -84,6 +84,18 @@ class Announcement extends \yii\db\ActiveRecord
 //        return $this->find()->select(['announcement_id','type','name','add_time','type_name'])->where($where)->asArray()->all();
     }
 
+    public function recent($filter=null){
+        $where = array();
+        if(!empty($filter['type']))
+        {
+            $where['type'] = $filter['type'];
+        }
+
+        $list = $this->find()->select(['announcement_id','type','name','add_time','type_name'])->where($where)->limit($filter['limit'])->asArray()->all();
+
+        return $list;
+    }
+
     public function info($id)//返回详情
     {
         return $this->find()->where(['announcement_id'=>$id])->one();

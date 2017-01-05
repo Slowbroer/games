@@ -29,6 +29,14 @@ class AnnouncementController extends Controller//公共前台功能代码，包�
         return $this->render("all",['ann'=>$all['list'],'pagination'=>$all['page'],'types'=>$type_lists]);
     }
 
+    public function actionRecent(){
+        $ann = new Announcement();
+        $filter['type'] = isset($_POST['type'])? $_POST['type']:1;
+        $filter['limit'] = isset($_POST['limit'])? $_POST['limit']:10;
+        $recent = $ann->recent($filter);
+        return json_encode($recent);
+    }
+
     public function actionInfo()
     {
         $id = isset($_REQUEST['id'])? $_REQUEST['id']:0;

@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use common\models\MEMBINFO;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -23,9 +24,12 @@ class PasswordResetRequestForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'exist',
-                'targetClass' => '\common\models\User',
-                'filter' => ['status' => User::STATUS_ACTIVE],
+                'targetClass' => '\common\models\MEMBINFO',
+                'targetAttribute'=>'mail_addr',
                 'message' => 'There is no user with such email.'
+//                'targetClass' => '\common\models\User',
+//                'filter' => ['status' => User::STATUS_ACTIVE],
+//                'message' => 'There is no user with such email.'
             ],
         ];
     }
@@ -35,19 +39,21 @@ class PasswordResetRequestForm extends Model
      *
      * @return boolean whether the email was send
      */
-    public function sendEmail()
+    public function sendEmail()//这里会先判断token的有效性
     {
         /* @var $user User */
-        $user = User::findOne([
-            'status' => User::STATUS_ACTIVE,
-            'email' => $this->email,
-        ]);
+//        $user = User::findOne([
+//            'status' => User::STATUS_ACTIVE,
+//            'email' => $this->email,
+//        ]);
+        $user = MEMBINFO::findOne(['mail_addr'=>$this->email]);
+
 
         if (!$user) {
             return false;
         }
         
-        if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
+        if (!MEMBINFO::isPasswordResetTokenValid($user->password_reset_token)) {//如果token已经过期了，就会进行更新
             $user->generatePasswordResetToken();
             if (!$user->save()) {
                 return false;
@@ -65,4 +71,5 @@ class PasswordResetRequestForm extends Model
             ->setSubject('Password reset for ' . Yii::$app->name)
             ->send();
     }
+
 }

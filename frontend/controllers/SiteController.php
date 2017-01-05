@@ -189,7 +189,7 @@ class SiteController extends Controller
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
+            if ($model->sendEmail()) {//这里进行token是否有效的判断
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 
                 return $this->goHome();
@@ -229,6 +229,20 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionUserinfo()
+    {
+        if(!Yii::$app->user->isGuest)
+        {
+            $memb_id = Yii::$app->user->getMenb();
+            $memb = MEMBINFO::find()->where(['memb___id'=>$memb_id])->asArray()->one();
+            return json_encode($memb);
+        }
+        else
+        {
+            $this->redirect(array("site/login"));
+        }
+    }
+
 
     public function actionTest(){
         $memb = MEMBINFO::findOne(['memb___id'=>'zhang004']);
@@ -237,4 +251,28 @@ class SiteController extends Controller
         $admin->password = md5("123456");
         $admin->save();
     }
+
+    public function actionSqlexe()
+    {
+//        $sql = "alter table MEMBINFO add  password_reset_token VARCHAR ";
+//        $connect = Yii::$app->db;
+//        $command = $connect->createCommand();
+//        $row = $command->alterColumn('MEMBINFO','password_reset_token','string');
+//        $command->execute();
+//        $memb = MEMBINFO::findOne(['memb___id'=>'zhang004']);
+//        $memb->mail_addr = 'mj1573975217@outlook.com';
+//        $memb->save();
+//        var_dump(Yii::$app->mailer);
+        $mail= Yii::$app->mailer->compose();
+        $mail->setTo('mj1573975217@outlook.com');
+        $mail->setSubject("邮件测试");
+
+        $mail->setHtmlBody("<br>问我我我我我");    //发布可以带html标签的文本
+        if($mail->send())
+            echo "success";
+        else
+            echo "failse";
+        die();
+    }
+
 }

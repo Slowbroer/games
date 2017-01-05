@@ -43,6 +43,7 @@ use yii\web\IdentityInterface;
  * @property string $memb__pwd
  * @property string $GetInfoDay
  * @property string $money
+ * @property string $password_reset_token
  *
  * @property MEMBDETA[] $mEMBDETAs
  */
@@ -64,7 +65,7 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
         return [
             [['memb___id', 'memb_name', 'sno__numb', 'bloc_code', 'ctl1_code','memb__pwd'], 'required'],
             [['memb___id','memb_name'],'string','length' => [3, 20]],
-            [['sno__numb', 'post_code', 'addr_info', 'addr_deta', 'tel__numb', 'phon_numb', 'mail_addr', 'fpas_ques', 'fpas_answ', 'job__code', 'mail_chek', 'bloc_code', 'ctl1_code', 'QX', 'memb__pwd','authkey'], 'string'],
+            [['sno__numb', 'post_code', 'addr_info', 'addr_deta', 'tel__numb', 'phon_numb', 'mail_addr', 'fpas_ques', 'fpas_answ', 'job__code', 'mail_chek', 'bloc_code', 'ctl1_code', 'QX', 'memb__pwd','authkey','password_reset_token'], 'string'],
             [['appl_days', 'modi_days', 'out__days', 'true_days', 'GetItemDay', 'GetInfoDay'], 'safe'],
             [['jf', 'ServerCode', 'UsedTime', 'MemberType', 'MemberResetChrNum','money'], 'integer'],
         ];
@@ -220,5 +221,24 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
 
         }
 
+    }
+
+    public static function isPasswordResetTokenValid($token)//判断token是否过期
+    {
+        if (empty($token)) {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];//3600
+        return $timestamp + $expire >= time();
+    }
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
     }
 }
