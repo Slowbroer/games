@@ -223,6 +223,16 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
 
     }
 
+    public static function findByPasswordResetToken($token)
+    {
+        if (!static::isPasswordResetTokenValid($token)) {
+            return null;
+        }
+
+        return static::findOne([
+            'password_reset_token' => $token,
+        ]);
+    }
     public static function isPasswordResetTokenValid($token)//判断token是否过期
     {
         if (empty($token)) {
