@@ -5,6 +5,7 @@ use backend\models\SystemAdmin;
 use common\models\MEMBINFO;
 use common\models\SetServerList;
 use common\models\Warehouse;
+use frontend\models\ResetPasswordWithOld;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -242,6 +243,32 @@ class SiteController extends Controller
             $this->redirect(array("site/login"));
         }
     }
+    public function actionResetPasswordWithOld()
+    {
+        if(Yii::$app->user->isGuest)
+        {
+            $this->redirect(array("site/login"));
+        }
+        $reset_form = new ResetPasswordWithOld();
+        $reset_form->memb_id = Yii::$app->user->identity->getMenb();
+
+        if($reset_form->load(Yii::$app->request->post())&&$reset_form->validate())
+        {
+            if($reset_form->reset_password())
+            {
+                echo $this->render("success",['message'=>'修改密码成功！','name'=>'修改密码']);
+            }
+            else
+            {
+                echo $this->render("error",['message'=>'修改密码失败！','name'=>'修改密码']);
+            }
+        }
+        else
+        {
+            echo $this->render("resetPasswordWithOld",['model'=>$reset_form]);
+        }
+    }
+
 
 
     public function actionTest(){
@@ -274,5 +301,7 @@ class SiteController extends Controller
             echo "failse";
         die();
     }
+
+
 
 }
