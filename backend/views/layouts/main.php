@@ -48,16 +48,19 @@ AppAsset::register($this);
             'label'=>'公告管理',
             'items'=>[
                 ['label' => '公告列表', 'url' => 'index.php?r=announcement/list',
-                    'options'=>[
-                        'target'=>'.container'
-                    ]
+//                    'options'=>[
+//                        'target'=>'.container'
+//                    ]
                 ],
 //                   '<li class="divider"></li>',
 //                   '<li class="dropdown-header">Dropdown Header</li>',
                 ['label' => '公告类型', 'url' => 'index.php?r=announcement/typelist',
-                    'options'=>[
-                        'target'=>'.container'
-                    ]
+//                    'options'=>[
+//                        'target'=>'.container'
+//                    ]
+                ],
+                ['label' => '游戏介绍', 'url' => 'index.php?r=introduce/index',
+
                 ],
             ],
         ];

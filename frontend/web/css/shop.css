@@ -1,0 +1,58 @@
+body {
+    font: 13px "微软雅黑", Arial, sans-serif;
+    background: #000;
+}
+.middle {
+  width: 982px;
+  margin: -580px auto;
+  position: relative;
+}
+.right {
+  float: right;
+  background: #fff;
+  width: 746px;
+  padding: 20px;
+  height: 768px;
+}
+.head {
+  border-bottom: 2px solid #ccc;
+  height: 58px;
+  line-height: 58px;
+}
+.head h3 {
+  background: #435d81;
+  color: #fff;
+  text-align: center;
+  height: 58px;
+  line-height: 58px;
+  margin: 0;
+}
+.main{
+    background: #fff;
+    position: relative;
+    font-size: 16px;
+}
+.main ul{
+    list-style: none;
+    width: 100%;
+}
+.main .content{
+    position: absolute;
+    border: 1px solid #dddddd;
+    border-top: none;
+    width: 706px;
+    min-height: 600px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+/*底部*/
+.footer{
+    width: 100%;
+    height: 162px;
+    padding-top: 60px;
+    clear: both;
+    text-align: center;
+    line-height: 240%;
+    font-size: 12px;
+    color: #666;
+}

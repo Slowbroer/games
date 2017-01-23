@@ -1,0 +1,47 @@
+.main_left{
+    width: 226px;
+    float: left;
+}
+.main_left_two{
+    width: 226px;
+    height: 560px;
+    border: 1px solid #bbb;
+    background-color: #fff;
+    margin-bottom: 12px;
+}
+.main_two_ban{
+    width: 224px;
+    height: 46px;
+    background-color: #eee;
+    color: #666;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 46px;
+    text-indent: 16px;
+}
+.rem ul{
+    list-style: none;
+    margin-top: 10px;
+    padding-left: 0;
+}
+.rem ul li{
+    height: 26px;
+    width: 224px;
+    line-height: 26px;
+    letter-spacing: 3px;
+    border-top: 1px #eee solid;
+    text-align: center;
+}
+.rem ul li:first-child{
+    border-top: none;
+}
+.rem ul li a{
+    font-size: 14px;
+    color: #666;
+}
+.rem ul li a:hover{
+    color: #cc0000;
+    font-weight: bold;
+    text-decoration: none;
+}

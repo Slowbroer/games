@@ -62,6 +62,6 @@ $type_list = array(
 
 <div style="margin: 10px auto">
     <a href="index.php?r=blog/add">
-        <button type="button" class="btn btn-info">新建博客</button>
+        <button type="button" class="btn btn-info">新建装备</button>
     </a>
 </div>

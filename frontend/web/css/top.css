@@ -1,0 +1,40 @@
+.top{
+    background: url("../images/home_page/bg3.2.jpg") no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 1011px;
+    margin: 0 auto;
+    position: relative;
+}
+.title{
+    background: url("../images/home_page/nav-top.png");
+    width: 100%;
+    height: 77px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    text-align: center;
+}
+.title ul{
+    list-style: none;
+    padding-top: 20px;
+    display: inline-block;
+    margin: 0 auto;
+}
+.title ul li{
+    float: left;
+}
+.title li a{
+    font-size: 18px;
+    color: #e5e5e5;
+    padding: 12px 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.clearfix:before,.clearfix:after{
+    content: "";
+    clear: both;
+    width: 0;
+    height: 0;
+}

@@ -2,6 +2,8 @@
 namespace frontend\controllers;
 
 use backend\models\SystemAdmin;
+use common\models\Character;
+use common\models\Introduce;
 use common\models\MEMBINFO;
 use common\models\SetServerList;
 use common\models\Warehouse;
@@ -17,6 +19,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\RankForm;
 
 /**
  * Site controller
@@ -78,7 +81,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+//        $rank = new RankForm();
+//        $rank_list = $rank->c_rank();
+//        $rank_content = $this->renderPartial("rank_content",['lists'=>$rank_list]);
+        $rank = new Character();
+        $rank_list = $rank->home_rank();
+
+        $introduce = new Introduce();
+        $introduce_list = $introduce->recent();
+        return $this->render('index',[
+            'ranks'=>$rank_list,
+            'introduces'=>$introduce_list,
+
+        ]);
     }
 
     /**
@@ -102,6 +117,36 @@ class SiteController extends Controller
                 'model' => $model,
                 'server_list' => $server_list,
             ]);
+        }
+    }
+    public function actionHomeLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return json_encode(array('code'=>1,'message'=>'您已经登陆了，请刷新页面'));
+        }
+        $memb_id = isset($_POST['user_name'])? $_POST['user_name']:'';
+        if(empty($memb_id))
+        {
+            return json_encode(array('code'=>0,'message'=>'请填写用户名'));
+        }
+        else
+        {
+            $member = MEMBINFO::findByUsername($memb_id,$_POST['server_code']);
+            if($member->validatePassword($_POST['password']))
+            {
+                if(Yii::$app->user->login($member, $_POST['remember'] ? 3600 * 24 * 30 : 3600*10))
+                {
+                    return json_encode(array('code'=>1,'memb'=>Yii::$app->user->identity->getMenb()));
+                }
+                else
+                {
+                    return json_encode(array('code'=>0,'message'=>'登录失败'));
+                }
+            }
+            else
+            {
+                return json_encode(array('code'=>0,'message'=>'密码和用户名不匹配'));
+            }
         }
     }
 
@@ -272,11 +317,12 @@ class SiteController extends Controller
 
 
     public function actionTest(){
-        $memb = MEMBINFO::findOne(['memb___id'=>'zhang004']);
-        var_dump($memb->memb__pwd);
-        $admin = SystemAdmin::findOne(['admin_name'=>'admin']);
-        $admin->password = md5("123456");
-        $admin->save();
+//        $memb = MEMBINFO::findOne(['memb___id'=>'zhang004']);
+//        var_dump($memb->memb__pwd);
+//        $admin = SystemAdmin::findOne(['admin_name'=>'admin']);
+//        $admin->password = md5("123456");
+//        $admin->save();
+        echo $this->render("index2");
     }
 
     public function actionSqlexe()

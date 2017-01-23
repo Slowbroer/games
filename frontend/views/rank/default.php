@@ -32,7 +32,7 @@ $this->title = $name;
 <script>
     $(function (e) {
 
-        $("#form-rank").submit(function (e) {
+        $("#form-rank").on("beforeSubmit",function (e) {
             getList($(this));
             return false;
         });

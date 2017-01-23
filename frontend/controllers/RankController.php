@@ -32,8 +32,8 @@ class RankController extends Controller{//排行控制器
             }
             else
             {
-//                $content = $this->renderPartial("list",['lists'=>$list]);
-                return json_encode($list);
+                $content = $this->renderPartial("list",['lists'=>$list]);
+//                return json_encode($list);
             }
         }
         else

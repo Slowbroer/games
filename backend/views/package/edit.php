@@ -113,7 +113,7 @@ use yii\helpers\Html;
 
     });
 
-    $(".item-edit").submit(function (e) {
+    $(".item-edit").on("beforeSubmit",function (e) {
         alert("test");
         formSubmit($(this));
         return false;

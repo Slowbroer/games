@@ -5,7 +5,8 @@
 /* @var $model \common\models\LoginForm */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+//use yii\bootstrap\ActiveForm;
+use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 $this->title = 'Login';
@@ -40,3 +41,19 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+
+
+<script>
+    $(function (e) {
+        $.ajax({
+            url:"http://119.29.26.196/mugua/frontend/web/index.php?r=rank/levelrank",
+            success:function (data) {
+                alert("test");
+            },
+            error:function (data) {
+                alert("error");
+            }
+        })
+    });
+</script>

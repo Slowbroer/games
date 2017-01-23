@@ -1,0 +1,130 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,a,blockquote,pre,abbr,address,cite,code,del,dfn,em,ins,kbd,q,samp,small,strong,var,b,i,dl,dt,dd,ol,ul,fieldset,form,label,legend,textarea,table,caption,tbody,tfoot,thead,tr,article,aside,canvas,datalist,details,figcaption,figure,footer,header,menu,meter,nav,section,summary,time,mark,audio,embed,source,video {margin:0; outline:0; border:0; padding:0; background:transparent; vertical-align:baseline; -webkit-tap-highlight-color:rgba(0,0,0,0); -ms-touch-action:none; word-break:break-all; word-wrap:break-word; font-size:100%;}
+button,th,td,li,img {margin:0; outline:0; border:0; padding:0; background:transparent; vertical-align:middle; -webkit-tap-highlight-color:rgba(0,0,0,0); -ms-touch-action:none; word-break:break-all; word-wrap:break-word; font-size:100%;}
+sub,sup {margin:0; outline:0; border:0; padding:0; background:transparent; -webkit-tap-highlight-color:rgba(0,0,0,0); -ms-touch-action:none; word-break:break-all; word-wrap:break-word; font-size:small;}
+article,aside,details,figcaption,figure,footer,header,menu,nav,section,img {display:block;}
+input,select {vertical-align:middle; -webkit-tap-highlight-color:rgba(0,0,0,0); -ms-touch-action:none;}
+button,input[type="button"],input[type="reset"],input[type="submit"] {display:inline-block; -webkit-appearance:none; -moz-appearance:none;}
+input::-ms-clear,input::-ms-reveal {display:none;}
+ol,ul {list-style:none;}
+blockquote,q {quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after {content:none;}
+del {text-decoration:line-through;}
+ins {background-color:#ff9; text-decoration:none; color:#000;}
+sub {vertical-align:bottom;}
+sup {vertical-align:top;}
+mark {background-color:#ff9; font-style:normal; font-weight:normal; color:#000;}
+abbr[title],dfn[title] {border-bottom:1px dotted transparent; cursor:help;}
+table {border-collapse:collapse; border-spacing:0;}
+hr {display:block; height:1px; margin:1em 0; border:0; border-top:1px solid #ccc; padding:0;}
+
+html {
+    font-size: 75%;
+}
+/*去除chorme下input获得焦点默认样式*/
+input,
+button,
+select,
+textarea {
+    outline: none;
+}
+textarea {
+    resize: none;
+}
+textarea,
+button,
+input,
+select {
+    font-family: 微软雅黑 ;
+    color: #000;
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="checkbox"] {
+    -moz-box-sizing: border-box;
+    /*FF*/
+
+    box-sizing: border-box;
+}
+input[type="text"],
+input[type="password"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    margin: 0;
+    outline: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    line-height: normal;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+    font-weight: normal;
+}
+th {
+    text-align: center;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+var,
+em {
+    font-style: normal;
+    font-weight: normal;
+}
+a {
+    text-decoration: none;
+}
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+    color: #fff;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix:after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    clear: both;
+    height: 0;
+    font-size: 0;
+}
+body {
+    font-size: 12px;
+    font-family: "Microsoft Yahei", "微软雅黑";
+    background-color: #f1f1f1;
+    line-height: 1.5;
+}
+.wrap {
+    width: 100%;
+    padding-bottom: 7%;
+    overflow: hidden;
+}
+.index-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #872265;
+    padding: 3.5em 0 1em 0;
+    z-index: 999;
+    font-family: "Microsoft Yahei", "微软雅黑";
+}

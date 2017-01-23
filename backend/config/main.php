@@ -7,6 +7,7 @@ $params = array_merge(
 );
 
 return [
+//    'language'=>'zh-CN',
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
@@ -49,6 +50,18 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
+
+//        'i18n' => [
+//            'translations' => [
+//                'config' => [
+//                    'class' => 'yii\i18n\PhpMessageSource',
+//                    'basePath' => '@backend/messages',
+//                    'fileMap' => [
+//                        'config' => 'config.php',
+//                    ],
+//                ],
+//            ],
+//        ],
     ],
     'params' => $params,
 ];

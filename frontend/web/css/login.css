@@ -1,0 +1,153 @@
+@charset "UTF-8";
+.left_one {
+  height: 186px;
+  background-color: rgba(25,25,25,.8);
+  margin-bottom: 10px;
+}
+.l_one {
+  padding-left: 14px;
+}
+.l_one .errorplace {
+  font-size: 12px;
+  color: red;
+  font-weight: bold;
+  position: absolute;
+  left: 70px;
+  top: -1px;
+}
+.l_one .errorplace label {
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+.left_one h3 {
+  color: #999;
+  font-size: 16px;
+  padding: 10px 0;
+  margin: 0;
+}
+.denglu {
+  width: 200px;
+  height: 60px;
+  margin-top: 20px;
+}
+.input {
+  width: 132px;
+  height: 60px;
+}
+.input .in_text {
+  width: 127px;
+  height: 28px;
+  border: 0;
+  line-height: 28px;
+  color: #B3B3B3;
+  outline: medium;
+  margin-bottom: 4px;
+  _margin-bottom: 2px;
+  padding-left: 5px;
+  background: #fff;
+}
+.input .in_text2 {
+  width: 127px;
+  height: 28px;
+  border: 0;
+  color: #B3B3B3;
+  outline: medium;
+  line-height: 28px;
+  padding-left: 5px;
+  background: #fff;
+}
+.denglu .submit {
+  border: 0;
+  float: right;
+  width: 64px;
+  height: 60px;
+  display: block;
+  background-image: url(../images/denglu.jpg);
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 60px;
+}
+.l3 {
+  width: 200px;
+  height: 24px;
+  border-bottom: 1px solid #333;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.l3 a {
+  float: right;
+  font-size: 12px;
+  color: #999;
+  line-height: 14px;
+  display: inline-block;
+  height: 24px;
+  line-height: 24px;
+}
+.l3 input {
+  float: left;
+  margin: 6px 0 0;
+}
+.l3 label {
+  color: #999;
+  font-size: 12px;
+  margin-left: 4px;
+  line-height: 24px;
+}
+.dengluhou h3 {
+  color: #999;
+  font-size: 16px;
+  margin-bottom: 6px;
+  margin-top: 0;
+}
+.dengluhou h3 .tui {
+  margin-left: 80px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #999;
+}
+.dengluhou p {
+  color: #ccc;
+  line-height: 24px;
+}
+.dengluhou p span {
+  color: #FC3;
+  margin-left: 4px;
+}
+.game {
+  width: 190px;
+  height: 60px;
+  display: block;
+  background-image: url(../images/denglu.jpg);
+  text-align: center;
+  line-height: 60px;
+  font-size: 20px;
+  color: #000;
+  margin-top: 10px;
+}
+.game:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.dengluhou_foot {
+  width: 190px;
+  font-size: 14px;
+  margin-left: 25px;
+  margin-top: 25px;
+}
+.dengluhou_foot a {
+  color: #999;
+}
+.dengluhou_foot a:hover {
+  color: #ccc;
+}
+.re {
+  font-size: 15px;
+  margin-top: 20px;
+  padding-left: 26px;
+}
+.re a {
+  color: #999;
+  text-decoration: none;
+}

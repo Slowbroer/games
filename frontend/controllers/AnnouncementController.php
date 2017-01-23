@@ -18,6 +18,23 @@ use Yii;
 class AnnouncementController extends Controller//公共前台功能代码，包括评论和回复的代码
 {
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['all','recent',],
+                'duration' => 600,
+                'variations' => [
+                    \Yii::$app->language,
+                ],
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM post',
+                ],
+            ],
+        ];
+    }
     public function actionAll()
     {
         $ann = new Announcement();

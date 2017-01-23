@@ -1,0 +1,43 @@
+body{
+    font: 13px Arial, sans-serif ,"微软雅黑";
+    background: #c5c5c5;
+    color: #666;
+}
+.main_right{
+    width: 746px;
+    float: right;
+    height: 770px;
+    background: #fff;
+    border: 1px solid #bbb;
+    padding: 20px;
+}
+.z_ban{
+    height: 46px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #ccc;
+}
+.z_ban .place{
+    float: right;
+    height: 46px;
+    line-height: 46px;
+    display: inline-block;
+}
+.z_ban .place a{
+    color: #666;
+}
+.ban h2{
+    font-family: "微软雅黑";
+    font-weight: 700;
+    font-size: 26px;
+    display: inline-block;
+    height: 46px;
+    line-height: 46px;
+    margin: 0;
+}
+.z_list {
+    width: 706px;
+    height: 660px;
+    margin: 0 auto;
+    padding-left: 20px ;
+    color: #666;
+}

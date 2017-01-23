@@ -45,8 +45,17 @@ use \yii\bootstrap\Html;
                 url:'index.php?r=announcement/del',
                 data:{id:id},
                 type:"POST",
-                success:function(){
-                    recent_blog();
+                success:function(data){
+                    console.log(data);
+                    if (data)
+                    {
+                        alert("删除成功");
+                        location.href="index.php?r=announcement/list";
+                    }
+                    else
+                    {
+                        alert("删除失败");
+                    }
 
                 },
                 error:function(){

@@ -14,6 +14,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/reset.css',
+        'css/style.css',
+        'css/top.css',
+        'css/login.css',
+        'css/swiper-3.3.1.min.css',
     ];
     public $js = [
     ];

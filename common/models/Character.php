@@ -4,6 +4,8 @@ namespace common\models;
 
 use Yii;
 use common\models\MEMBINFO;
+use backend\models\ClassSet;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "Character".
@@ -156,6 +158,22 @@ class Character extends \yii\db\ActiveRecord
     public function getMEMBINFO()
     {
         return $this->hasOne(MEMBINFO::className(), ['memb___id' => 'AccountID']);
+    }
+
+    public function home_rank($number=10)
+    {
+        $class = new ClassSet();//职业名称表
+        $class_list = $class->get_list();
+        $class_array = ArrayHelper::map($class_list,"class_id","class_name");
+
+        $lists = $this->find()->select("Name,cLevel,Class,ZY,PkLevel")->limit($number)->orderBy("cLevel")->asArray()->all();
+        foreach($lists as $key=>$list)
+        {
+            $lists[$key]['ZY_name'] = $class_array[$list['Class']];
+            $lists[$key]["PK_name"] = ($list['PkLevel'] > 3)?(($list['PkLevel'] > 5)?"魔头":"恶人"):'义士';
+        }
+        return $lists;
+
     }
 
 
