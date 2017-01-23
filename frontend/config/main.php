@@ -48,4 +48,5 @@ return [
         */
     ],
     'params' => $params,
+    'layout' => "main1",
 ];
