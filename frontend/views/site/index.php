@@ -15,6 +15,7 @@ use yii\helpers\Url;
                 data: $(this).serialize(),
                 success: function (data) {
                     data = eval("(" + data + ")");
+                    location.href = "index.php";
 
                 },
                 error: function (data) {
