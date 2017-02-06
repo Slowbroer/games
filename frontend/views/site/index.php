@@ -8,7 +8,7 @@ use yii\helpers\Url;
 <script>
     $(function () {
         $("#form2").on("beforeSubmit", function () {
-            alert("test");
+//            alert("test");
             $.ajax({
                 url: $(this).attr("action"),
                 type: $(this).attr("method"),
@@ -33,7 +33,10 @@ use yii\helpers\Url;
                 <div class="dengluhou" style="">
                     <h3>
                         登录
-                        <a href="LoginSession.php?out=out" class="tui">退出登录</a>
+                        <?php ActiveForm::begin(['id' => 'logoutForm','action'=>Url::toRoute("site/logout"),'options'=>['style'=>"display: inline-block"]]); ?>
+                        <button id="logout" name="logout" class="tui" type="submit" >退出登陆</button>
+                        <?php ActiveForm::end(); ?>
+<!--                        <a href="index.php?r=site/logout" class="tui">退出登录</a>-->
                     </h3>
                     <p>用户ID:<span><?php if(!Yii::$app->user->isGuest){echo Yii::$app->user->identity->getMenb();}?></span></p>
                     <a href="#" class="game">开始游戏</a>
@@ -47,8 +50,7 @@ use yii\helpers\Url;
                 }
                 else{ ?>
                     <div class="dengluqian">
-<!--                        <form  id="form2" name="form2" method="post" action="index.php?r=site/home-login">-->
-                        <?php $form = ActiveForm::begin(['id' => 'form2','action'=>Url::toRoute("site/home-login")]); ?>
+                        <?php ActiveForm::begin(['id' => 'form2','action'=>Url::toRoute("site/home-login")]); ?>
                             <h3>登录</h3>
                             <div class="errorplace"></div>
                             <div class="denglu">
@@ -56,12 +58,10 @@ use yii\helpers\Url;
                                 <div class="input">
                                     <input class="in_text" type="text" id="username" name="user_name" placeholder="用戶名">
                                     <input type="password" class="in_text2" id="password" name="password" placeholder="密碼">
-<!--                                    <input type="button" value="登录">-->
                                 </div>
                                 <div style="clear: both"></div>
                             </div>
                         <?php ActiveForm::end(); ?>
-<!--                        </form>-->
                         <div class="re">
                             <a href="reg.php" class="register" >游戏註冊</a>
                             <span>|</span>
