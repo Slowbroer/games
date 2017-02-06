@@ -172,9 +172,9 @@ class MEMBINFO extends \yii\db\ActiveRecord implements IdentityInterface
         }
     }
 
-    public static function findByUsername($user_name,$server)//����memb___id��ȡ��Ϣ
+    public static function findByUsername($user_name,$server='')//����memb___id��ȡ��Ϣ
     {
-        return static::findOne(['memb___id' => $user_name,'ServerCode' => $server]);
+        return static::findOne(['memb___id' => $user_name,]);
     }
 
 

@@ -67,6 +67,7 @@ class Introduce extends \yii\db\ActiveRecord
         $count = $query->count();
 
         $page_size = isset($filter['page_size'])? $filter['page_size']:20;
+//        var_dump($query);
         $page = new Pagination(['pageSize'=>$page_size,'totalCount'=>$count]);
 
 
@@ -80,6 +81,7 @@ class Introduce extends \yii\db\ActiveRecord
         $where['is_able']=1;
         $where['is_show']=1;
         $lists = $this->find()->select("id,content,title,brief")->where($where)->limit($number)->orderBy("add_time")->asArray()->all();
+//        var_dump($lists);
         return $lists;
     }
 

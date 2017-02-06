@@ -39,7 +39,10 @@ use yii\helpers\Url;
         })
     }
     function addIntroduce() {
-
+        $("#introduce-title").val("");
+        $("#introduce-content").val("");
+        $("#introduce_idt").val("");
+        $(":radio[name='Introduce[is_show]'][value='1']").attr("checked","checked");
         $("#myModal").modal("show");
     }
     function deleteIntroduce(id) {

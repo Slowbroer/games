@@ -10,7 +10,7 @@ use yii\helpers\Html;
 //$this->title = $name;
 $this->title = "出错了－_－";
 ?>
-<div class="site-error">
+<div class="site-error" style="background: aliceblue;padding: 20px;border-radius: 10px;">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

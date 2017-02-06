@@ -20,19 +20,19 @@ class IntroduceController extends Controller
     public function behaviors()
     {
         return [
-            'cache'=>[
-                'class' => 'yii\filters\PageCache',
-                'only' => ['index'],
-                'duration' => 600,
-                'variations' => [
-                    \Yii::$app->language,
-                ],
-                'dependency' => [
-                    'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT count(*) FROM introduce where is_able = 1 ',
-                    //这里表示如果文章总数发生变化则缓存会失效
-                ],
-            ],
+//            'cache'=>[
+//                'class' => 'yii\filters\PageCache',
+//                'only' => ['index'],
+//                'duration' => 1,
+//                'variations' => [
+//                    \Yii::$app->language,
+//                ],
+//                'dependency' => [
+//                    'class' => 'yii\caching\DbDependency',
+//                    'sql' => 'SELECT count(*) FROM introduce where is_able = 1 ',
+//                    //这里表示如果文章总数发生变化则缓存会失效
+//                ],
+//            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['index', 'all', 'info','delete'],
@@ -60,7 +60,7 @@ class IntroduceController extends Controller
         $model = new Introduce();
         $model->is_show =1;
         $lists = $model->all($filter);
-
+//        var_dump($lists);
         return $this->render("index",['model'=>$model,'lists'=>$lists['list'],'page'=>$lists['page']]);
 
     }

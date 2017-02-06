@@ -3,17 +3,38 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
+<script>
+    $(function () {
+        $("#form2").on("beforeSubmit", function () {
+            alert("test");
+            $.ajax({
+                url: $(this).attr("action"),
+                type: $(this).attr("method"),
+                data: $(this).serialize(),
+                success: function (data) {
+                    data = eval("(" + data + ")");
 
+                },
+                error: function (data) {
+                    alert("login failed!")
+                }
+            });
+            return false;
+        });
+    });
+</script>
     <div class="left">
         <div class="left_one" id="lofinDiv" >
             <div class="l_one">
-                <div class="dengluhou" style="display:none">
+                <?php if(!Yii::$app->user->isGuest){ ?>
+                <div class="dengluhou" style="">
                     <h3>
                         登录
                         <a href="LoginSession.php?out=out" class="tui">退出登录</a>
                     </h3>
-                    <p>用户ID:<span></span></p>
+                    <p>用户ID:<span><?php if(!Yii::$app->user->isGuest){echo Yii::$app->user->identity->getMenb();}?></span></p>
                     <a href="#" class="game">开始游戏</a>
                     <div class="dengluhou_foot">
                         <a href="register.php" class="manage" >账号管理</a>
@@ -21,27 +42,35 @@ use yii\helpers\Html;
                         <a href="download.php" class="buy">充值中心</a>
                     </div>
                 </div>
-                <div class="dengluqian">
-                    <form onsubmit="javascript:return checkLogin();" id="form2" name="form2" method="post" action="main.php">
-                        <h3>登录</h3>
-                        <div class="errorplace"></div>
-                        <div class="denglu">
-                            <button id="Login" name="Login" class="submit" type="submit" >登錄</button>
-                            <div class="input">
-                                <input class="in_text" type="text" id="username" name="user_name" placeholder="用戶名">
-                                <input type="password" class="in_text2" id="password" name="password" placeholder="密碼">
+                <?php
+                }
+                else{ ?>
+                    <div class="dengluqian">
+<!--                        <form  id="form2" name="form2" method="post" action="index.php?r=site/home-login">-->
+                        <?php $form = ActiveForm::begin(['id' => 'form2','action'=>Url::toRoute("site/home-login")]); ?>
+                            <h3>登录</h3>
+                            <div class="errorplace"></div>
+                            <div class="denglu">
+                                <button id="Login" name="Login" class="submit" type="submit" >登錄</button>
+                                <div class="input">
+                                    <input class="in_text" type="text" id="username" name="user_name" placeholder="用戶名">
+                                    <input type="password" class="in_text2" id="password" name="password" placeholder="密碼">
+<!--                                    <input type="button" value="登录">-->
+                                </div>
+                                <div style="clear: both"></div>
                             </div>
-                            <div style="clear: both"></div>
+                        <?php ActiveForm::end(); ?>
+<!--                        </form>-->
+                        <div class="re">
+                            <a href="reg.php" class="register" >游戏註冊</a>
+                            <span>|</span>
+                            <a href="getPw.php" class="download">找回密码</a>
                         </div>
-                    </form>
-                    <div class="re">
-                        <a href="reg.php" class="register" >游戏註冊</a>
-                        <span>|</span>
-                        <a href="getPw.php" class="download">找回密码</a>
                     </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
+
         <div class="left_two">
             <div class="share">
             </div>
@@ -153,7 +182,10 @@ use yii\helpers\Html;
             <div class="rthree_foot">
                 <div class="rr_right">
                     <ul id="GMintr">
-
+<!--                        <li><a href="index.php?r=site/introduce-info"><span style="margin-right: 50px;">测试标题</span><span>测试内容</span></a></li>-->
+                        <?php foreach ($introduces as $key=>$introduce){?>
+                        <li><span style="margin-right: 50px;"><?= $introduce['title']?></span><span><?= $introduce['content']?></span></li>
+                        <?php }?>
                     </ul>
                 </div>
             </div>

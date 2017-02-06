@@ -89,6 +89,9 @@ class SiteController extends Controller
 
         $introduce = new Introduce();
         $introduce_list = $introduce->recent();
+
+//        var_dump(Yii::$app->params['systemConfig']);
+
         return $this->render('index',[
             'ranks'=>$rank_list,
             'introduces'=>$introduce_list,
@@ -131,10 +134,11 @@ class SiteController extends Controller
         }
         else
         {
-            $member = MEMBINFO::findByUsername($memb_id,$_POST['server_code']);
+            $member = MEMBINFO::findByUsername($memb_id);
             if($member->validatePassword($_POST['password']))
             {
-                if(Yii::$app->user->login($member, $_POST['remember'] ? 3600 * 24 * 30 : 3600*10))
+//                if(Yii::$app->user->login($member, $_POST['remember'] ? 3600 * 24 * 30 : 3600*10))
+                if(Yii::$app->user->login($member, 3600*10))
                 {
                     return json_encode(array('code'=>1,'memb'=>Yii::$app->user->identity->getMenb()));
                 }
