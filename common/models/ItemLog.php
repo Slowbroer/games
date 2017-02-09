@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "ItemLog".
@@ -82,6 +83,21 @@ class ItemLog extends \yii\db\ActiveRecord
         $this->Iname = $code['Iname'];
         $this->sentdate = $code['sentdate'];
         return $this->save();
+
+    }
+
+    public function lists($filter = array())
+    {
+        $where = array();
+        $query = $this->find()->where($where)->asArray();
+        $count = $query->count();
+        $page = new Pagination(['totalCount' => $count,'pageSize'=>30,]);
+
+        $lists = $query->offset($page->offset)->limit($page->limit)->all();
+
+
+
+        return array('lists'=>$lists,'page'=>$page);
 
     }
 }

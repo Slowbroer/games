@@ -2,6 +2,8 @@
 namespace backend\controllers;
 
 use backend\models\ConfigureForm;
+use backend\models\OrderFilter;
+use common\models\ItemLog;
 use common\models\Systemconfig;
 use Yii;
 use yii\db\QueryBuilder;
@@ -135,25 +137,56 @@ class SiteController extends Controller
     }
     public function actionSetConfig()
     {
+//        $array = [
+//            ['prize_cost','100',"text"],
+//            ['prize_cost_type','1',"text"],
+//            ['point_field','jf',"text"],
+//            ['point_to_money','100',"text"],
+//            ['web_name','奇迹mu',"text"],
+//        ];
         $array = [
-            ['prize_cost','100',"text"],
-            ['prize_cost_type','1',"text"],
-            ['point_field','jf',"text"],
-            ['point_to_money','100',"text"],
-            ['web_name','奇迹mu',"text"],
+//            ['web_url','www.baidu.com','text'],
+//            ['web_title','木瓜奇迹','text'],
+//            ['web_keywords','网游','text'],
+//            ['web_description','网游','text'],
+//            ['web_kfqq','网游','text'],
+//            ['web_pay_money','人民币','text'],
+//            ['web_pay_field','money','text'],//支付字段
+//            ['web_pay_url','www.baidu.com','text'],
+//            ['web_body','游戏介绍','text'],
+            ['qr_code','@web/images/qr_code.png','text'],
         ];
-//        $config = new Systemconfig();
-//        var_dump($config->attributes);
-//        foreach ($array as $key => $value)
-//        {
-//            $config = new Systemconfig();
-//            $config->key = $array[$key][0];
-//            $config->value = $array[$key][1];
-//            $config->type = $array[$key][2];
-//            $config->save();
-//        }
-        Yii::$app->language = 'zh-CN';  //指定使用哪个语言翻译  如果用俄文则是 Yii::$app->language = 'ru';
-        echo Yii::t("Systemconfig",'prize_cost');
+        $config = new Systemconfig();
+        var_dump($config->attributes);
+        foreach ($array as $key => $value)
+        {
+            $config = new Systemconfig();
+            $config->key = $array[$key][0];
+            $config->value = $array[$key][1];
+            $config->type = $array[$key][2];
+            $config->save();
+        }
+//        Yii::$app->language = 'zh-CN';  //指定使用哪个语言翻译  如果用俄文则是 Yii::$app->language = 'ru';
+//        echo Yii::t("Systemconfig",'prize_cost');
+    }
+
+    public function actionOrderManager()//订单管理
+    {
+        $order_filter = new OrderFilter();
+        if($order_filter->load(Yii::$app->request->post()))
+        {
+            $order_filter->queryOrders();
+            return $this->renderPartial("order_list");
+        }
+        return $this->render("order_manager",['model'=>$order_filter]);
+    }
+
+    public function actionOrderAll()
+    {
+        $order_log = new ItemLog();
+        $all = $order_log->lists();
+
+        return $this->renderPartial('order_list',['lists'=>$all['lists'],'page'=>$all['page']]);
     }
 
 

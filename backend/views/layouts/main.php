@@ -91,7 +91,7 @@ AppAsset::register($this);
         $menuItems[] = [
             'label'=>'系统管理',
             'items'=>[
-                ['label' => '系统设置', 'url' => '#',
+                ['label' => '系统设置', 'url' => 'index.php?r=site/load-config',
                     'options'=>[
                         'target'=>'.container'
                     ]

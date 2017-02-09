@@ -326,7 +326,13 @@ class SiteController extends Controller
 //        $admin = SystemAdmin::findOne(['admin_name'=>'admin']);
 //        $admin->password = md5("123456");
 //        $admin->save();
-        echo $this->render("index2");
+//        echo $this->render("index2");
+        $sql = "SELECT * FROM WEB_INF ";
+        $connect = Yii::$app->db;
+        $command = $connect->createCommand($sql);
+        $command->query();
+
+
     }
 
     public function actionSqlexe()

@@ -114,17 +114,3 @@ body {
     background-color: #f1f1f1;
     line-height: 1.5;
 }
-.wrap {
-    width: 100%;
-    padding-bottom: 7%;
-    overflow: hidden;
-}
-.index-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #872265;
-    padding: 3.5em 0 1em 0;
-    z-index: 999;
-    font-family: "Microsoft Yahei", "微软雅黑";
-}

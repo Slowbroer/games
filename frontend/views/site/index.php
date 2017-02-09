@@ -1,205 +1,165 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Slowbro
+ * Date: 17/2/8
+ * Time: 下午9:07
+ */
 
-
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
 use yii\helpers\Url;
+
 ?>
-<script>
-    $(function () {
-        $("#form2").on("beforeSubmit", function () {
-//            alert("test");
-            $.ajax({
-                url: $(this).attr("action"),
-                type: $(this).attr("method"),
-                data: $(this).serialize(),
-                success: function (data) {
-                    data = eval("(" + data + ")");
-                    location.href = "index.php";
 
-                },
-                error: function (data) {
-                    alert("login failed!")
-                }
-            });
-            return false;
-        });
-    });
-</script>
-    <div class="left">
-        <div class="left_one" id="lofinDiv" >
-            <div class="l_one">
-                <?php if(!Yii::$app->user->isGuest){ ?>
-                <div class="dengluhou" style="">
-                    <h3>
-                        登录
-                        <?php ActiveForm::begin(['id' => 'logoutForm','action'=>Url::toRoute("site/logout"),'options'=>['style'=>"display: inline-block"]]); ?>
-                        <button id="logout" name="logout" class="tui" type="submit" >退出登陆</button>
-                        <?php ActiveForm::end(); ?>
-<!--                        <a href="index.php?r=site/logout" class="tui">退出登录</a>-->
-                    </h3>
-                    <p>用户ID:<span><?php if(!Yii::$app->user->isGuest){echo Yii::$app->user->identity->getMenb();}?></span></p>
-                    <a href="#" class="game">开始游戏</a>
-                    <div class="dengluhou_foot">
-                        <a href="register.php" class="manage" >账号管理</a>
-                        <span>|</span>
-                        <a href="download.php" class="buy">充值中心</a>
+
+
+<div class="content">
+    <div class="slider_news clearfix">
+        <div class="content_slider">
+            <!--輪播圖 begin-->
+            <div class="swiper-container1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src='<?= Url::to("@web/images/home_page/title2.jpg");?>'>
+                    </div>
+                    <div class="swiper-slide"><img src='<?= Url::to("@web/images/home_page/title2.jpg");?>'></div>
+                    <div class="swiper-slide"><img src='<?= Url::to("@web/images/home_page/title2.jpg");?>'></div>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+            </div>
+            <!-- 轮播图 end -->
+        </div>
+        <div class="news bg_type_1">
+            <div class="tab_type_1">
+                <h3 class="tab cur"><a href="javascript:;">综合</a></h3>
+                <h3 class="tab"><a href="javascript:;">公告</a></h3>
+                <h3 class="tab"><a href="javascript:;">活动</a></h3>
+                <h3 class="tab"><a href="javascript:;">新闻</a></h3>
+                <a href="http://mu.niu.xunlei.com/zonghe/1.shtml" target="_blank" class="hd_more">more+</a>
+            </div>
+            <div class="news_tab_con">
+                <div class="cont_item">
+                    <div class="newsListBox">
+                        <ul class="news_list" style="display: block;">
+                            <li>
+                                <span class="com_arrow icon-play_arrow"></span>
+                                <span class="cat">公告</span>
+                                <span class="txt"><a href="#" target="_blank" title="通知" class="fcy fb">通知通知通知通知通知通知通知通知通知通知</a></span>
+                                <span class="date">11-18</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <?php
-                }
-                else{ ?>
-                    <div class="dengluqian">
-                        <?php ActiveForm::begin(['id' => 'form2','action'=>Url::toRoute("site/home-login")]); ?>
-                            <h3>登录</h3>
-                            <div class="errorplace"></div>
-                            <div class="denglu">
-                                <button id="Login" name="Login" class="submit" type="submit" >登錄</button>
-                                <div class="input">
-                                    <input class="in_text" type="text" id="username" name="user_name" placeholder="用戶名">
-                                    <input type="password" class="in_text2" id="password" name="password" placeholder="密碼">
-                                </div>
-                                <div style="clear: both"></div>
+            </div>
+        </div>
+    </div>
+    <div class="game_link clear mb">
+        <ul class="clearfix">
+            <li>
+                <a href="#" target="_blank" class="niuxReportLink" rdata="g3_indexad:item1">
+                    <img src="http://i2.webgame.kanimg.com/20150126/1422237656845.jpg" alt="" width="180" height="118">
+                    <span class="btn">go></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank" class="niuxReportLink" rdata="g3_indexad:item1">
+                    <img src="http://i2.webgame.kanimg.com/20150126/1422237656845.jpg" alt="" width="180" height="118">
+                    <span class="btn">go></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank" class="niuxReportLink" rdata="g3_indexad:item1">
+                    <img src="http://i2.webgame.kanimg.com/20150126/1422237656845.jpg" alt="" width="180" height="118">
+                    <span class="btn">go></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" target="_blank" class="niuxReportLink" rdata="g3_indexad:item1">
+                    <img src="http://i2.webgame.kanimg.com/20150126/1422237656845.jpg" alt="" width="180" height="118">
+                    <span class="btn">go></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="video_partner bg_type_2 mb">
+        <div class="tab_type_2">
+            <h3 class="tab"><a>游戏视频</a></h3>
+            <h3 class="tab cur"><a>伙伴展示</a></h3>
+        </div>
+        <div class="tab_con">
+            <div class="cont_item clearfix" style="display:none">
+                <div class="video" id="video-box">
+                    <a href="javascript:;" id="to-play" data-videourl="http://preloaddown.boxsvr.niu.xunlei.com/webgame/mu_video.flv "><img src="http://i1.webgame.kanimg.com/20150122/1421920823339.jpg" width="338" height="240" alt="">
+                        <span class="btn_play png"></span>
+                    </a>
+                </div>
+                <div class="video_intro">
+                    <div class="hd">
+                        <span class="com_arrow icon-play_arrow"></span>
+                        <h4>奇迹归来游戏介绍</h4>
+                    </div>
+                    <div class="bd">
+                        <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                        <div class="btn_v_start"><a href="#" target="_blank" class="btn_v_start niuxReportLink" rdata="g3_indexvedio:entergame">进入游戏&gt;&gt;</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cont_item">
+                <!--輪播圖 begin-->
+                <div class="cont_slider">
+                    <div class="swiper-container2">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="<?= Url::to("@web/images/home_page/title2.jpg");?>">
                             </div>
-                        <?php ActiveForm::end(); ?>
-                        <div class="re">
-                            <a href="reg.php" class="register" >游戏註冊</a>
-                            <span>|</span>
-                            <a href="getPw.php" class="download">找回密码</a>
+                            <div class="swiper-slide">
+
+                                <div class="video" id="video-box">
+                                    <a href="javascript:;" id="to-play" data-videourl="http://preloaddown.boxsvr.niu.xunlei.com/webgame/mu_video.flv "><img src="http://i1.webgame.kanimg.com/20150122/1421920823339.jpg" width="338" height="240" alt="">
+                                        <span class="btn_play png"></span>
+                                    </a>
+                                </div>
+                                <div class="video_intro">
+                                    <div class="hd">
+                                        <span class="com_arrow icon-play_arrow"></span>
+                                        <h4>奇迹归来游戏介绍</h4>
+                                    </div>
+                                    <div class="bd">
+                                        <p>介绍介绍介绍介绍介绍介绍介绍介绍</p>
+                                        <div class="btn_v_start"><a href="#" target="_blank" class="btn_v_start niuxReportLink" rdata="g3_indexvedio:entergame">进入游戏&gt;&gt;</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide"><img src="<?= Url::to("@web/images/home_page/title2.jpg");?>"></div>
                         </div>
+                        <!-- 如果需要分页器 -->
+                        <div class="swiper-pagination"></div>
                     </div>
-                <?php } ?>
+                </div>
+                <!-- 轮播图 end -->
             </div>
-        </div>
-
-        <div class="left_two">
-            <div class="share">
-            </div>
-        </div>
-        <!--積分榜-->
-        <div class="left_four">
-            <div class="four_ban"><a href="#">更多</a> 等級排行榜</div>
-            <table class="table table-condensed">
-                <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>名字</th>
-                    <th>等级</th>
-                    <th>职业</th>
-                    <th>PK状态</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($ranks as $key=>$rank){ ?>
-                    <tr>
-                        <td><?= Html::encode($key+1);?></td>
-                        <td><?= Html::encode($rank['Name']);?></td>
-                        <td><?= Html::encode($rank['PkLevel']);?></td>
-                        <td><?= Html::encode($rank['ZY_name']);?></td>
-                        <td><?= Html::encode($rank['PK_name']);?></td>
-                    </tr>
-                <?php } ?>
-                </tbody>
-            </table>
-        </div>
-        <!--游戲玩法-->
-        <div class="left_three">
-            <div class="three_ban"><a href="#">更多</a> 游戲玩法</div>
-            <ul id="play" style="list-style: none;padding-left: 0px;"></ul>
-        </div>
-        <!--玩家交流群-->
-        <div class="left_five" id="qq">
-            <div class="five_ban"><a href="#">更多</a> 玩家交流群</div>
         </div>
     </div>
-    <div class="right_in">
-        <div class="right_one">
-            <!--服務器情況-->
-            <div class="one_right">
-                <div class="service">
-                    <h3 id="ser">服務器情況</h3>
-                    <div class="ser_dec">
-                        <p class="name">
-                            <span class=" icon icon1"></span>
-                            <span>游戲名稱：</span>
-                            <span></span>
-                        </p>
-                        <p class="version">
-                            <span class=" icon icon2"></span>
-                            <span>游戲版本：</span>
-                            <span></span>
-                        </p>
-                        <p class="index">
-                            <span class=" icon icon3"></span>
-                            <span>電信主頁：</span>
-                            <span></span>
-                        </p>
-                        <p class="version">
-                            <span class=" icon icon4"></span>
-                            <span>客服ＱＱ：</span>
-                            <span></span>
-                        </p>
-                    </div>
-                </div>
+    <div class="gamedata bg_type_2 mb">
+        <div class="bg_type_2">
+            <div class="cont_hd">
+                <span class="icon-addressbook"></span>
+                <h6>游戏资料</h6>
             </div>
-            <div class="one_left">
-                <!--輪播圖-->
-                <object type="application/x-shockwave-flash" data="pic/dg_maincha.swf" width="466" height="186" wmode="transparent" quality="high" bgcolor="#FFFFFF" allowscriptaccess="always" allowfullscreen="false">
-                </object>
-            </div>
-        </div>
-        <!--移動文字-->
-        <div class="right_five">
-            <marquee direction="left" behavior=scroll  scrollamount=7 scrolldelay=1 onmouseover='this.stop()' onmouseout='this.start()' valign="middle" class="marquee">
-                <a href="reg.php">【亂世首區】今日17點開放體驗!19點開放轉生！趕快注冊吧~~！</a>
-            </marquee>
-        </div>
-        <div class="right_two">
-            <div class="two_ban">
-                <a href="#">更多</a>
-                <div class="tit">
-                    公告
-                </div>
-            </div>
-            <div class="rtwo_foot">
-                <div class="r_right">
-                    <ul id="news">
-                    </ul>
-                </div>
-                <div class="r_left">
-                    <div class="tupp">
-                        <a href="#"><img src="images/bottom-video.gif" style="width:100%"/> </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="right_three" style="height:400px">
-            <div class="three_ban">
-                <a href="#">更多</a>
-                <div class="tit">
-                    游戲介紹
-                </div>
-            </div>
-            <div class="rthree_foot">
-                <div class="rr_right">
-                    <ul id="GMintr">
-<!--                        <li><a href="index.php?r=site/introduce-info"><span style="margin-right: 50px;">测试标题</span><span>测试内容</span></a></li>-->
-                        <?php foreach ($introduces as $key=>$introduce){?>
-                        <li><span style="margin-right: 50px;"><?= $introduce['title']?></span><span><?= $introduce['content']?></span></li>
-                        <?php }?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="right_four">
-            <div class="four_ban">
-                <a href="#">更多</a>
-                <div class="tit">
-                    截圖
-                </div>
-            </div>
-            <div class="four_pic" id="images">
+            <div class="datalink">
 
             </div>
         </div>
     </div>
+    <div class="gameimg bg_type_2">
+        <div class="tab_type_2">
+            <h3 class="tab"><a>游戏原画</a></h3>
+            <h3 class="tab cur"><a>游戏截图</a></h3>
+        </div>
+        <div class="tab_con">
+            <div class="img_container">
+                <img src="http://i1.webgame.kanimg.com/20150121/1421810419823.jpg" _bsrc="http://i0.webgame.kanimg.com/20150121/1421810414531.jpg" idx="0" alt="" width="168" height="110">
+            </div>
+        </div>
+    </div>
+</div>

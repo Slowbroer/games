@@ -13,14 +13,18 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+//        'css/site.css',
         'css/reset.css',
-        'css/style.css',
-        'css/top.css',
-        'css/login.css',
+//        'css/style.css',
+//        'css/top.css',
+//        'css/login.css',
         'css/swiper-3.3.1.min.css',
+        'css/skin_black.css',
     ];
     public $js = [
+        'js/swiper-3.3.1.jquery.min.js',
+//        'js/skin_black.js',
+        'js/jquery.validate.min.js'
     ];
     public $jsOptions = ['position'=>View::POS_HEAD];
     public $depends = [
