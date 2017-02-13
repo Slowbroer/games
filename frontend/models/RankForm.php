@@ -59,11 +59,11 @@ class RankForm extends Model {
 //            return null;
 //        }
 
-//        $where = " where m.ServerCode = ".$this->server;
-//        if($this->career!==''&&intval($this->career)>=0)
-//        {
-//            $where .= " and c.Class = $this->career ";
-//        }
+        $where = " where m.ServerCode = ".$this->server;
+        if($this->career!==''&&intval($this->career)>=0)
+        {
+            $where .= " and c.Class = $this->career ";
+        }
 //        $where = array();
 //        $where['Character.ZY'] = isset($this->career)? $this->career:'';//职业表
 //        $where['MEMBINFO.ServerCode'] = isset($this->server)? $this->server:'';//服务区
@@ -80,7 +80,7 @@ class RankForm extends Model {
         $connect = Yii::$app->db;
 //        $sql = "select top $limit c.Name,c.cLevel,c.Class,c.ZY,c.PkLevel from Character as c left join MEMB_INFO as m on c.AccountID = m.memb___id ".$where." order by $order desc";
 
-        $sql = "select top $limit c.Name,c.cLevel,c.Class,c.ZY,c.PkLevel from Character as c left join MEMB_INFO as m on c.AccountID = m.memb___id  order by $order desc";
+        $sql = "select top $limit c.Name,c.cLevel,c.Class,c.ZY,c.PkLevel from Character as c left join MEMB_INFO as m on c.AccountID = m.memb___id $where order by $order desc";
 
 
 //        var_dump($sql);

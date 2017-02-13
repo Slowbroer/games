@@ -10,6 +10,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 $this->title = $name;
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
@@ -33,6 +34,7 @@ $this->title = $name;
     $(function (e) {
 
         $("#form-rank").on("beforeSubmit",function (e) {
+//            alert("test");
             getList($(this));
             return false;
         });
@@ -54,8 +56,8 @@ $this->title = $name;
                 data = eval("("+data+")");
                 if(data.code==0)//error
                 {
-
-                    $(".rank_lists").html(data.message);
+                    alert(data.message);
+//                    $(".rank_lists").html(data.message);
                 }
                 else //success
                 {

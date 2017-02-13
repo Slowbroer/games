@@ -33,7 +33,7 @@ class RankController extends Controller{//排行控制器
             else
             {
                 $content = $this->renderPartial("list",['lists'=>$list]);
-//                return json_encode($list);
+                return json_encode(array('code'=>1,'message'=>$content));
             }
         }
         else
@@ -55,8 +55,8 @@ class RankController extends Controller{//排行控制器
             }
             else
             {
-//                $content = $this->renderPartial("guild_list",['lists'=>$list]);
-                return json_encode($list);
+                $content = $this->renderPartial("guild_list",['lists'=>$list]);
+                return json_encode(array('code'=>1,'message'=>$content));
             }
 //            return json_encode($list);
         }

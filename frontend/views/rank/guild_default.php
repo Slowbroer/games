@@ -10,6 +10,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 $this->title = $name;
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
@@ -54,8 +55,9 @@ $this->title = $name;
                 data = eval("("+data+")");
                 if(data.code==0)//error
                 {
-                    console.log(form.serialize());
-                    $(".rank_lists").html(data.message);
+//                    console.log(form.serialize());
+//                    $(".rank_lists").html(data.message);
+                    alert(data.message);
                 }
                 else //success
                 {
