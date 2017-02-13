@@ -51,12 +51,12 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li style="margin-right:125px;">
-                        <a href="reg.php">
+                        <a href="index.php?r=announcement/all">
                             <h4>游戏公告</h4>
                         </a>
                     </li>
                     <li>
-                        <a href="login.php">
+                        <a href="index.php?r=rank/default">
                             <h4>玩家排名</h4>
                         </a>
                     </li>
