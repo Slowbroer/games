@@ -101,7 +101,7 @@ class RankController extends Controller{//排行控制器
     }
 
 
-    public function actionLevelrank()
+    public function actionLevelrank()//首页的排行（ajax）
     {
         $model = new RankForm();
         $list = $model->c_rank();

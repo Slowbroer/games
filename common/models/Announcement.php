@@ -61,7 +61,7 @@ class Announcement extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getList($filter=null)//返回列表
+    public function getList($filter=array())//返回列表
     {
         $where = array();
         if(!empty($filter['type']))
@@ -74,7 +74,9 @@ class Announcement extends \yii\db\ActiveRecord
 
         $count = $query->count();
 
+
         $pagination = new Pagination(['totalCount' => $count,'pageSize'=>$page_size,'params'=>array_merge($_GET, ['keywords' => 'test'])]);//这里添加自定义参数
+
 
         $result['list'] = $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
@@ -114,6 +116,17 @@ class Announcement extends \yii\db\ActiveRecord
             $this->update_time = time();
             return ($this->save())? true:false;
         }
+    }
+
+    public static function ListPreview($type = 0,$limit = 5)//首页公告展示部分
+    {
+        $where = array();
+        if($type !== 0)
+        {
+            $where['type'] = $type;
+        }
+
+        return self::find()->select("*")->where($where)->limit($limit)->orderBy("add_time desc")->asArray()->all();
     }
 
 

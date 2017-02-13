@@ -37,7 +37,7 @@ class ItemController extends Controller
                 'rules'=>[
                     [
                         'allow' => true,
-                        'actions' => ['buyitem', 'buypackage'],
+                        'actions' => ['buyitem', 'buypackage', 'buy_single_item' ],
                         'roles' => ['@'],
                     ]
                 ]
@@ -209,6 +209,10 @@ class ItemController extends Controller
 
     public function actionBuy_single_item()
     {
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->render("/site/error",['message'=>'您还没登陆']);
+        }
         $model = new SingleItemForm();
         if($model->load(Yii::$app->request->post())&&$model->validate())
         {

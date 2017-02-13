@@ -2,17 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: Slowbro
- * Date: 16/12/15
- * Time: 下午4:34
+ * Date: 17/2/12
+ * Time: 下午9:42
  */
-
-
-use yii\bootstrap\Dropdown;
+use frontend\assets\ShopAsset;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 
-$this->title = "购买装备";
-
+ShopAsset::register($this)
 ?>
 
 
@@ -65,29 +62,63 @@ $this->title = "购买装备";
     });
 </script>
 
-
-<div>
-    <?php $form = ActiveForm::begin(['id' => 'buy-item']); ?>
-
-    <?php echo $form->field($model,'type')->dropDownList($lists,['style'=>'width:400px;','prompt'=>'请先选择种类']);?>
-
-    <?php echo $form->field($model,'id')->dropDownList([],['prompt'=>'请选择','style'=>'width:400px;']);?>
-
-    <div class="item_info">
-
+<div class="content">
+    <div class="page_news_wrap">
+        <div class="tab_type_2 tab_page">
+            <h3 class="tab cur"><a href="#">购买装备</a></h3>
+            <h3 class="tab"><a href="#">购买套装</a></h3>
+            <h3 class="tab"><a href="#">推广奖励</a></h3>
+            <div class="cur_pos">
+                当前位置：<a href="#">奇迹归来</a> &gt; <span class="cur">购买装备</span>
+            </div>
+        </div>
+        <div class="buy_content buy_content_zb">
+            <?php $form = ActiveForm::begin(['id' => 'buy-item']); ?>
+            <table border="0" cellpadding="5" cellspacing="0">
+                <thead>
+                <th>装备类别</th>
+                <th>装备内容</th>
+                <th>备注</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <?php echo $form->field($model,'type')->dropDownList($lists,['style'=>'width:200px;','prompt'=>'请先选择种类'])->label(false);?>
+                    </td>
+                    <td>
+                        <?php echo $form->field($model,'id')->dropDownList([],['prompt'=>'请选择','style'=>'width:400px;'])->label(false);?>
+                    </td>
+                    <td><span class="item_info" style="">还需充值100积分</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="buy" type="submit" >购买装备</button>
+<!--            <input class="buy" type="button" value="购买装备"></td>-->
+            <?php ActiveForm::end(); ?>
+        </div>
+        <div class="buy_content buy_content_tz" style="display:none">
+            <?php $form = ActiveForm::begin(['id' => 'buy-package']); ?>
+            <table border="0" cellpadding="5" cellspacing="0">
+                <thead>
+                <th>装备类别</th>
+                <th>装备内容</th>
+                <th>备注</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <?php //echo $form->field($model,'type')->dropDownList($lists,['style'=>'width:400px;','prompt'=>'请先选择种类']);?>
+                    </td>
+                    <td>
+                        <?php //echo $form->field($model,'id')->dropDownList([],['prompt'=>'请选择','style'=>'width:400px;']);?>
+                    </td>
+                    <td><span style="">还需充值100积分</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <input class="buy" type="button" value="购买套装"></td>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <div class="form-group">
-        <?= Html::submitButton('购买', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
 </div>
 
-
-
-<!--    <select class="form-control">-->
-<!--    --><?php //foreach ($lists as $key=>$value){?>
-<!--        <option value="--><?//= $key?><!--">--><?//= $value?><!--</option>-->
-<!--    --><?php //}?>
-<!--    </select>-->

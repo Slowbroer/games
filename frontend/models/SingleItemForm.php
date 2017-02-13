@@ -50,8 +50,8 @@ class SingleItemForm extends Model
     public function attributeLabels()
     {
         return [
-            'id'=>'id',
-            'type'=>'种类',
+            'id'=>'装备',
+            'type'=>'装备种类',
         ];
     }
 

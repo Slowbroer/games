@@ -33,20 +33,64 @@ window.setInterval(
 
 /*星星评分*/
 $(function(){
-	$(".info").find('.starwp').each(function(index, el) {
-		var star_el = $(this).children('.star');
-		star_el.hover(function() {
-			$(this).addClass('star_on');
-			$(this).prevAll().addClass('star_on');
-			
-		}, function() {
-			$(this).removeClass('star_on');
-			$(this).prevAll().removeClass('star_on');
-		});
-		star_el.click(function(event) {
-			$(this).addClass('star_on');
-			$(this).prevAll().addClass('star_on');
-		});
+	/*鼠标经过*/
+	$(document).on('mouseover', 'span[star]', function(event) {
+		var num = $(this).index();
+		console.log(num);
+		var pmark = $(this).parent(".starwp");
+		var mark = pmark.prevAll("input");
+		var list = pmark.find('span');
+		for(var i =0; i <=num;i++){
+			list.eq(i).attr('class', 'star_on');
+		}
+		for(var i=num+1;i<=list.length-1;i++){
+			list.eq(i).attr('class', 'star');
+		}
+	});
+	/*鼠标移出*/
+	$(document).on('mouseout', 'span[star]', function(event) {
+		var num = $(this).index();
+		console.log(num);
+		var pmark = $(this).parent(".starwp");
+		var mark = pmark.prevAll("input");
+		var val = mark.val();
+		var list = pmark.find('span');
+		if (val != 0) {
+			for(var i =0;i<val;i++){
+				list.eq(i).attr('class', 'star_on');
+			}
+			for(var i=val;i<=list.length-1;i++){
+				list.eq(i).attr('class', 'star');
+			}
+		}else{
+			for(var i =0;i<=list.length-1;i++){
+				list.eq(i).attr('class', 'star');
+			}
+		}
 		
-	});		
+	});
+	/*鼠标点击*/
+	$(document).on('click', 'span[star]', function(event) {
+		var num = $(this).index();
+		var pmark = $(this).parent(".starwp");
+		var mark = pmark.prevAll("input");
+		mark.val(num+1);
+		console.log(num+1);
+	});
+})
+
+/*tab切换*/
+$(".tab").mouseover(function(){
+	$(this).addClass('cur');
+	$(this).prevAll().removeClass("cur");
+	$(this).nextAll().removeClass("cur");
+	var tab_num = $(this).index();
+	var cont_item = $(this).parent(".tab_type").siblings('.tab_con').children('.cont_item');
+	for(var i =0;i<cont_item.length;i++){
+		if (tab_num == i) {
+			cont_item.eq(i).show();
+			cont_item.eq(i).prevAll().hide();
+			cont_item.eq(i).nextAll().hide();
+		};
+	}
 })

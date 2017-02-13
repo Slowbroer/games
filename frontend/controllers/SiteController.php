@@ -2,6 +2,8 @@
 namespace frontend\controllers;
 
 use backend\models\SystemAdmin;
+use common\models\Announcement;
+use common\models\AnnouncementType;
 use common\models\Character;
 use common\models\Introduce;
 use common\models\MEMBINFO;
@@ -81,21 +83,28 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//        $rank = new RankForm();
-//        $rank_list = $rank->c_rank();
-//        $rank_content = $this->renderPartial("rank_content",['lists'=>$rank_list]);
         $rank = new Character();
         $rank_list = $rank->home_rank();
 
         $introduce = new Introduce();
         $introduce_list = $introduce->recent();
 
+        $ann_type = new AnnouncementType();
+        $type_lists = $ann_type->ListPreview();
+        array_unshift($type_lists,['id'=>0,'name'=>'综合']);
+
+        $ann_lists = array();
+        foreach ($type_lists as $key=>$type_list) {
+            $ann_lists[] = Announcement::ListPreview($type_list['id']);
+        }
+
 //        var_dump(Yii::$app->params['systemConfig']);
 
         return $this->render('index',[
             'ranks'=>$rank_list,
             'introduces'=>$introduce_list,
-
+            'ann_types'=>$type_lists,
+            'ann_lists'=>$ann_lists,
         ]);
     }
 
@@ -127,7 +136,7 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return json_encode(array('code'=>1,'message'=>'您已经登陆了，请刷新页面'));
         }
-        $memb_id = isset($_POST['user_name'])? $_POST['user_name']:'';
+        $memb_id = isset($_POST['username'])? $_POST['username']:'';
         if(empty($memb_id))
         {
             return json_encode(array('code'=>0,'message'=>'请填写用户名'));

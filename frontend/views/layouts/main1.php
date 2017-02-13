@@ -12,6 +12,7 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
 
 
 AppAsset::register($this);
@@ -40,7 +41,7 @@ AppAsset::register($this);
                 <a class="logo" href="#"><img src="<?= Url::to("@web/images/home_page/logo.png");?>" alt="logo"></a>
                 <ul class="clearfix">
                     <li>
-                        <a href="sy_index.php">
+                        <a href="index.php">
                             <h4>MU奇迹</h4>
                         </a>
                     </li>
@@ -78,8 +79,10 @@ AppAsset::register($this);
                     </div>
                     <!-- login begin -->
                     <div class="userwrap side_box bg_type_1">
+                        <?php if(Yii::$app->user->isGuest){ //如果已经登陆了 ?>
                         <div class="input_area" id="account_login_before">
-                            <form action="" class="form_login">
+<!--                            <form action="" class="form_login" id="form_login">-->
+                            <?php ActiveForm::begin(['id' => 'form_login','action'=>Url::toRoute("site/home-login"),'options'=>['class'=>'form_login']]); ?>
                                 <p class="in_box_cite color_red errorplacement" style="display:block;" id="al_warn"></p>
 <!--                                <div class="container clearfix">-->
                                 <div class="clearfix">
@@ -110,13 +113,18 @@ AppAsset::register($this);
                                     </label>
                                     <a href="#" title="忘记密码？" target="_blank" class="text_cite">忘记密码？</a>
                                 </div>
-                            </form>
+                            <?php ActiveForm::end(); ?>
+<!--                            </form>-->
                         </div>
-                        <div id="acount_login_after" style="display:none">
-                            <p class="account_name">
+                        <?php }else{ //if not login ?>
+                        <div id="acount_login_after" >
+                            <p class="account_name" style="display: inline-block;margin-bottom: 5px;">
                                 <span>当前账号</span>
-                                <span class="account_name_txt">青青</span>
+<!--                                <span class="account_name_txt">青青</span>-->
                             </p>
+                            <?php ActiveForm::begin(['id' => 'logoutForm','action'=>Url::toRoute("site/logout"),'options'=>['style'=>"display: inline-block;padding-top:0px;padding-bottom:10px;"]]); ?>
+                            <button id="logout" name="logout" class="account_name_txt btn btn-default" type="submit" ><?= Yii::$app->user->identity->getMenb();?>(退出登陆)</button>
+                            <?php ActiveForm::end(); ?>
                             <p class="state">
                                 <span>当前状态：</span>
                                 <span class="state_txt">账号正常</span>
@@ -130,8 +138,9 @@ AppAsset::register($this);
                                 <span class="rechange_txt">0</span>
                             </p>
                         </div>
+                        <?php }?>
                         <div class="btnwrap">
-                            <a href="#" title="" target="_blank" class="btn_register niuxReportLink" rdata="g3_side:reg">
+                            <a href="index.php?r=site/signup" title="" target="_blank" class="btn_register niuxReportLink" rdata="g3_side:reg">
                                 <span class="icon-gavel"></span>
                                 注册帐号
                             </a>
@@ -143,7 +152,7 @@ AppAsset::register($this);
                             </a>
                         </div>
                         <div class="btnwrap">
-                            <a href="#" title="" target="_blank" class="btn_register niuxReportLink" rdata="g3_side:reg">
+                            <a href="index.php?r=site/memb-info" title="" target="_blank" class="btn_register niuxReportLink" rdata="g3_side:reg">
                                 <span class="icon-gavel"></span>
                                 账号管理
                             </a>
@@ -157,9 +166,9 @@ AppAsset::register($this);
                             <h6>网站功能</h6>
                         </div>
                         <div class="quick clear">
-                            <a href="/Pwd" class="btn_quick fastEnterGameLink" tid="side">修改密码</a>
-                            <a href="/top" class="btn_quick fastEnterGameLink" tid="side">等级排行</a>
-                            <a href="/top/zm.asp" class="btn_quick fastEnterGameLink" tid="side">战盟排行</a>
+                            <a href="index.php?r=site/request-password-reset" class="btn_quick fastEnterGameLink" tid="side">修改密码</a>
+                            <a href="index.php?r=rank/default" class="btn_quick fastEnterGameLink" tid="side">等级排行</a>
+                            <a href="index.php?r=rank/guilddefault" class="btn_quick fastEnterGameLink" tid="side">战盟排行</a>
                         </div>
                     </div>
                     <!-- side_box1 end-->
@@ -289,7 +298,13 @@ AppAsset::register($this);
                     </div>
                     <!-- side_box4 end-->
                 </div>
+                <div style="width: 866px;float: right;background: #26282C;min-height: 1395px;">
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        'options'=>['style'=>"text-align:left;background: #26282C;",'class' => 'breadcrumb']
+                    ]) ?>
                 <?= $content ?>
+                </div>
             </div>
         </div>
     </div>
@@ -368,8 +383,38 @@ AppAsset::register($this);
                 $(form).ajaxSubmit();
             }
         })
-    })
+    });
+
+    $(function () {
+        $(".form_login").on("beforeSubmit", function () {
+            alert("test");
+            $.ajax({
+                url: $(this).attr("action"),
+                type: $(this).attr("method"),
+                data: $(this).serialize(),
+                success: function (data) {
+                    data = eval("(" + data + ")");
+                    if(data.code == 1)
+                    {
+                        location.href = "index.php";
+                    }
+                    else
+                    {
+                        alert(data.message);
+                    }
+
+
+                },
+                error: function (data) {
+                    alert("login failed!")
+                }
+            });
+            return false;
+        });
+    });
 </script>
+
+
 <?php $this->endBody() ?>
 </body>
 

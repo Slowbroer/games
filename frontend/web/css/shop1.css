@@ -18,17 +18,17 @@ ul, li, ol {
     z-index: 100;
 }
 .wrap{
-	background: url(../images/home_page/footer.jpg) no-repeat center bottom;
+    background: url(../img/footer.jpg) no-repeat center bottom;
     padding-bottom: 200px
 }
 .wp{
-	background: url(../images/home_page/bg4.jpg) no-repeat top center;
+    background: url(../img/bg4.jpg) no-repeat top center;
 }
 .layout{
-	width: 1200px;
-	margin: 0 auto;
-	position: relative;
-	text-align: center;
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
 }
 .nav a{
     color: #fff
@@ -58,7 +58,7 @@ ul, li, ol {
     display: inline-block;
 }
 .nav li:hover{
-    background: url(../images/home_page/spr_nav1.png) center no-repeat;
+    background: url(../img/spr_nav1.png) center no-repeat;
 }
 .logo{
     position: absolute;
@@ -72,7 +72,7 @@ ul, li, ol {
 }
 .beginimg{
     display: block;
-    background: url(../images/home_page/sprites02.png) top left;
+    background: url(../img/sprites02.png) top left;
     background-position: 0 0;
     width: 318px;
     height: 137px;
@@ -151,7 +151,7 @@ ul, li, ol {
 }
 .in_boxa{
     padding: 10px 12px;
-    /*height: 39px;*/
+    height: 39px;
     line-height: 39px;
 }
 .verify_img{
@@ -289,8 +289,7 @@ ul, li, ol {
     display: inline-block;
     width: 13px;
     height: 12px;
-    background: url(../images/home_page/spr_side.png);
-    background-position: -38px -38px;
+    background: url(../img/spr_side.png);
     overflow: hidden;
 }
 .star{
@@ -300,250 +299,135 @@ ul, li, ol {
     background-position: -52px -38px;
 }
 
+
 /* content */
 .content {
     float: right;
+    width: 866px;  
+}
+.page_news_wrap {
+    padding: 0;
+}
+.game_server_wrap, .page_news_wrap {
+    background: #26282C;
+    min-height: 1450px;
+    _height: 1450px;
+}
+.tab_page {
+    height: 58px;
+    margin-right: 0;
+    position: relative;
+}
+.tab_page:after{
+    content: "";
     width: 866px;
-    
-}
-.content_slider {
-    float: left;
-    _display: inline;
-    width: 368px;
-    height: 270px;
-    overflow: hidden;
-    position: relative;
-}
-.news {
-    float: right;
-    width: 488px;
-    height: 270px;
-}
-.tab_type_1 {
-    height: 43px;
-    background: #131418;
-    position: relative;
-}
-.tab_type_1 .tab {
-    float: left;
-    _display: inline;
-}
-.tab_type_1 .tab a:hover, .tab_type_1 .cur a {
-    color: #fff;
-    text-decoration: none;
-    background: #1E1F22;
-    border-bottom: 2px solid #0284C4;
-}
-.tab_type_1 .tab a {
-    display: block;
-    width: 71px;
-    height: 41px;
-    text-align: center;
-    line-height: 41px;
-    color: #8e8c8d 
-}
-.tab_type_1 .hd_more {
-    right: 14px;
-    top: 14px;
-}
-a.hd_more {
+    height: 1px;
+    background: #000;
     position: absolute;
-    color: #0284c4;
-    border-bottom: 1px solid #056FA5;
-    line-height: 14px;
-}
-.news .news_tab_con {
-    height: 227px;
-    overflow: hidden;
-}
-.news .cont_item {
-    padding: 15px 16px;
-}
-.news_list li {
-    height: 30px;
-    position: relative;
-    line-height: 30px;
-}
-.news_list .com_arrow {
     left: 0;
-    top: 0px;
-    height: 30px;
-    line-height: 30px;
-}
-.com_arrow {
-    position: absolute;
-    width: 7px;
-    height: 13px;
-    background-position: -21px -95px;
-}
+    bottom: 0;
 
-.news_list .cat {
-    position: absolute;
-    left: 17px;
-    top: 0;
-    color: #6A696A;
 }
-
-.news_list .txt {
-    display: block;
-    width: 234px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0 0 0 80px;
-    text-align: left;
-}
-
-.news_list .date {
-    position: absolute;
-    top: 1px;
-    right: 0;
-}
-.content .mb {
-    margin-bottom: 9px;
-}
-.game_link li {
-    float: left;
-    _display: inline;
-    margin: 0 9px 0 0;
-}
-.game_link li:last-child{
-    margin: 0 -1px 0 0 ;
-}
-.game_link li a {
-    display: block;
-    position: relative;
-    overflow: hidden;
-}
-.game_link li span {
-    position: absolute;
-    left: 12px;
-}
-.game_link li .btn {
-    overflow: hidden;
-    width: 51px;
-    /*height: 20px;*/
-    top: 79px;
-    text-align: center;
-    line-height: 20px;
-    border: 1px solid #9D795A;
-    color: #9D795A;
-    border-radius: 5px;
-}
-.game_link li .btn:hover{
-    background-color: #9D795A;
-    color: #000;
-}
-.tab_type_2 {
-    height: 34px;
-    position: relative;
-    margin-right: 16px;
-    background-position: 0 0;
-    background-repeat: repeat-x;
-    border-bottom: 1px solid #000;
+.tab_page .tab {
+    font-size: 20px;
 }
 .tab_type_2 .tab {
     float: left;
     _display: inline;
 }
-.tab_type_2 .tab a {
-    display: block;
-    width: 102px;
-    height: 32px;
-    line-height: 32px;
-    text-align: center;
-    position: relative;
+.tab_page .tab a:hover, .tab_page .cur a {
+    border-width: 3px;
 }
-.tab_type_2 .cur a {
+.tab_page .tab a {
+    width: 116px;
+    height: 55px;
+    line-height: 55px;
+}
+.tab_type_2 .tab a:hover, .tab_type_2 .cur a {
     color: #fff;
     border-bottom: 2px solid #0284C4;
     text-decoration: none;
 }
-.tab_type_2 .tab a:after {
-    position: absolute;
-    content: '';
-    width: 0;
-    height: 11px;
-    border-right: 1px solid #5A5A5D;
-    top: 11px;
-    right: 0;
-}
-.video_partner .video, .video_partner .video_intro {
-    float: left;
-    _display: inline;
-}
-.video_partner .tab_con {
-    padding: 19px 0 0 46px;
-}
-.video_partner .cont_item {
-    position: relative;
-    z-index: 10;
-}
-.video_partner .video {
-    width: 338px;
-    height: 240px;
-    position: relative;
-    overflow: hidden;
-    margin-right: 10px;
-}
-.video_intro .hd {
-    position: relative;
-}
-.video_intro .hd .com_arrow {
-    left: 19px;
-    top: 0px;
-}
-.com_arrow {
-    position: absolute;
-    width: 7px;
-    height: 13px;
-}
-.video_partner {
-    height: 360px;
-}
-.video_intro .hd h4 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    padding: 0 0 0 35px;
-}
-.video_intro .btn_v_start:hover {
-    text-decoration: none;
-}
-.video_intro .btn_v_start {
+.tab_type_2 .tab a {
     display: block;
-    width: 108px;
-    height: 33px;
+    width: 122px;
     text-align: center;
-    line-height: 33px;
-    color: #000;
-    font-size: 14px;
-    background-color: #FF9900
-}
-.cont_item .cont_slider{
-    overflow: hidden;
-}
-.cont_hd{
-    height: 34px;
-    line-height: 34px;
-    background-position: 0 0;
     position: relative;
-    margin: 0 16px 9px;
-    background-repeat: repeat-x;
+}
+.tab_type_2 .tab a:after{
+    content: "";
+    width: 1px;
+    height: 20px;
+    position: absolute;
+    left: 122px;
+    top: 50%;
+    margin-top: -10px;
+    background-color: #8e8c8d;
+}
+.tab_page .cur_pos {
+    right: 26px;
+    top: 20px;
+}
+.cur_pos {
+    position: absolute;
+}
+
+.cur_pos .cur {
+    color: #0284c4;
+}
+.page_news_list_wrap {
+    padding: 0 28px;
+}
+.page_news_list li {
+    position: relative;
+    border-bottom: 1px dashed #3A3A3C;
+    line-height: 22px;
+    padding: 21px 0 22px;
     text-align: left;
-        color: #fff;
-    border-bottom: 1px #000 solid;
-    margin: 0 10px;
 }
-.cont_hd h6{
-    display: inline-block;
+.page_news_list .com_arrow {
+    position: absolute;
+    left: 0;
+    top: 21px;
 }
-.gamedata{
-    height: 450px;
+.page_news_list .news_con {
+    padding: 0 0 0 25px;
 }
-.img_container{
-    padding: 13px;
+.page_news_list .date {
+    position: absolute;
+    right: 0;
+    top: 22px;
 }
+.buy_content{
+    padding: 40px 20px 10px 20px;
+}
+.buy_content table{
+    width: 100%;
+    font-size: 18px;
+}
+.buy_content table tr{
+    height: 40px;
+    line-height: 40px;
+}
+.buy_content table select{
+    height: 30px;
+}
+.buy_content table tr td:last-child{
+    color:#FFCC00
+}
+.buy_content .buy{
+    display: block;
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    margin: 40px auto
+}
+
+
+/* footer */
 footer{
     margin-top: 50px;
     text-align: center;

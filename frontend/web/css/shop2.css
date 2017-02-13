@@ -1,0 +1,125 @@
+/* content */
+.content {
+    float: right;
+    width: 866px;
+}
+.page_news_wrap {
+    padding: 0;
+}
+.game_server_wrap, .page_news_wrap {
+    background: #26282C;
+    min-height: 1450px;
+    _height: 1450px;
+}
+.tab_page {
+    height: 58px;
+    margin-right: 0;
+    position: relative;
+}
+.tab_page:after{
+    content: "";
+    width: 866px;
+    height: 1px;
+    background: #000;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+}
+.tab_page .tab {
+    font-size: 20px;
+}
+.tab_type_2 .tab {
+    float: left;
+    _display: inline;
+}
+.tab_page .tab a:hover, .tab_page .cur a {
+    border-width: 3px;
+}
+.tab_page .tab a {
+    width: 116px;
+    height: 55px;
+    line-height: 55px;
+}
+.tab_type_2 .tab a:hover, .tab_type_2 .cur a {
+    color: #fff;
+    border-bottom: 2px solid #0284C4;
+    text-decoration: none;
+}
+.tab_type_2 .tab a {
+    display: block;
+    width: 122px;
+    text-align: center;
+    position: relative;
+}
+.tab_type_2 .tab a:after{
+    content: "";
+    width: 1px;
+    height: 20px;
+    position: absolute;
+    left: 122px;
+    top: 50%;
+    margin-top: -10px;
+    background-color: #8e8c8d;
+}
+.tab_page .cur_pos {
+    right: 26px;
+    top: 20px;
+}
+.cur_pos {
+    position: absolute;
+}
+
+.cur_pos .cur {
+    color: #0284c4;
+}
+.page_news_list_wrap {
+    padding: 0 28px;
+}
+.page_news_list li {
+    position: relative;
+    border-bottom: 1px dashed #3A3A3C;
+    line-height: 22px;
+    padding: 21px 0 22px;
+    text-align: left;
+}
+.page_news_list .com_arrow {
+    position: absolute;
+    left: 0;
+    top: 21px;
+}
+.page_news_list .news_con {
+    padding: 0 0 0 25px;
+}
+.page_news_list .date {
+    position: absolute;
+    right: 0;
+    top: 22px;
+}
+.buy_content{
+    padding: 40px 20px 10px 20px;
+}
+.buy_content table{
+    width: 100%;
+    font-size: 18px;
+}
+.buy_content table tr{
+    height: 40px;
+    line-height: 40px;
+}
+.buy_content table select{
+    height: 30px;
+}
+.buy_content table tr td:last-child{
+    color:#FFCC00
+}
+.buy_content .buy{
+    display: block;
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    margin: 40px auto
+}

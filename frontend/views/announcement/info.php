@@ -8,6 +8,11 @@
 use yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
 
+
+$this->title = "公告详情";
+$this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 
 
@@ -17,10 +22,15 @@ use yii\bootstrap\ActiveForm;
         var id = $(".id").val();
     }
 </script>
+<style>
+    .ann_content img {
+        max-width: 866px;
+    }
+</style>
 
-<a href="#editComment">发表评论</a>
-<a href="#commentLists">查看评论</a>
-<div style="text-align: center;border-bottom: thick solid black">
+<!--<a href="#editComment">发表评论</a>-->
+<!--<a href="#commentLists">查看评论</a>-->
+<div style="text-align: center;">
     <h1>
         <?= Html::encode($model->name);?>
     </h1>
@@ -40,8 +50,8 @@ use yii\bootstrap\ActiveForm;
 
 </div>
 
-
-
+<!--屏蔽评论功能-->
+<!--
 <div id="editComment" style="padding-bottom: 100px;">
 
     <h3>评价区：</h3>
@@ -61,3 +71,4 @@ use yii\bootstrap\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+-->
