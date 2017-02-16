@@ -109,17 +109,17 @@ ul, li, ol {
     line-height: 62px;
     color: #fff !important;
     background-image:-webkit-linear-gradient(
-        to bottom, 
-        rgb(72, 203, 255) 0%, 
-        rgb(64, 200, 255) 27%, 
-        rgb(40, 183, 248) 64%, 
-        rgb(0, 171, 255)100%); 
+        to bottom,
+        rgb(72, 203, 255) 0%,
+        rgb(64, 200, 255) 27%,
+        rgb(40, 183, 248) 64%,
+        rgb(0, 171, 255)100%);
     background-image:linear-gradient(
         to bottom,
-        rgb(72, 203, 255) 0%, 
-        rgb(64, 200, 255) 27%, 
-        rgb(40, 183, 248) 64%, 
-        rgb(0, 171, 255)100%); 
+        rgb(72, 203, 255) 0%,
+        rgb(64, 200, 255) 27%,
+        rgb(40, 183, 248) 64%,
+        rgb(0, 171, 255)100%);
 }
 .pay_btn input{
     color: #fff
@@ -170,16 +170,16 @@ ul, li, ol {
 .btnwrap a:hover{
     color: #fff;
     background-image: -webkit-linear-gradient(
-     to bottom, 
-     rgb(72, 203, 255) 0%, 
-     rgb(64, 200, 255) 27%, 
-     rgb(40, 183, 248) 64%, 
+     to bottom,
+     rgb(72, 203, 255) 0%,
+     rgb(64, 200, 255) 27%,
+     rgb(40, 183, 248) 64%,
      rgb(0, 171, 255)100%);
         background-image: linear-gradient(
      to bottom,
-     rgb(72, 203, 255) 0%, 
-     rgb(64, 200, 255) 27%, 
-     rgb(40, 183, 248) 64%, 
+     rgb(72, 203, 255) 0%,
+     rgb(64, 200, 255) 27%,
+     rgb(40, 183, 248) 64%,
      rgb(0, 171, 255)100%);
 }
 #acount_login_after{
@@ -304,7 +304,7 @@ ul, li, ol {
 .content {
     float: right;
     width: 866px;
-    
+
 }
 .content_slider {
     float: left;
@@ -340,7 +340,7 @@ ul, li, ol {
     height: 41px;
     text-align: center;
     line-height: 41px;
-    color: #8e8c8d 
+    color: #8e8c8d
 }
 .tab_type_1 .hd_more {
     right: 14px;

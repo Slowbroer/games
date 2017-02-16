@@ -168,13 +168,13 @@ use frontend\assets\HomeAsset;
                         <ul class="data_list">
                             <li>
                                 <span class="com_arrow icon-play_arrow"></span>
-                                <span class="cat">公告</span>
+                                <span class="cat">公告公告</span>
                                 <span class="txt"><a href="#" target="_blank" title="通知" class="fcy fb">通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知</a></span>
                                 <span class="date">11-18</span>
                             </li>
                             <li>
                                 <span class="com_arrow icon-play_arrow"></span>
-                                <span class="cat">活动</span>
+                                <span class="cat">活动公告</span>
                                 <span class="txt"><a href="#" target="_blank" title="活动" class="fcy fb">活动活动活动活动活动活动活动活动</a></span>
                                 <span class="date">11-18</span>
                             </li>
@@ -183,21 +183,21 @@ use frontend\assets\HomeAsset;
                 </div>
             </div>
         </div>
-        <div class="gameimg bg_type_2">
-            <div class="tab_type tab_type_2">
-                <h3 class="tab cur"><a>游戏原画</a></h3>
-                <h3 class="tab "><a>游戏截图</a></h3>
-            </div>
-            <div class="tab_con">
-                <div class="cont_item" style="display: block;">
-                    <div class="img_container">
-                        <img src="http://i1.webgame.kanimg.com/20150121/1421810419823.jpg" _bsrc="http://i0.webgame.kanimg.com/20150121/1421810414531.jpg" idx="0" alt="" width="168" height="110">
-                    </div>
+    </div>
+    <div class="gameimg bg_type_2">
+        <div class="tab_type tab_type_2">
+            <h3 class="tab cur"><a>游戏原画</a></h3>
+            <h3 class="tab "><a>游戏截图</a></h3>
+        </div>
+        <div class="tab_con">
+            <div class="cont_item" style="display: block;">
+                <div class="img_container">
+                    <img src="http://i1.webgame.kanimg.com/20150121/1421810419823.jpg" _bsrc="http://i0.webgame.kanimg.com/20150121/1421810414531.jpg" idx="0" alt="" width="168" height="110">
                 </div>
-                <div class="cont_item" style="display: none;">
-                    <div class="img_container">
-                        <img src="img/no21.jpg" _bsrc="http://i0.webgame.kanimg.com/20150121/1421810414531.jpg" idx="0" alt="" width="168" height="110">
-                    </div>
+            </div>
+            <div class="cont_item" style="display: none;">
+                <div class="img_container">
+                    <img src="img/no21.jpg" _bsrc="http://i0.webgame.kanimg.com/20150121/1421810414531.jpg" idx="0" alt="" width="168" height="110">
                 </div>
             </div>
         </div>

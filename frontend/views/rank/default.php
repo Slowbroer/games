@@ -40,8 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
         });
 
 
-//        rankForm = $("#form-rank");
-//        getList(rankForm);
+        rankForm = $("#form-rank");
+        getList(rankForm);
     });
 
 

@@ -2,39 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: Slowbro
- * Date: 16/12/4
- * Time: 下午3:52
+ * Date: 17/2/15
+ * Time: 下午10:34
  */
-
-
+use frontend\assets\ShopAsset;
+use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
 
-$this->title = $title;
+$this->title = "购买装备";
+$this->params['breadcrumbs'][] = $this->title;
 
-
+ShopAsset::register($this);
 ?>
-
-<h3><?php echo $title;?></h3>
-
-<div style="margin: 100px 0;width: 300px;">
-    <form action="index.php?r=item/buypackage" method="post" role="form">
-        <label class="control-label">
-            套装
-        </label>
-        <div class="form-group required">
-            <?php echo Html::dropDownList("id",null,ArrayHelper::map($lists,"Id","Name"),['class'=>'form-control','prompt'=>"请选择套装",'id'=>"package_id"]);?>
-        </div>
-
-        <div class="content" style="margin: 20px 10px;font-size: small;color: grey">
-            请选择套装进行购买
-        </div>
-        <input name="_csrf-frontend" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
-        <div style="padding-top: 20px;">
-            <button type="submit" class="btn btn-primary">购买</button>
-        </div>
-    </form>
-</div>
 
 <script type="text/javascript">
     $(function (e) {
@@ -48,10 +28,47 @@ $this->title = $title;
                 success:function (data) {
                     data = eval("("+data+")");
 
-                    $(".content").html(data.message);
+                    $(".item_info").html(data.message);
                 }
             });
         });
     });
 
 </script>
+
+<div class="content">
+    <div class="page_news_wrap">
+        <div class="tab_type_2 tab_page">
+            <h3 class="tab"><a href="#">购买装备</a></h3>
+            <h3 class="tab cur"><a href="#">购买套装</a></h3>
+            <h3 class="tab"><a href="#">推广奖励</a></h3>
+        </div>
+        <div class="buy_content buy_content_tz" style="">
+            <?php $form = ActiveForm::begin(['id' => 'buy-package']); ?>
+            <table border="0" cellpadding="5" cellspacing="0">
+                <thead>
+<!--                <th>装备类别</th>-->
+                <th>装备内容</th>
+                <th>备注</th>
+                </thead>
+                <tbody>
+                <tr>
+<!--                    <td>-->
+<!--                        <select name="type">-->
+<!--                            <option>左手</option>-->
+<!--                            <option>右手</option>-->
+<!--                        </select>-->
+<!--                    </td>-->
+                    <td>
+                        <?php echo Html::dropDownList("id",null,ArrayHelper::map($lists,"Id","Name"),['class'=>'form-control','prompt'=>"请选择套装",'id'=>"package_id"]);?>
+                    </td>
+                    <td><span class="item_info" style="">还需充值100积分</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="buy" type="submit" >购买套装</button>
+<!--            <input class="buy" type="button" value="购买套装"></td>-->
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
+</div>

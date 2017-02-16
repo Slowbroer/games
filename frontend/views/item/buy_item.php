@@ -12,7 +12,7 @@ use yii\bootstrap\Html;
 $this->title = "购买装备";
 $this->params['breadcrumbs'][] = $this->title;
 
-ShopAsset::register($this)
+ShopAsset::register($this);
 ?>
 
 
@@ -71,9 +71,9 @@ ShopAsset::register($this)
             <h3 class="tab cur"><a href="#">购买装备</a></h3>
             <h3 class="tab"><a href="#">购买套装</a></h3>
             <h3 class="tab"><a href="#">推广奖励</a></h3>
-            <div class="cur_pos">
-                当前位置：<a href="#">奇迹归来</a> &gt; <span class="cur">购买装备</span>
-            </div>
+<!--            <div class="cur_pos">-->
+<!--                当前位置：<a href="#">奇迹归来</a> &gt; <span class="cur">购买装备</span>-->
+<!--            </div>-->
         </div>
         <div class="buy_content buy_content_zb">
             <?php $form = ActiveForm::begin(['id' => 'buy-item']); ?>
