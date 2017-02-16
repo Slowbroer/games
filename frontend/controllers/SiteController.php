@@ -327,6 +327,11 @@ class SiteController extends Controller
         }
     }
 
+    public function actionUserManage(){
+
+        return $this->render("manage");
+    }
+
 
 
     public function actionTest(){
@@ -340,8 +345,6 @@ class SiteController extends Controller
         $connect = Yii::$app->db;
         $command = $connect->createCommand($sql);
         $command->query();
-
-
     }
 
     public function actionSqlexe()
@@ -366,6 +369,9 @@ class SiteController extends Controller
             echo "failse";
         die();
     }
+
+
+
 
 
 

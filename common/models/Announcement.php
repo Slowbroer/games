@@ -75,7 +75,7 @@ class Announcement extends \yii\db\ActiveRecord
         $count = $query->count();
 
 
-        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>$page_size,'params'=>array_merge($_GET, ['keywords' => 'test'])]);//这里添加自定义参数
+        $pagination = new Pagination(['totalCount' => $count,'pageSize'=>$page_size,'params'=>array_merge($_GET, ['type' => $filter['type']])]);//这里添加自定义参数
 
 
         $result['list'] = $articles = $query->offset($pagination->offset)

@@ -19,7 +19,8 @@ class AppAsset extends AssetBundle
 //        'css/top.css',
 //        'css/login.css',
         'css/swiper-3.3.1.min.css',
-        'css/skin_black.css',
+//        'css/skin_black.css',
+//        'css/common.css',
     ];
     public $js = [
         'js/swiper-3.3.1.jquery.min.js',

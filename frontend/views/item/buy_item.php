@@ -12,7 +12,7 @@ use yii\bootstrap\Html;
 $this->title = "购买装备";
 $this->params['breadcrumbs'][] = $this->title;
 
-ShopAsset::register($this);
+//ShopAsset::register($this);
 ?>
 
 

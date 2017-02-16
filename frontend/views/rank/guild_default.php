@@ -12,6 +12,8 @@ use yii\helpers\ArrayHelper;
 $this->title = $name;
 $this->params['breadcrumbs'][] = $this->title;
 
+
+\frontend\assets\CommonAsset::register($this);
 ?>
 
 <style>

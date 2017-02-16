@@ -11,7 +11,7 @@ use yii\bootstrap\Html;
 use frontend\assets\HomeAsset;
 
 
-//HomeAsset::register($this);
+HomeAsset::register($this);
 ?>
 
 
@@ -166,18 +166,14 @@ use frontend\assets\HomeAsset;
                 <div class="data_item">
                     <div class="dataListBox">
                         <ul class="data_list">
+                            <?php foreach ($introduces as $key=>$introduce){ ?>
                             <li>
                                 <span class="com_arrow icon-play_arrow"></span>
-                                <span class="cat">公告公告</span>
-                                <span class="txt"><a href="#" target="_blank" title="通知" class="fcy fb">通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知</a></span>
-                                <span class="date">11-18</span>
+                                <span class="cat"><?= Html::encode($introduce['title']);?></span>
+                                <span class="txt"><p   title="通知" class="fcy fb"><?= Html::encode($introduce['content']);?></p></span>
+                                <span class="date"><?= date("Y-m",$introduce['add_time']);?></span>
                             </li>
-                            <li>
-                                <span class="com_arrow icon-play_arrow"></span>
-                                <span class="cat">活动公告</span>
-                                <span class="txt"><a href="#" target="_blank" title="活动" class="fcy fb">活动活动活动活动活动活动活动活动</a></span>
-                                <span class="date">11-18</span>
-                            </li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -197,7 +193,7 @@ use frontend\assets\HomeAsset;
             </div>
             <div class="cont_item" style="display: none;">
                 <div class="img_container">
-                    <img src="img/no21.jpg" _bsrc="http://i0.webgame.kanimg.com/20150121/1421810414531.jpg" idx="0" alt="" width="168" height="110">
+                    <img src='<?= Url::to("@web/images/home_page/no21.jpg");?>' _bsrc="http://i0.webgame.kanimg.com/20150121/1421810414531.jpg" idx="0" alt="" width="168" height="110">
                 </div>
             </div>
         </div>

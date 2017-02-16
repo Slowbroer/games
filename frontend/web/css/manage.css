@@ -1,0 +1,31 @@
+/* manage */
+.tab_page_2{
+    position: relative;
+}
+.tab_page_2 .tab a:hover, .tab_page_2 .cur a{
+    border-bottom: none;
+}
+.tab_page_2 .tab a:after{
+    content: none;
+}
+.tab_page_2 .tab{
+    margin-left: 20px;
+}
+.com_arrow {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    height: 58px;
+    line-height: 58px !important;
+}
+.tab_content{
+    padding: 40px 20px 10px 20px;
+}
+table {
+    width: 100%;
+    font-size: 18px;
+}
+table tr {
+    height: 40px;
+    line-height: 40px;
+}

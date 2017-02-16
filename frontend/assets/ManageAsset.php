@@ -2,26 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: Slowbro
- * Date: 17/2/12
- * Time: 下午2:14
+ * Date: 17/2/16
+ * Time: 上午10:40
  */
 
 namespace frontend\assets;
 
+
 use yii\web\AssetBundle;
 
-class HomeAsset extends AssetBundle
+class ManageAsset extends AssetBundle
 {
 
     public $basePath = '@webroot';
     public $baseUrl = '@web';
 
-    public $css = [
-        'css/skin_black.css',
+    public $css =[
+        'css/manage.css'
     ];
 
-    public $depends =[
+    public $depends = [
         'frontend\assets\AppAsset'
     ];
-
 }

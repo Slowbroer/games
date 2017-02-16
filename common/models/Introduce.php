@@ -80,7 +80,7 @@ class Introduce extends \yii\db\ActiveRecord
     {
         $where['is_able']=1;
         $where['is_show']=1;
-        $lists = $this->find()->select("id,content,title,brief")->where($where)->limit($number)->orderBy("add_time")->asArray()->all();
+        $lists = $this->find()->select("id,content,title,brief,add_time,update_time")->where($where)->limit($number)->orderBy("add_time")->asArray()->all();
 //        var_dump($lists);
         return $lists;
     }

@@ -37,13 +37,21 @@ class AnnouncementController extends Controller//公共前台功能代码，包�
 //    }
     public function actionAll()
     {
+        $filter["type"] = isset($_GET['type'])? intval($_GET['type']):0;//类别id
+
+//        var_dump($filter);
         $ann = new Announcement();
-        $all = $ann->getList();//announcements list
+        $all = $ann->getList($filter);//announcements list
 
         $ann_type = new AnnouncementType();
         $type_lists = $ann_type->getList();//announcements type list
 
-        return $this->render("all",['ann'=>$all['list'],'pagination'=>$all['page'],'types'=>$type_lists]);
+        array_unshift($type_lists,['id'=>0,'name'=>"综合"]);
+//        var_dump($type_lists);
+//        die();
+
+
+        return $this->render("all",['ann'=>$all['list'],'pagination'=>$all['page'],'type_lists'=>$type_lists,'type'=>$filter['type']]);
     }
 
     public function actionRecent(){
