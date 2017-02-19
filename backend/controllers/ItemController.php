@@ -9,6 +9,7 @@
 namespace backend\controllers;
 
 
+use backend\models\BuyRecord;
 use common\models\MuItem;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -83,6 +84,23 @@ class ItemController extends Controller
             $info = MuItem::find()->where(['Id'=>$id])->asArray()->one();
             return json_encode($info);
         }
+    }
+
+
+
+    public function actionShopRecord()//购买记录
+    {
+        $model = new BuyRecord();
+        if($model->load(Yii::$app->request->post())&&$model->validate())
+        {
+            $list = $model->loadRecord();
+            $this->renderPartial();
+        }
+        else
+        {
+            return $this->render("BuyRecord",['model'=>$model]);
+        }
+
     }
 
 

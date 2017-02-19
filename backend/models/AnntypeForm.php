@@ -9,6 +9,7 @@
 namespace backend\models;
 
 
+use common\models\Announcement;
 use common\models\AnnouncementType;
 use yii\base\Model;
 
@@ -21,14 +22,17 @@ class AnntypeForm extends Model//公告类型表单类
 
     public function rules(){
         return [
-            ['type_name',"require"],
+
+            ['type_name',"required"],
             ['type_name',"string",'min' => 2, 'max' => 50],
-            ['type_name','unique','targetClass'=>'common\models\AnnouncementType',]
+//            ['type_name','unique','targetClass'=>'common\models\AnnouncementType','targetAttribute'=>'name','message'=>'改类别已经存在！'],
+            ['id','safe'],
         ];
     }
 
     public function update()//更新或添加一个公告类型
     {
+
         if(!$this->validate())
         {
             return false;
@@ -45,9 +49,17 @@ class AnntypeForm extends Model//公告类型表单类
             $type->update_time = time();
         }
 
+
         $type->name = $this->type_name;
 
-        return $type->save()? $type : false;
+        if($type->save()){
+            Announcement::updateAll(['type_name'=>$this->type_name],['type'=>$this->id]);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
     }
 

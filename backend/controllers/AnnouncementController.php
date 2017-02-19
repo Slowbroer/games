@@ -132,8 +132,10 @@ class AnnouncementController extends Controller//公告控制器
         $type = new AnnouncementType();
         $type_list = $type->getList();
 
+        $model = new AnntypeForm();
+
         //echo the view
-        echo $this->render('typelist',['lists'=>$type_list]);
+        echo $this->render('typelist',['lists'=>$type_list,'model'=>$model]);
     }
 
     public function actionUpdatetype(){
@@ -151,10 +153,14 @@ class AnnouncementController extends Controller//公告控制器
         {
             if(!empty($_GET['id'] && is_numeric(intval($_GET['id']))))
             {
-                return AnnouncementType::findOne(['id'=>$_GET['id']]);
+                $type = AnnouncementType::findOne(['id'=>$_GET['id']]);
+                $model->id = $type->id;
+                $model->type_name = $type->name;
             }
+//            return $this->renderAjax("typeform",['model'=>$model]);
 
-            return false;
+            return json_encode(array('code'=>1,'id'=>$model->id,'type_name'=>$model->type_name));
+
         }
     }
 
