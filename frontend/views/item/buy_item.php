@@ -71,7 +71,7 @@ CommonAsset::register($this);
     <div class="page_news_wrap">
         <div class="tab_type_2 tab_page">
             <h3 class="tab cur"><a href="#">购买装备</a></h3>
-            <h3 class="tab"><a href="#">购买套装</a></h3>
+            <h3 class="tab"><a href="<?= \yii\helpers\Url::toRoute("item/buypackage")?>">购买套装</a></h3>
             <h3 class="tab"><a href="#">推广奖励</a></h3>
 <!--            <div class="cur_pos">-->
 <!--                当前位置：<a href="#">奇迹归来</a> &gt; <span class="cur">购买装备</span>-->

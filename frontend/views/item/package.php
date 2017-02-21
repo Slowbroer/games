@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="page_news_wrap">
         <div class="tab_type_2 tab_page">
-            <h3 class="tab"><a href="#">购买装备</a></h3>
+            <h3 class="tab"><a href="<?= \yii\helpers\Url::toRoute("item/buy_single_item")?>">购买装备</a></h3>
             <h3 class="tab cur"><a href="#">购买套装</a></h3>
             <h3 class="tab"><a href="#">推广奖励</a></h3>
         </div>
