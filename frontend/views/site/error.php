@@ -7,6 +7,8 @@
 
 use yii\helpers\Html;
 
+\frontend\assets\CommonAsset::register($this);
+
 //$this->title = $name;
 $this->title = "出错了－_－";
 ?>
