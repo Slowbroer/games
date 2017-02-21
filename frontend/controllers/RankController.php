@@ -22,7 +22,7 @@ class RankController extends Controller{//排行控制器
     public function actionCharacterlist(){//英雄排行
 
         $model = new RankForm();
-        if($model->load(Yii::$app->request->post())&&$model->validate())
+        if($model->load(Yii::$app->request->get())&&$model->validate())
         {
 //            var_dump($model->career);
             $list = $model->c_rank();
@@ -46,7 +46,7 @@ class RankController extends Controller{//排行控制器
     public function actionGuildlist()
     {
         $model = new RankForm();
-        if($model->load(Yii::$app->request->post()))
+        if($model->load(Yii::$app->request->get()))
         {
             $list = $model->g_rank();
             if(empty($list))

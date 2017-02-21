@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                    console.log(form.serialize());
 //                    $(".rank_lists").html(data.message);
                     alert(data.message);
+                    $(".rank_lists").html('');
                 }
                 else //success
                 {
@@ -73,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div style="text-align: center">
-    <?php $form = ActiveForm::begin(['id' => 'form-rank','action'=>'index.php?r=rank/guildlist']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-rank','action'=>'index.php?r=rank/guildlist','method'=>'get']); ?>
 
     <?php //echo $form->field($model,'server',['template'=>'{label}<div style="display: inline-block">{input}{hint}{error}</div>'])
         //->dropDownList(ArrayHelper::map($lists,'ID','ServerName'));?>

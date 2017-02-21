@@ -66,7 +66,7 @@ AppAsset::register($this);
                         </a>
                     </li>
                     <li>
-                        <a href="shop.php">
+                        <a href="index.php?r=item/buy_single_item">
                             <h4>装备商城</h4>
                         </a>
                     </li>

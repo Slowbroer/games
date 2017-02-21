@@ -58,8 +58,12 @@ class RankForm extends Model {
 //        if (!$this->validate()) {
 //            return null;
 //        }
+        $where = " where 1=1 ";
 
-        $where = " where m.ServerCode = ".$this->server;
+        if($this->server)
+        {
+            $where .= " and m.ServerCode = ".$this->server;
+        }
         if($this->career!==''&&intval($this->career)>=0)
         {
             $where .= " and c.Class = $this->career ";

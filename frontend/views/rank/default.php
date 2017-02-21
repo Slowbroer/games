@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 if(data.code==0)//error
                 {
                     alert(data.message);
-//                    $(".rank_lists").html(data.message);
+                    $(".rank_lists").html('');
                 }
                 else //success
                 {
@@ -73,10 +73,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div style="text-align: center">
-    <?php $form = ActiveForm::begin(['id' => 'form-rank','action'=>'index.php?r=rank/characterlist']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-rank','action'=>'index.php?r=rank/characterlist','method'=>'get']); ?>
 
     <?= $form->field($model,'server',['template'=>'{label}<div style="display: inline-block">{input}{hint}{error}</div>'])
-        ->dropDownList(ArrayHelper::map($lists,'ID','ServerName'));?>
+        ->dropDownList(ArrayHelper::map($lists,'ID','ServerName'),['prompt'=>'请选择服务区']);?>
 
     <?= $form->field($model,'career',['template'=>'{label}<div style="display: inline-block">{input}{hint}{error}</div>'])
         ->dropDownList(ArrayHelper::map($class_lists,'class_id','class_name'),['prompt'=>'请选择职业']);?>
