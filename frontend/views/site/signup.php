@@ -9,6 +9,8 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
+
+\frontend\assets\CommonAsset::register($this);
 ?>
 
 <style>

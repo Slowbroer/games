@@ -11,6 +11,8 @@ use yii\helpers\ArrayHelper;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
+
+\frontend\assets\CommonAsset::register($this);
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
