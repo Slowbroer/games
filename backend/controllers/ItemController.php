@@ -88,20 +88,20 @@ class ItemController extends Controller
 
 
 
-    public function actionShopRecord()//购买记录
-    {
-        $model = new BuyRecord();
-        if($model->load(Yii::$app->request->post())&&$model->validate())
-        {
-            $list = $model->loadRecord();
-            $this->renderPartial();
-        }
-        else
-        {
-            return $this->render("BuyRecord",['model'=>$model]);
-        }
-
-    }
+//    public function actionShopRecord()//购买记录
+//    {
+//        $model = new BuyRecord();
+//        if($model->load(Yii::$app->request->post())&&$model->validate())
+//        {
+//            $list = $model->loadRecord();
+//            $this->renderPartial();
+//        }
+//        else
+//        {
+//            return $this->render("BuyRecord",['model'=>$model]);
+//        }
+//
+//    }
 
 
 

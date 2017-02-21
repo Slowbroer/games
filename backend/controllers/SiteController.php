@@ -173,12 +173,18 @@ class SiteController extends Controller
     public function actionOrderManager()//订单管理
     {
         $order_filter = new OrderFilter();
-        if($order_filter->load(Yii::$app->request->post()))
+        if($order_filter->load(Yii::$app->request->get()))
         {
-            $order_filter->queryOrders();
-            return $this->renderPartial("order_list");
+            $all = $order_filter->queryOrders();
+            return $this->render("order_manager",['model'=>$order_filter,'lists'=>$all['lists'],'page'=>$all['page']]);
         }
-        return $this->render("order_manager",['model'=>$order_filter]);
+        else
+        {
+            $order_log = new ItemLog();
+            $all = $order_log->lists();
+            return $this->render("order_manager",['model'=>$order_filter,'lists'=>$all['lists'],'page'=>$all['page']]);
+        }
+
     }
 
     public function actionOrderAll()

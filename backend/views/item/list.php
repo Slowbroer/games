@@ -9,6 +9,7 @@
 use \yii\bootstrap\Html;
 
 
+
 $type_list = array(
     '0'=>'剑',
     '1'=>'斧头',
