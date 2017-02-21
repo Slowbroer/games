@@ -8,11 +8,13 @@
 use frontend\assets\ShopAsset;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
+use frontend\assets\CommonAsset;
 
 $this->title = "购买装备";
 $this->params['breadcrumbs'][] = $this->title;
 
 //ShopAsset::register($this);
+CommonAsset::register($this);
 ?>
 
 

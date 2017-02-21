@@ -13,7 +13,8 @@ use yii\helpers\ArrayHelper;
 $this->title = "购买装备";
 $this->params['breadcrumbs'][] = $this->title;
 
-ShopAsset::register($this);
+//ShopAsset::register($this);
+\frontend\assets\CommonAsset::register($this);
 ?>
 
 <script type="text/javascript">
